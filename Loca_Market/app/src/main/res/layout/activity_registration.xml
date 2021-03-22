@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registrationActivity">
+    tools:context=".RegistrationActivity">
     <ImageView
         android:id="@+id/img_registration"
         android:layout_width="180dp"
@@ -158,15 +158,17 @@
                     android:inputType="textPassword"/>
             </LinearLayout>
         </LinearLayout>
+
         <Button
             android:id="@+id/b_register_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:text="@string/b_registration"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"/>
+            android:onClick="click_b_register_user"
+            android:text="@string/b_registration" />
         <TextView
             android:id="@+id/tv_msg_already_registred"
             android:layout_width="wrap_content"
@@ -189,5 +191,12 @@
 
     </LinearLayout>
 
-
+    <ProgressBar
+        android:id="@+id/pb_signe_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

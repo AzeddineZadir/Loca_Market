@@ -120,15 +120,17 @@
                     android:inputType="textPassword"/>
             </LinearLayout>
         </LinearLayout>
+
         <Button
             android:id="@+id/b_login"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
             android:text="@string/tv_login"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"/>
+            android:onClick="click_b_login"/>
         <Button
             android:id="@+id/b_forgot_password"
             style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -162,4 +164,12 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/pb_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
