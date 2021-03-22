@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Loca_Market</string>
+    <string name="tv_welcome">Bienvenu</string>
+    <string name="msg_splash_screen">Sélectionner comment voulez \n vous utiliser l\'application \n SVP</string>
+    <string name="b_seller">Commerçant</string>
+    <string name="b_client">Client</string>
+    <string name="desc_img_login">image de la connexion</string>
+    <string name="tv_login">Connexion</string>
+    <string name="desc_ic_username">icon du nom d\'utilisateur</string>
+    <string name="tv_username">Nom d\'utilisateur / Email</string>
+    <string name="desc_ic_password">icon du nom mot de passe</string>
+    <string name="tv_password">Mot de passe</string>
+    <string name="b_forgot_password">Mot de passe oublié !</string>
+    <string name="tv_msg_registration">Vous n\'êtes pas encore inscrit !</string>
+    <string name="b_registration">Inscription</string>
+    <string name="desc_img_registration">image de l\'inscription</string>
+    <string name="tv_title_registration">Inscription</string>
+    <string name="desc_ic_email">icon de l\'email</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_msg_already_registred">Vous êtes inscrit !</string>
+    <string name="b_login">Connexion</string>
+    <string name="b_registation">Inscription</string>
+    <string name="tv_title_forgot_password">MOT DE PASSE OUBLIÉ</string>
+    <string name="desc_img_forgot_password">Image mot de passe oublié</string>
+    <string name="tv_text_forgot_password">Entrez l\'adresse email que vous avez utilisé pour créer votre compte et nous vous envérons un lien
+pour réinitialiser votre mot de passe</string>
+    <string name="b_reset">Réinitialiser</string>
+
 </resources>
