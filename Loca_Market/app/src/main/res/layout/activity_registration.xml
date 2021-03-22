@@ -73,7 +73,7 @@
                     android:layout_marginTop="5dp"
                     />
                 <EditText
-                    android:id="@+id/ed_email"
+                    android:id="@+id/et_email_registration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="janedo123@gmail.com"/>
@@ -112,7 +112,7 @@
                     android:layout_marginTop="10dp"
                     />
                 <EditText
-                    android:id="@+id/ed_username"
+                    android:id="@+id/et_email_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="janedo123"/>
@@ -151,7 +151,7 @@
                     android:layout_marginTop="10dp"
                     />
                 <EditText
-                    android:id="@+id/ed_password_registration"
+                    android:id="@+id/et_password_registration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="**********"
@@ -159,7 +159,7 @@
             </LinearLayout>
         </LinearLayout>
         <Button
-            android:id="@+id/b_registration"
+            android:id="@+id/b_register_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
