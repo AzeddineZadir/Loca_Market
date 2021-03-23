@@ -150,17 +150,18 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:text="@string/tv_msg_registration"
             android:layout_gravity="center_horizontal" />
+
         <Button
-            android:id="@+id/b_register_user"
+            android:id="@+id/b_go_register"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="registration"
             android:text="@string/b_registration"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textStyle="bold|italic"
             android:textColor="@color/red_900"
-            android:layout_gravity="center_horizontal"
-            android:onClick="registration"/>
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 

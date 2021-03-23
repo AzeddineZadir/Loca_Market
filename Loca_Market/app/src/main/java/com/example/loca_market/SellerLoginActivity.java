@@ -41,10 +41,10 @@ public class SellerLoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (mAuth.getCurrentUser() != null) {
+        /*if (mAuth.getCurrentUser() != null) {
             finish();
             startActivity(new Intent(this, SellerHomeActivity.class));
-        }
+        }*/
     }
 
 
@@ -88,6 +88,7 @@ public class SellerLoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 pb_login.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+
                     finish();
                     Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity .class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

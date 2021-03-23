@@ -4,31 +4,45 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.loca_market.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText et_email_registration ,et_username_registration , et_password_registration ;
     ProgressBar pb_signe_up ;
     FirebaseAuth mAuth;
+    FirebaseFirestore fdb ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         mAuth = FirebaseAuth.getInstance();
+        // Access a Firestore instance from your Activity
+        fdb = FirebaseFirestore.getInstance();
+
         et_email_registration =(EditText)findViewById(R.id.et_email_registration);
         et_password_registration =(EditText)findViewById(R.id.et_password_registration);
         et_username_registration =(EditText)findViewById(R.id.et_email_login);
@@ -46,7 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void registerUser() {
         String email = et_email_registration.getText().toString().trim();
         String password = et_password_registration.getText().toString().trim();
-
+        String username = et_username_registration.getText().toString().trim();
         if (email.isEmpty()) {
             et_email_registration.setError("Email is required");
             et_email_registration.requestFocus();
@@ -76,8 +90,31 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                pb_signe_up.setVisibility(View.GONE);
+                CollectionReference usersRef  = fdb.collection("Users");
+                // si la creation c'est correctement dérouler
+                // on ajoute le username au compte que on viens de crrer
                 if (task.isSuccessful()) {
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        // Name, email address, and profile photo Url
+                        String name = user.getDisplayName();
+                        String email = user.getEmail();
+                        Uri photoUrl = user.getPhotoUrl();
+                        String uid = user.getUid();
+                        String role = "Seller";
+                        User new_user = new User(username,email,role) ;
+
+                        Log.d("silver","user uid "+ uid);
+                        usersRef.document(uid).set(new_user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "user correctly registered", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
                     finish();
                     startActivity(new Intent(RegistrationActivity.this, SellerLoginActivity.class));
                 } else {
