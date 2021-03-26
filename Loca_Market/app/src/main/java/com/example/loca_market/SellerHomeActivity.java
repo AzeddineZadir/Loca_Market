@@ -32,6 +32,7 @@ public class SellerHomeActivity extends AppCompatActivity {
     Button b_log_out;
     FirebaseAuth mAuth;
     FirebaseFirestore fdb;
+    FirebaseUser user ;
     String username ,email ;
 
 
@@ -47,7 +48,7 @@ public class SellerHomeActivity extends AppCompatActivity {
         tv_username_home = (TextView) findViewById(R.id.tv_username_home) ;
         tv_email_home = (TextView) findViewById(R.id.tv_email_home) ;
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("theUID",user.getUid());
         DocumentReference docRef = fdb.collection("Users").document(user.getUid());
 
@@ -85,5 +86,14 @@ public class SellerHomeActivity extends AppCompatActivity {
     }
 
 
-
+    public void click_email_verification(View view) {
+        if (!user.isEmailVerified()) {
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(SellerHomeActivity.this, "vifification Email Sent", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
 }

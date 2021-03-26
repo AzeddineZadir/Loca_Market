@@ -21,9 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -45,7 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         et_email_registration =(EditText)findViewById(R.id.et_email_registration);
         et_password_registration =(EditText)findViewById(R.id.et_password_registration);
-        et_username_registration =(EditText)findViewById(R.id.et_email_login);
+        et_username_registration =(EditText)findViewById(R.id.et_username_registration);
         pb_signe_up = (ProgressBar)findViewById(R.id.pb_signe_up);
         // massquer la bar de progression et l'afficher lors de l'operation d'inscription
         pb_signe_up.setVisibility(View.INVISIBLE);
@@ -110,13 +108,14 @@ public class RegistrationActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplicationContext(), "user correctly registered", Toast.LENGTH_SHORT).show();
+
                             }
                         });
 
                     }
-
                     finish();
                     startActivity(new Intent(RegistrationActivity.this, SellerLoginActivity.class));
+
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
