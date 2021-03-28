@@ -25,5 +25,10 @@
     <string name="tv_text_forgot_password">Entrez l\'adresse email que vous avez utilisé pour créer votre compte et nous vous envérons un lien
 pour réinitialiser votre mot de passe</string>
     <string name="b_reset">Réinitialiser</string>
+    <string name="boutique">Boutique</string>
+    <string name="recherche">Recherche</string>
+    <string name="commandes">Commandes</string>
+    <string name="profile">Profile</string>
+    <string name="gerer">Gérer</string>
 
 </resources>
