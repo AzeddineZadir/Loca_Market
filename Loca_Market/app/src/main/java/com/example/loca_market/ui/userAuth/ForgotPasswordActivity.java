@@ -1,4 +1,4 @@
-package com.example.loca_market;
+package com.example.loca_market.ui.userAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +53,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(ForgotPasswordActivity.this, "Email sent", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "Email sent.");
-                            Intent i = new Intent(getApplicationContext(),SellerLoginActivity.class);
+                            Intent i = new Intent(getApplicationContext(), SellerLoginActivity.class);
                             startActivity(i);
                         }
                     }

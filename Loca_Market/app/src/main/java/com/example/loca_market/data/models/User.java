@@ -1,4 +1,4 @@
-package com.example.loca_market.Models;
+package com.example.loca_market.data.models;
 
 public class User {
 

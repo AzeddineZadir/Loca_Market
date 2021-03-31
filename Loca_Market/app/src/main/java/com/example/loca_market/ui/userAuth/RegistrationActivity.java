@@ -1,4 +1,4 @@
-package com.example.loca_market;
+package com.example.loca_market.ui.userAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.loca_market.Models.User;
+import com.example.loca_market.data.models.User;
+import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

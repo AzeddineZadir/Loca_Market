@@ -1,10 +1,13 @@
-package com.example.loca_market;
+package com.example.loca_market.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.loca_market.R;
+import com.example.loca_market.ui.userAuth.SellerLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void sellerLogin(View view){
-        Intent intent1 =new Intent(this,SellerLoginActivity.class);
+        Intent intent1 =new Intent(this, SellerLoginActivity.class);
         startActivity(intent1);
     }
 }
