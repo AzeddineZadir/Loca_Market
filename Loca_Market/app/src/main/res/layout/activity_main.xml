@@ -57,6 +57,7 @@
         android:background="@drawable/button"
         android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
         android:text="@string/b_client"
+        android:onClick="clientLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
