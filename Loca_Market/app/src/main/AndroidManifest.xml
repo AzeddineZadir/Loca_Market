@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market">
-        <activity android:name=".Client.ClientForgotPasswordActivity"></activity>
+        <activity android:name=".Client.ClientHomeActivity"></activity>
+        <activity android:name=".Client.ClientForgotPasswordActivity" />
         <activity android:name=".Client.ClientRegistrationActivity" />
-        <activity android:name=".Client.productCategoryClientActivity" />
         <activity android:name=".Client.ClientLoginActivity" />
         <activity android:name=".SellerHomeActivity" />
         <activity android:name=".ForgotPasswordActivity" />

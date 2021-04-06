@@ -77,7 +77,7 @@ public class ClientLoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     finish();
-                    Intent intent = new Intent(ClientLoginActivity.this, productCategoryClientActivity.class);
+                    Intent intent = new Intent(ClientLoginActivity.this, ClientHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else {

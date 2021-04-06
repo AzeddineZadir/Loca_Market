@@ -25,5 +25,7 @@
     <string name="tv_text_forgot_password">Entrez l\'adresse email que vous avez utilisé pour créer votre compte et nous vous envérons un lien
 pour réinitialiser votre mot de passe</string>
     <string name="b_reset">Réinitialiser</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
