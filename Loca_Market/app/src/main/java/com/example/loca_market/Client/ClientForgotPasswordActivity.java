@@ -28,7 +28,7 @@ public class ClientForgotPasswordActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         // To apply the default app language instead of explicitly setting it.
         auth.useAppLanguage();
-        et_client_email_reset=(EditText)findViewById(R.id.et_email_reset);
+        et_client_email_reset=(EditText)findViewById(R.id.et_client_forgot_password_email_reset);
 
     }
 
