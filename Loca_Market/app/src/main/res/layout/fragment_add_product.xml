@@ -8,7 +8,7 @@
     <data>
         <variable
             name="productToAdd"
-            type="com.example.loca_market.ui.addProduct.ProductViewModel" />
+            type="com.example.loca_market.ui.addProduct.AddProductViewModel" />
 
     </data>
 
@@ -56,7 +56,8 @@
                         android:id="@+id/iv_product"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:src="@drawable/ic_baseline_image" />
+                        android:src="@drawable/ic_baseline_image"
+                        android:onClick="openFileChoser"/>
 
                     <TextView
 

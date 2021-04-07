@@ -1,35 +1,40 @@
 package com.example.loca_market.ui.addProduct;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.data.repositores.ProductRepository;
 import com.example.loca_market.databinding.FragmentAddProductBinding;
+import com.google.android.play.core.internal.ad;
+import com.squareup.picasso.Picasso;
 
 public class AddProductFragment extends Fragment {
 
     private final static String  TAG ="AddProductFragment" ;
+    private static final int PICK_IMAGE_REQUEST = 1;
     // data binding
     FragmentAddProductBinding binding  ;
     private Product product ;
-    private ProductViewModel productViewModel ;
+    private AddProductViewModel addProductViewModel;
+    private Uri mImageUri;
 
+    ImageView iv_product ;
 
     public AddProductFragment(){
 
@@ -51,15 +56,53 @@ public class AddProductFragment extends Fragment {
 
         //here data must be an instance of the class MarsDataProvider
 
+        addProductViewModel = new ViewModelProvider(this).get(AddProductViewModel.class);
 
-        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        binding.setProductToAdd(addProductViewModel);
 
-        binding.setProductToAdd(productViewModel);
+        iv_product = (ImageView) view.findViewById(R.id.iv_product);
 
+        iv_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            openFileChooser();
 
+            }
+        });
 
 
 
         return view;
     }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getActivity().getApplicationContext().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            Picasso.get().load(mImageUri).into(iv_product);
+        }
+        addProductViewModel.imageUri = mImageUri ;
+        addProductViewModel.image_ext = getFileExtension(mImageUri);
+
+
+    }
+
+
+
 }

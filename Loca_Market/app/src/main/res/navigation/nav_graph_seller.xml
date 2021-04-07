@@ -29,7 +29,11 @@
         android:id="@+id/addProductFragment"
         android:name="com.example.loca_market.ui.addProduct.AddProductFragment"
         android:label="fragment_add_product"
-        tools:layout="@layout/fragment_add_product" />
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_manageFragment"
+            app:destination="@id/manageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/updateProductFragment"
         android:name="com.example.loca_market.ui.UpdateProductFragment"
