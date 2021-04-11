@@ -1,5 +1,6 @@
 package com.example.loca_market.Client.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.loca_market.Client.adapter.CategorieAdapter;
+import com.example.loca_market.Client.adapter.NewProductAdapter;
 import com.example.loca_market.Models.Category;
+import com.example.loca_market.Models.Product;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,9 +29,17 @@ import java.util.List;
 
 public class ClientHomeFragment extends Fragment {
     private FirebaseFirestore mstore;
+
+    // for categories
     private List<Category> mCategoryList;
     private CategorieAdapter mCategoryAdapter;
     private RecyclerView mCategoryRecyclerView;
+
+    // for new Products
+    private List<Product>mNewProductsList;
+    private NewProductAdapter mNewProductsAdapter;
+    private RecyclerView mNewProductsRecyclerView;
+
     public ClientHomeFragment() {
         // Required empty public constructor
     }
@@ -39,6 +50,7 @@ public class ClientHomeFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,12 +58,21 @@ public class ClientHomeFragment extends Fragment {
         View view  =inflater.inflate(R.layout.fragment_client_home, container, false);
         mstore=FirebaseFirestore.getInstance();
         // get the data
+
+        // for categories
         mCategoryList =new ArrayList<>();
         mCategoryAdapter = new CategorieAdapter(getContext(),mCategoryList);
         mCategoryRecyclerView = view.findViewById(R.id.category_recycler);
         mCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-
         mCategoryRecyclerView.setAdapter(mCategoryAdapter);
+        // for NewProducts
+        mNewProductsList =new ArrayList<>();
+        mNewProductsAdapter = new NewProductAdapter(getContext(),mNewProductsList);
+        mNewProductsRecyclerView= view.findViewById(R.id.newProductRecycler);
+        mNewProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        mNewProductsRecyclerView.setBackgroundColor(R.color.gray_300);
+        mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
+
         mstore.collection("Categories")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -71,6 +92,25 @@ public class ClientHomeFragment extends Fragment {
                     }
                 });
 
+
+
+        mstore.collection("Products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Home Fragment", document.getId() + " => " + document.getData());
+                                Product product=document.toObject(Product.class);
+                                mNewProductsList.add(product);
+                                mNewProductsAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Log.w("Home Fragment", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
         return view;
     }

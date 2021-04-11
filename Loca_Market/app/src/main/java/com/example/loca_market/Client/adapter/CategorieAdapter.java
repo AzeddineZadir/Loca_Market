@@ -50,6 +50,9 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
     public int getItemCount() {
         return mCategoryList.size();
     }
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView mTypeImg;
         public ViewHolder(@NonNull View itemView) {

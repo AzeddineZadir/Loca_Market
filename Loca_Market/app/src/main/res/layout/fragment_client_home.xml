@@ -64,8 +64,9 @@
                     android:textSize="18sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newProductRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"/>
+                android:layout_height="240dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
