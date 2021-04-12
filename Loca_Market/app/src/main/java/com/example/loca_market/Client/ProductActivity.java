@@ -13,7 +13,7 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        type=getIntent().getStringExtra("type");
+        type=getIntent().getStringExtra("Category");
         Toast.makeText(this,"l'interface du produit de la catégorie  "+type+" est en cours de réalisation",Toast.LENGTH_LONG).show();
     }
 }

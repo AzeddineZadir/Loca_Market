@@ -50,9 +50,9 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
         private  TextView mNewProductName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-          mNewProductImg = itemView.findViewById(R.id.i_NewProductImg);
-          mNewProductPrice =itemView.findViewById(R.id.t_NewProductPrice);
-          mNewProductName=itemView.findViewById(R.id.t_NewProductName);
+          mNewProductImg = itemView.findViewById(R.id.i_ProductImg);
+          mNewProductPrice =itemView.findViewById(R.id.t_ProductPrice);
+          mNewProductName=itemView.findViewById(R.id.t_ProductName);
         }
     }
 }

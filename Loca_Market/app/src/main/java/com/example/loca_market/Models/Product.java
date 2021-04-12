@@ -7,17 +7,19 @@ public class Product {
     private String category ;
     private String description ;
     private String imageUrl ;
+    private boolean bestSell;
 
     public Product() {
     }
 
-    public Product(String name, String brand, float price, String category, String description, String imageUrl) {
+    public Product(String name, String brand, float price, String category, String description, String imageUrl, boolean bestSell) {
         this.name = name;
         this.brand = brand;
         this.price = price;
         this.category = category;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.bestSell = bestSell;
     }
 
     public String getName() {
@@ -66,6 +68,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isBestSell() {
+        return bestSell;
+    }
+    public void setBestSell(boolean bestSell) {
+        this.bestSell = bestSell;
     }
 }
 

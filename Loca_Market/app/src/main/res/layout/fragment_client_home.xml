@@ -37,7 +37,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                android:background="@color/red_600"
+                android:layout_height="125dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,6 +67,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newProductRecycler"
                 android:layout_width="match_parent"
+                android:background="@color/red_600"
                 android:layout_height="240dp"/>
         </LinearLayout>
         <LinearLayout
@@ -92,8 +94,10 @@
                     android:textSize="18sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bestSellsRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"/>
+                android:background="@color/red_600"
+                android:layout_height="240dp"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

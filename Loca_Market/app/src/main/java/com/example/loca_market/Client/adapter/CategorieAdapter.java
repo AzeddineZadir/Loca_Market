@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,13 +35,14 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull CategorieAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(mCategoryList.get(position).getImg_url()).into(holder.mTypeImg);
-        holder.mTypeImg.setOnClickListener(new View.OnClickListener(){
+        Glide.with(context).load(mCategoryList.get(position).getImg_url()).into(holder.mCategoryImg);
+        holder.mCategoryText.setText(mCategoryList.get(position).getType());
+        holder.mCategoryImg.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(context, ProductActivity.class);
-                intent.putExtra("type",mCategoryList.get(position).getType());
+                intent.putExtra("Category",mCategoryList.get(position).getType());
                 context.startActivity(intent);
             }
         });
@@ -54,10 +56,12 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageView mTypeImg;
+        private ImageView mCategoryImg;
+        private TextView mCategoryText;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTypeImg =itemView.findViewById(R.id.category_img);
+            mCategoryImg =itemView.findViewById(R.id.category_img);
+            mCategoryText=itemView.findViewById(R.id.t_Category);
         }
     }
 }

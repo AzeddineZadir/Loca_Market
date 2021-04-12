@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.loca_market.Client.adapter.BestSellsAdapter;
 import com.example.loca_market.Client.adapter.CategorieAdapter;
 import com.example.loca_market.Client.adapter.NewProductAdapter;
 import com.example.loca_market.Models.Category;
@@ -39,6 +40,11 @@ public class ClientHomeFragment extends Fragment {
     private List<Product>mNewProductsList;
     private NewProductAdapter mNewProductsAdapter;
     private RecyclerView mNewProductsRecyclerView;
+
+    // for best sells
+    private List<Product>mBestSellsList;
+    private BestSellsAdapter mBestSellsAdapter;
+    private RecyclerView mBestSellsRecyclerView;
 
     public ClientHomeFragment() {
         // Required empty public constructor
@@ -70,8 +76,10 @@ public class ClientHomeFragment extends Fragment {
         mNewProductsAdapter = new NewProductAdapter(getContext(),mNewProductsList);
         mNewProductsRecyclerView= view.findViewById(R.id.newProductRecycler);
         mNewProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-        mNewProductsRecyclerView.setBackgroundColor(R.color.gray_300);
+     //   mNewProductsRecyclerView.setBackgroundColor(R.color.red_600);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
+
+
 
         mstore.collection("Categories")
                 .get()
@@ -102,9 +110,40 @@ public class ClientHomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("Home Fragment", document.getId() + " => " + document.getData());
-                                Product product=document.toObject(Product.class);
-                                mNewProductsList.add(product);
-                                mNewProductsAdapter.notifyDataSetChanged();
+                                if(document.getData().get("bestSell").equals(false)) {
+                                    Product product = document.toObject(Product.class);
+                                    mNewProductsList.add(product);
+                                    mNewProductsAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        } else {
+                            Log.w("Home Fragment", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+        // for BestSells
+        mBestSellsList =new ArrayList<>();
+        mBestSellsAdapter = new BestSellsAdapter(getContext(),mBestSellsList);
+        mBestSellsRecyclerView= view.findViewById(R.id.bestSellsRecycler);
+        mBestSellsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+   //     mBestSellsRecyclerView.setBackgroundColor(R.color.red_600);
+        mBestSellsRecyclerView.setAdapter(mBestSellsAdapter);
+
+        mstore.collection("Products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Home Fragment Best Sell", document.getId() + " => " + document.getData());
+                                if(document.getData().get("bestSell").equals(true)){
+                                    Product product2=document.toObject(Product.class);
+                                    mBestSellsList.add(product2);
+                                    mBestSellsAdapter.notifyDataSetChanged();
+                                }
+
                             }
                         } else {
                             Log.w("Home Fragment", "Error getting documents.", task.getException());
