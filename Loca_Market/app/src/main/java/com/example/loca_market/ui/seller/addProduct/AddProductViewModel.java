@@ -1,26 +1,16 @@
-package com.example.loca_market.ui.addProduct;
+package com.example.loca_market.ui.seller.addProduct;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.repositores.ProductRepository;
-import com.example.loca_market.ui.MainActivity;
-import com.example.loca_market.ui.ManageFragmentDirections;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class AddProductViewModel extends ViewModel {

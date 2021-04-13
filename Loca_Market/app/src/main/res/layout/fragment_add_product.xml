@@ -8,7 +8,7 @@
     <data>
         <variable
             name="productToAddViewModel"
-            type="com.example.loca_market.ui.addProduct.AddProductViewModel" />
+            type="com.example.loca_market.ui.seller.addProduct.AddProductViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_300"
-        tools:context=".ui.addProduct.AddProductFragment">
+        tools:context=".ui.seller.addProduct.AddProductFragment">
 
 
         <ScrollView

@@ -1,4 +1,4 @@
-package com.example.loca_market.ui;
+package com.example.loca_market.ui.seller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.loca_market.R;
 
-public class OrdersFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    public OrdersFragment(){
-        super(R.layout.fragment_orders);
+    public SearchFragment(){
+        super(R.layout.fragment_search);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class OrdersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         return view;
     }

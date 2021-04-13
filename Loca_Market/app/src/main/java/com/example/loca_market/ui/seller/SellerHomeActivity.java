@@ -1,4 +1,4 @@
-package com.example.loca_market.ui;
+package com.example.loca_market.ui.seller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.User;
-import com.example.loca_market.ui.userAuth.SellerLoginActivity;
+import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -57,17 +57,21 @@ public class SellerHomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottom_navigation_menu, navController);
 
         Log.d("theUID",user.getUid());
-        DocumentReference docRef = fdb.collection("Users").document(user.getUid());
+        DocumentReference docRef = fdb.collection("users").document(user.getUid());
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User current_user = documentSnapshot.toObject(User.class);
-                Log.d("theUID",current_user.getEmail());
-                Log.d("theUID",current_user.getUsername());
-                // Name, email address, and profile photo Url
-                username = current_user.getUsername();
-                email = current_user.getEmail();
+                if (current_user != null){
+                    Log.d("theUID",current_user.getEmail());
+                    Log.d("theUID",current_user.getUsername());
+                    // Name, email address, and profile photo Url
+                    username = current_user.getUsername();
+                    email = current_user.getEmail();
+
+                }
+
 
 
 
@@ -88,7 +92,7 @@ public class SellerHomeActivity extends AppCompatActivity {
         // se décconecter
         mAuth.signOut();
         Toast.makeText(this, "you just signed out ", Toast.LENGTH_SHORT).show();
-        Intent intent1 = new Intent(this, SellerLoginActivity.class);
+        Intent intent1 = new Intent(this, LoginActivity.class);
         startActivity(intent1);
 
     }

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.loca_market.data.models.Product;
-import com.example.loca_market.data.models.ProductImage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -117,7 +116,7 @@ public class ProductRepository {
                 // String image_url = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString() ;
                 String image_url = taskSnapshot.getStorage().getDownloadUrl().toString();
                 // on instencie l'objet a ajouter dans la base
-                ProductImage productImageToAdd = new ProductImage(image_name, image_url);
+
                 reference.update("imageUrl", image_url).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

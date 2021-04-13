@@ -1,4 +1,4 @@
- package com.example.loca_market.ui;
+ package com.example.loca_market.ui.seller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,8 +13,9 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.loca_market.R;
+import com.example.loca_market.ui.seller.ManageFragmentDirections;
 
-public class ManageFragment extends Fragment {
+ public class ManageFragment extends Fragment {
 
     CardView card_add_product,card_update_product,card_delete_product;
 

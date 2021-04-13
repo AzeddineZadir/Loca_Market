@@ -53,7 +53,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(ForgotPasswordActivity.this, "Email sent", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "Email sent.");
-                            Intent i = new Intent(getApplicationContext(), SellerLoginActivity.class);
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                         }
                     }

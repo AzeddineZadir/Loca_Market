@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.addProduct;
+package com.example.loca_market.ui.seller.addProduct;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -21,10 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
-import com.example.loca_market.data.repositores.ProductRepository;
 import com.example.loca_market.databinding.FragmentAddProductBinding;
-import com.example.loca_market.ui.ManageFragmentDirections;
-import com.google.android.play.core.internal.ad;
 import com.squareup.picasso.Picasso;
 
 public class AddProductFragment extends Fragment {

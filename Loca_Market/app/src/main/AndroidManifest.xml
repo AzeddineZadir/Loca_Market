@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market">
-        <activity android:name=".ui.SellerHomeActivity"></activity>
+        <activity android:name=".ui.seller.SellerHomeActivity"></activity>
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />
-        <activity android:name=".ui.userAuth.SellerLoginActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.userAuth.LoginActivity" />
+        <activity android:name=".ui.userAuth.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
