@@ -1,4 +1,4 @@
-package com.example.loca_market;
+package com.example.loca_market.ui.userAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.loca_market.Models.User;
+import com.example.loca_market.data.models.User;
+import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -30,12 +31,20 @@ public class RegistrationActivity extends AppCompatActivity {
     ProgressBar pb_signe_up ;
     FirebaseAuth mAuth;
     FirebaseFirestore fdb ;
+    public static  String role ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        Intent intent  = getIntent() ;
+        if (intent!= null){
+            role = intent.getStringExtra("role");
+
+        }
+
 
         mAuth = FirebaseAuth.getInstance();
         // Access a Firestore instance from your Activity
@@ -88,19 +97,18 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                CollectionReference usersRef  = fdb.collection("Users");
+                CollectionReference usersRef  = fdb.collection("users");
                 // si la creation c'est correctement dérouler
                 // on ajoute le username au compte que on viens de crrer
                 if (task.isSuccessful()) {
 
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user != null) {
+                    if (user != null && role != null) {
                         // Name, email address, and profile photo Url
                         String name = user.getDisplayName();
                         String email = user.getEmail();
                         Uri photoUrl = user.getPhotoUrl();
                         String uid = user.getUid();
-                        String role = "Seller";
                         User new_user = new User(username,email,role) ;
 
                         Log.d("silver","user uid "+ uid);
@@ -114,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     }
                     finish();
-                    startActivity(new Intent(RegistrationActivity.this, SellerLoginActivity.class));
+                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
 
                 } else {
 
@@ -132,7 +140,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void sellerLogin(View view){
-        Intent intent1 =new Intent(this,SellerLoginActivity.class);
+        Intent intent1 =new Intent(this, LoginActivity.class);
         startActivity(intent1);
     }
 

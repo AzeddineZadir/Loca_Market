@@ -1,4 +1,4 @@
-package com.example.loca_market;
+package com.example.loca_market.ui.seller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.loca_market.R;
+
 public class ProfilFragment extends Fragment {
 
     public ProfilFragment(){
-        super(R.layout.fragment_search);
+        super(R.layout.fragment_profil);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

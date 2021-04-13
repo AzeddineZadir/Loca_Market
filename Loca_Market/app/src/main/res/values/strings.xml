@@ -30,5 +30,13 @@ pour réinitialiser votre mot de passe</string>
     <string name="commandes">Commandes</string>
     <string name="profile">Profile</string>
     <string name="gerer">Gérer</string>
+    <string name="ajouter_un_produit">Ajouter un Produit</string>
+    <string name="modifier_un_produit">Modifier un Produit</string>
+    <string name="libel">Libelé</string>
+    <string name="marque">Marque</string>
+    <string name="prix">Prix</string>
+    <string name="cat_gorie">Catégorie</string>
+    <string name="d_scription">Déscription</string>
+    <string name="ajouter">Ajouter</string>
 
 </resources>
