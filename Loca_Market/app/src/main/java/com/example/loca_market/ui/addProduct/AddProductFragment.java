@@ -16,11 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.repositores.ProductRepository;
 import com.example.loca_market.databinding.FragmentAddProductBinding;
+import com.example.loca_market.ui.ManageFragmentDirections;
 import com.google.android.play.core.internal.ad;
 import com.squareup.picasso.Picasso;
 
@@ -58,7 +61,7 @@ public class AddProductFragment extends Fragment {
 
         addProductViewModel = new ViewModelProvider(this).get(AddProductViewModel.class);
 
-        binding.setProductToAdd(addProductViewModel);
+        binding.setProductToAddViewModel(addProductViewModel);
 
         iv_product = (ImageView) view.findViewById(R.id.iv_product);
 
@@ -70,6 +73,8 @@ public class AddProductFragment extends Fragment {
             }
         });
 
+        // observations
+        observeNavigationToManagementFragment(view);
 
 
         return view;
@@ -103,6 +108,18 @@ public class AddProductFragment extends Fragment {
 
     }
 
+
+    // observations
+    private void observeNavigationToManagementFragment(View view){
+        addProductViewModel.navigationToManageFragment.observe(getViewLifecycleOwner(),result -> {
+            if (result == true ){
+                NavDirections action = AddProductFragmentDirections.actionAddProductFragmentToManageFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+        addProductViewModel.endGoToManagmentFragment();
+    }
 
 
 }

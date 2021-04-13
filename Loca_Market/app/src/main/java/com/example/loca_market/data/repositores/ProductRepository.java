@@ -37,9 +37,12 @@ public class ProductRepository {
     //construction d'une référance
     private static final StorageReference storageRef = storage.getReference("products_imges");
 
+
+
     public static ProductRepository getInstance(Context context) {
         if (instance == null) {
             instance = new ProductRepository();
+
         }
         return instance;
     }
@@ -73,7 +76,6 @@ public class ProductRepository {
     public MutableLiveData<ArrayList<Product>> getProductData() {
 
         loadProductData();
-
         MutableLiveData<ArrayList<Product>> data = new MutableLiveData<>();
         data.setValue(productArrayList);
         return data;
@@ -136,5 +138,9 @@ public class ProductRepository {
             }
         });
     }
+
+
+    //  navigation
+
 
 }

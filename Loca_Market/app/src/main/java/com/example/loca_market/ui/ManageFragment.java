@@ -1,4 +1,4 @@
-package com.example.loca_market.ui;
+ package com.example.loca_market.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

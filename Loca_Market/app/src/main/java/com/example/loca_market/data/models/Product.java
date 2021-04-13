@@ -7,7 +7,7 @@ public class Product {
     private float price;
     private String categorie ;
     private String description ;
-    private String imgaeUrl ;
+    private String imageUrl ;
 
     public Product() {
     }
@@ -60,12 +60,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getImgaeUrl() {
-        return imgaeUrl;
+    public String getimageUrl() {
+        return imageUrl;
     }
 
-    public void setImgaeUrl(String imgaeUrl) {
-        this.imgaeUrl = imgaeUrl;
+    public void setimageUrl(String imgaeUrl) {
+        this.imageUrl = imgaeUrl;
     }
 }
 

@@ -92,6 +92,7 @@ public class SellerLoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     finish();
+
                     Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity .class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

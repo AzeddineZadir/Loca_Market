@@ -33,6 +33,9 @@ public class AddProductViewModel extends ViewModel {
     public Uri imageUri ;
     public String image_ext ,image_name ;
 
+    // navigation variables
+    MutableLiveData<Boolean> navigationToManageFragment = new MutableLiveData<Boolean>();
+
     public AddProductViewModel() {
         product.setValue(new Product());
     }
@@ -51,8 +54,7 @@ public class AddProductViewModel extends ViewModel {
         Log.e(TAG, "addProduct: "+product.getValue().getCategorie() );
         image_name = product.getValue().getName()+"_"+product.getValue().getBrand();
         ProductRepository.addProduct(product.getValue(),imageUri,image_name,image_ext);
-
-
+        goToManagmentFragment();
     }
 
     public LiveData<ArrayList<Product>> getProductData(){
@@ -62,7 +64,13 @@ public class AddProductViewModel extends ViewModel {
 
 
 
+    public  void goToManagmentFragment(){
+        navigationToManageFragment .setValue(true); ;
+    }
 
+    public void endGoToManagmentFragment(){
+        navigationToManageFragment .setValue(false); ;
+    }
 
 
 }

@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void sellerLogin(View view){
         Intent intent1 =new Intent(this, SellerLoginActivity.class);
+        intent1.putExtra("role","seller");
         startActivity(intent1);
     }
 }
