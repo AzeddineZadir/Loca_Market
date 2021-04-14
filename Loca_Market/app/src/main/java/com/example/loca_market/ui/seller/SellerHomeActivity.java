@@ -63,6 +63,7 @@ public class SellerHomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User current_user = documentSnapshot.toObject(User.class);
+
                 if (current_user != null){
                     Log.d("theUID",current_user.getEmail());
                     Log.d("theUID",current_user.getUsername());

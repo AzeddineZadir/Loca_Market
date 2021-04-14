@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.Client.fragments;
+package com.example.loca_market.ui.client.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,11 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.loca_market.ui.Client.adapter.BestSellsAdapter;
-import com.example.loca_market.ui.Client.adapter.CategorieAdapter;
-import com.example.loca_market.ui.Client.adapter.NewProductAdapter;
-import com.example.loca_market.Models.Category;
-import com.example.loca_market.Models.Product;
+import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.adapter.BestSellsAdapter;
+import com.example.loca_market.ui.client.adapter.CategorieAdapter;
+import com.example.loca_market.ui.client.adapter.NewProductAdapter;
+import com.example.loca_market.data.models.Category;
+
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -76,7 +77,7 @@ public class ClientHomeFragment extends Fragment {
         mNewProductsAdapter = new NewProductAdapter(getContext(),mNewProductsList);
         mNewProductsRecyclerView= view.findViewById(R.id.newProductRecycler);
         mNewProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-     //   mNewProductsRecyclerView.setBackgroundColor(R.color.red_600);
+        //  mNewProductsRecyclerView.setBackgroundColor(R.color.red_600);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
 

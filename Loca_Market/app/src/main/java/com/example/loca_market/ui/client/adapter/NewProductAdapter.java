@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.Client.adapter;
+package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loca_market.Models.Product;
 import com.example.loca_market.R;
+import com.example.loca_market.data.models.Product;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
     public void onBindViewHolder(@NonNull NewProductAdapter.ViewHolder holder, int position) {
         holder.mNewProductName.setText(mProductList.get(position).getName());
         holder.mNewProductPrice.setText(mProductList.get(position).getPrice()+"€");
-        Glide.with(context).load(mProductList.get(position).getImageUrl()).into(holder.mNewProductImg);
+        Glide.with(context).load(mProductList.get(position).getimageUrl()).into(holder.mNewProductImg);
     }
 
     @Override

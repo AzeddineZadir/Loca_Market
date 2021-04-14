@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.Client.adapter;
+package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loca_market.ui.Client.ProductActivity;
-import com.example.loca_market.Models.Category;
+import com.example.loca_market.ui.client.ProductActivity;
+import com.example.loca_market.data.models.Category;
 import com.example.loca_market.R;
 
 import java.util.List;
@@ -35,14 +35,14 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull CategorieAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(mCategoryList.get(position).getImg_url()).into(holder.mCategoryImg);
-        holder.mCategoryText.setText(mCategoryList.get(position).getType());
+        Glide.with(context).load(mCategoryList.get(position).getImageUrl()).into(holder.mCategoryImg);
+        holder.mCategoryText.setText(mCategoryList.get(position).getName());
         holder.mCategoryImg.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(context, ProductActivity.class);
-                intent.putExtra("Category",mCategoryList.get(position).getType());
+                intent.putExtra("Category",mCategoryList.get(position).getName());
                 context.startActivity(intent);
             }
         });

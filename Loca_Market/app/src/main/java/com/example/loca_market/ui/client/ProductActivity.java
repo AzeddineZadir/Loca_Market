@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.Client;
+package com.example.loca_market.ui.client;
 
 import androidx.appcompat.app.AppCompatActivity;
 

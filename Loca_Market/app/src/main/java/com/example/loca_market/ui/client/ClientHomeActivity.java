@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.Client;
+package com.example.loca_market.ui.client;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.example.loca_market.ui.Client.fragments.ClientHomeFragment;
+import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.example.loca_market.R;
 
 public class ClientHomeActivity extends AppCompatActivity {

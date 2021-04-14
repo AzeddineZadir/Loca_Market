@@ -28,7 +28,6 @@ public class ProductRepository {
     private static final String PRODUCTS = "products";
     private static ProductRepository instance;
     private ArrayList<Product> productArrayList = new ArrayList<>();
-
     private static final FirebaseFirestore fdb = FirebaseFirestore.getInstance();
     private static final CollectionReference productRef = fdb.collection(PRODUCTS);
     // delaration de l'instence de storage
@@ -41,14 +40,12 @@ public class ProductRepository {
     public static ProductRepository getInstance(Context context) {
         if (instance == null) {
             instance = new ProductRepository();
-
         }
         return instance;
     }
 
 
     public static void addProduct(Product product, Uri mImageUri, String image_name, String image_extention) {
-
 
         DocumentReference new_product_uid = productRef.document();
         productRef.document(new_product_uid.getId()).set(product).addOnSuccessListener(new OnSuccessListener<Void>() {

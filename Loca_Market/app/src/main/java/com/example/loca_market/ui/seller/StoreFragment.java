@@ -30,6 +30,9 @@ public class StoreFragment  extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class StoreFragment  extends Fragment {
                 UserRepository.logOut();
                 Toast.makeText(getContext(), "you just signed out ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.putExtra("role","seller");
                 startActivity(intent);
             }
         });

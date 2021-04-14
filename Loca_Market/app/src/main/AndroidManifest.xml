@@ -12,21 +12,16 @@
         <activity android:name=".ui.seller.SellerHomeActivity"></activity>
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />
-        <activity android:name=".ui.userAuth.LoginActivity" />
-        <activity android:name=".ui.userAuth.SplashActivity">
-
+        <activity android:name=".ui.userAuth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.Client.ProductActivity"></activity>
-        <activity android:name=".ui.Client.ClientHomeActivity" />
-        <activity android:name=".ui.Client.ClientForgotPasswordActivity" />
-        <activity android:name=".ui.Client.ClientRegistrationActivity" />
-        <activity android:name=".ui.Client.ClientLoginActivity" />
+        <activity android:name=".ui.userAuth.SplashActivity"/>
+        <activity android:name=".ui.client.ProductActivity"></activity>
+        <activity android:name=".ui.client.ClientHomeActivity" />
 
 
     </application>

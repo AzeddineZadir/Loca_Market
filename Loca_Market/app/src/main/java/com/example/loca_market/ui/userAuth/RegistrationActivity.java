@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -31,6 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
     ProgressBar pb_signe_up ;
     FirebaseAuth mAuth;
     FirebaseFirestore fdb ;
+    CheckBox cb_client , cb_seller ;
     public static  String role ;
 
 
@@ -39,21 +42,39 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        Intent intent  = getIntent() ;
+       /* Intent intent  = getIntent() ;
         if (intent!= null){
             role = intent.getStringExtra("role");
 
-        }
+        }*/
 
 
         mAuth = FirebaseAuth.getInstance();
         // Access a Firestore instance from your Activity
         fdb = FirebaseFirestore.getInstance();
-
+        // composants
         et_email_registration =(EditText)findViewById(R.id.et_email_registration);
         et_password_registration =(EditText)findViewById(R.id.et_password_registration);
         et_username_registration =(EditText)findViewById(R.id.et_username_registration);
         pb_signe_up = (ProgressBar)findViewById(R.id.pb_signe_up);
+        cb_client = (CheckBox)findViewById(R.id.cb_client);
+
+        cb_client.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){cb_seller.setVisibility(View.INVISIBLE);}
+                if (!isChecked){cb_seller.setVisibility(View.VISIBLE);}
+            }
+        });
+        cb_seller = (CheckBox)findViewById(R.id.cb_seller);
+        cb_seller.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){cb_client.setVisibility(View.INVISIBLE);}
+                if (!isChecked){cb_client.setVisibility(View.VISIBLE);}
+            }
+        });
+
         // massquer la bar de progression et l'afficher lors de l'operation d'inscription
         pb_signe_up.setVisibility(View.INVISIBLE);
 
@@ -92,8 +113,17 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        pb_signe_up.setVisibility(View.VISIBLE);
+        // gestion des check box
+        if (!cb_client.isChecked() && !cb_seller.isChecked()){
+            cb_seller.setError("please check one ");
+            cb_client.setError("please check one ");
+            cb_client.requestFocus();
+            return;
+        }
 
+        pb_signe_up.setVisibility(View.VISIBLE);
+        // initalisation du role
+        role=getRole();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -143,6 +173,12 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent intent1 =new Intent(this, LoginActivity.class);
         startActivity(intent1);
     }
-
+     public String getRole(){
+        if (cb_seller.isChecked()){
+            return "seller";
+        }else {
+            return "client";
+        }
+     }
 
 }
