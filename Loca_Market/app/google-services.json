@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "396141223095",
-    "project_id": "kzlocalmarket",
-    "storage_bucket": "kzlocalmarket.appspot.com"
+    "project_number": "925376341635",
+    "project_id": "loca-market",
+    "storage_bucket": "loca-market.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:396141223095:android:134ac0c315e5ca7e858132",
+        "mobilesdk_app_id": "1:925376341635:android:6a482b80acf84defbf9db6",
         "android_client_info": {
           "package_name": "com.example.loca_market"
         }
       },
       "oauth_client": [
         {
-          "client_id": "396141223095-kr62s9nkg8o9hrmj13fqol5l42565uhr.apps.googleusercontent.com",
+          "client_id": "925376341635-d9jgt8uvglr67oil358npdgh0vt5s8h5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCVLidssi5IGpnc62gbPA9_Yp5erQcGFyw"
+          "current_key": "AIzaSyDfQlaOVXT9HKExphVR-ug-8bUuAQlIOl8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "396141223095-kr62s9nkg8o9hrmj13fqol5l42565uhr.apps.googleusercontent.com",
+              "client_id": "925376341635-d9jgt8uvglr67oil358npdgh0vt5s8h5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

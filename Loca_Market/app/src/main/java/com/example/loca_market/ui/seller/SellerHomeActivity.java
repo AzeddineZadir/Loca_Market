@@ -1,36 +1,34 @@
-package com.example.loca_market;
+ package com.example.loca_market.ui.seller;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import com.example.loca_market.Models.User;
+import com.example.loca_market.R;
+import com.example.loca_market.data.models.User;
 import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class SellerHomeActivity extends AppCompatActivity {
     private final String  TAG ="SellerHomeActivity";
-    TextView tv_username_home , tv_email_home ;
-    Button b_log_out;
+
     FirebaseAuth mAuth;
     FirebaseFirestore fdb;
     FirebaseUser user ;
@@ -44,27 +42,37 @@ public class SellerHomeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         fdb = FirebaseFirestore.getInstance();
-/*
-        b_log_out = (Button) findViewById(R.id.b_log_out);
-        tv_username_home = (TextView) findViewById(R.id.tv_username_home) ;
-        tv_email_home = (TextView) findViewById(R.id.tv_email_home) ;*/
-
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("theUID",user.getUid());
-        DocumentReference docRef = fdb.collection("Users").document(user.getUid());
 
+        BottomNavigationView bottom_navigation_menu = findViewById(R.id.bottom_navigation_menu) ;
+
+
+       /* NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_container);
+*/
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        NavHostFragment navHostFragment =
+                (NavHostFragment) fragmentManager.findFragmentById(R.id.nav_host_fragment_container);
+        NavController navController = navHostFragment.getNavController();
+
+        NavigationUI.setupWithNavController(bottom_navigation_menu, navController);
+
+        Log.d("theUID",user.getUid());
+        DocumentReference docRef = fdb.collection("users").document(user.getUid());
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User current_user = documentSnapshot.toObject(User.class);
-                Log.d("theUID",current_user.getEmail());
-                Log.d("theUID",current_user.getUsername());
-                // Name, email address, and profile photo Url
-                username = current_user.getUsername();
-                email = current_user.getEmail();
-                tv_username_home.setText(username);
-                tv_email_home.setText(email);
+                if (current_user != null){
+                    Log.d("theUID",current_user.getEmail());
+                    Log.d("theUID",current_user.getUsername());
+                    // Name, email address, and profile photo Url
+                    username = current_user.getUsername();
+                    email = current_user.getEmail();
+
+                }
+
+
 
 
             }
@@ -75,7 +83,10 @@ public class SellerHomeActivity extends AppCompatActivity {
 
 
 
+
     }
+
+
 
     public void click_b_log_out(View view) {
         // se décconecter
@@ -97,4 +108,5 @@ public class SellerHomeActivity extends AppCompatActivity {
             });
         }
     }
+
 }

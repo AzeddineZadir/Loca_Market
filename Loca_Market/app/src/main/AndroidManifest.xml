@@ -9,22 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market">
-        <activity android:name=".Client.ProductActivity"></activity>
-        <activity android:name=".Client.ClientHomeActivity" />
-        <activity android:name=".Client.ClientForgotPasswordActivity" />
-        <activity android:name=".Client.ClientRegistrationActivity" />
-        <activity android:name=".Client.ClientLoginActivity" />
-        <activity android:name=".SellerHomeActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SellerLoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.seller.SellerHomeActivity"></activity>
+        <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
+        <activity android:name=".ui.userAuth.RegistrationActivity" />
+        <activity android:name=".ui.userAuth.LoginActivity" />
+        <activity android:name=".ui.userAuth.SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Client.ProductActivity"></activity>
+        <activity android:name=".Client.ClientHomeActivity" />
+        <activity android:name=".Client.ClientForgotPasswordActivity" />
+        <activity android:name=".Client.ClientRegistrationActivity" />
+        <activity android:name=".Client.ClientLoginActivity" />
+        <activity android:name=".SellerHomeActivity" />
+
+
     </application>
 
 </manifest>
