@@ -38,5 +38,7 @@ pour réinitialiser votre mot de passe</string>
     <string name="cat_gorie">Catégorie</string>
     <string name="d_scription">Déscription</string>
     <string name="ajouter">Ajouter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

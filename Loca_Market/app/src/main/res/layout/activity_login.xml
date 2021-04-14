@@ -125,12 +125,12 @@
             android:id="@+id/b_login"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:onClick="click_b_login"
             android:text="@string/tv_login"
-            android:onClick="click_b_login"/>
+            android:layout_gravity="center"/>
+
         <Button
             android:id="@+id/b_forgot_password"
             style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -150,7 +150,6 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:text="@string/tv_msg_registration"
             android:layout_gravity="center_horizontal" />
-
         <Button
             android:id="@+id/b_go_register"
             style="@style/Widget.MaterialComponents.Button.TextButton"
