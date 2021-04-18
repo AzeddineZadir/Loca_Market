@@ -59,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (mAuth.getCurrentUser()!= null){
+
+
+        }
 
     }
 
@@ -116,13 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                              if (current_user.getRole().equals("seller")){
 
                                 Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
-                                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 //Toast.makeText(getApplicationContext(),"juste connected as a Seller ", Toast.LENGTH_SHORT).show();
                             }else if (current_user.getRole().equals("client")){
 
                                 Intent intent2 = new Intent(LoginActivity.this, ClientHomeActivity.class);
-                                 //intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent2);
                                 //Toast.makeText(getApplicationContext(),"juste connected as a Clinet  ", Toast.LENGTH_SHORT).show();
                             }

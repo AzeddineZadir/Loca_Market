@@ -85,6 +85,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="8dp"
+                        android:text="@string/cat_gorie"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="102dp" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actv_product_category"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@={productToAddViewModel.product.category}"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/marque"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:layout_editor_absoluteY="102dp" />
@@ -119,27 +139,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/et_product_price"
                         android:text="@={productToAddViewModel.product.price}"/>
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/cat_gorie"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:layout_editor_absoluteY="102dp" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/actv_product_categorie"
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@={productToAddViewModel.product.categorie}"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
 
 
                     <TextView

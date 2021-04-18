@@ -5,18 +5,18 @@ public class Product {
     private String name;
     private String brand;
     private float price;
-    private String categorie ;
+    private String category;
     private String description ;
     private String imageUrl ;
 
     public Product() {
     }
 
-    public Product(String name, String brand, float price, String categorie, String description) {
+    public Product(String name, String brand, float price, String category, String description) {
         this.name = name;
         this.brand = brand;
         this.price = price;
-        this.categorie = categorie;
+        this.category = category;
         this.description = description;
     }
 
@@ -44,12 +44,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategorie(String categori) {
-        this.categorie = categori;
+    public void setCategory(String categori) {
+        this.category = categori;
     }
 
     public String getDescription() {
