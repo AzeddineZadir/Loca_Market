@@ -85,6 +85,7 @@ public class AddProductFragment extends Fragment {
 
         observeProducts();
         observeCategories();
+        observeProductsbyseller();
         return view;
     }
 
@@ -150,6 +151,14 @@ public class AddProductFragment extends Fragment {
         });
     }
 
+    private void  observeProductsbyseller(){
+        addProductViewModel.getProductBySellerUid().observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
+            @Override
+            public void onChanged(ArrayList<Product> products) {
+                Log.e(TAG, "by seller: " + products.size()  );
+            }
+        });
+    }
 
     private ArrayList<String> getCategoriesNameList(ArrayList<Category>categoryArrayList){
         ArrayList<String>stringArrayList = new ArrayList<>();

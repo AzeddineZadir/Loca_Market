@@ -9,8 +9,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Product;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -44,7 +47,7 @@ public class ProductRepository {
         }
         return instance;
     }
-
+    //ajouter un produit a la collection products toute en uploadent l'image de ce dernier dans le cloud
     public static void addProduct(Product product, Uri mImageUri, String image_name, String image_extention) {
 
         DocumentReference new_product_uid = productRef.document();
@@ -69,6 +72,7 @@ public class ProductRepository {
 
     }
 
+    //recuperer les tous les produis de firstore grace a loadProductData et les passer au view model
     public MutableLiveData<ArrayList<Product>> getProductData() {
 
         MutableLiveData<ArrayList<Product>> data = new MutableLiveData<>();
@@ -76,6 +80,7 @@ public class ProductRepository {
         return data;
     }
 
+    //recuperer tous les produits de la collections products de firstore et les mettres dans un mutable live data
     private void loadProductData(MutableLiveData<ArrayList<Product>> productLiveData) {
 
         ArrayList<Product>productArrayList = new ArrayList<>();
@@ -101,9 +106,10 @@ public class ProductRepository {
             }
         });
 
-         ;
+
     }
 
+    //recuperer les toutes les categories de firstore grace a loadCategoryData et les passer au view model
     public MutableLiveData<ArrayList<Category>> getCategoryData() {
         MutableLiveData<ArrayList<Category>> data = new MutableLiveData<>();
         loadCategoryData(data);
@@ -111,6 +117,7 @@ public class ProductRepository {
 
     }
 
+    //recuperer toutes les catégories de firstore et les mettres dans un mutable live data
     private void loadCategoryData(MutableLiveData<ArrayList<Category>> categoryLiveData) {
         ArrayList<Category>categoryArrayList = new ArrayList<>();
 
@@ -137,10 +144,51 @@ public class ProductRepository {
 
     }
 
+    //uploader l'image d'un produis dans le cloud de firebase
     public static void uploadProductImage(Uri mImageUri, String image_name, String image_extention, DocumentReference reference) {
         StorageReference imageStorageReference = storageRef.child(image_name + "." + image_extention);
+        UploadTask uploadTask = imageStorageReference.putFile(mImageUri);
+        // Dabord récupérer le URI de l'image que on viens de uploade
+        // puis transformer URI en  string
+        // ensuite mettre ajoure le produis concérné
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
 
-        if (mImageUri != null) {
+                // Continue with the task to get the download URL
+                return imageStorageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                // si on arrive a avoir le lins de limage
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    String image_url = downloadUri.toString();
+                    Log.e(TAG, "onComplete: get uri + "+image_url );
+                    reference.update("imageUrl", image_url).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.e(TAG, "onSuccess: added image url in database  ");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e(TAG, "onFailure: added image url in database ");
+                        }
+                    });
+
+                } else {
+                    Log.e(TAG, "onFailure: to get the URI ");
+                }
+            }
+        });
+
+
+        /*if (mImageUri != null) {
             imageStorageReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -148,7 +196,8 @@ public class ProductRepository {
                     // on crrer l'ojet image a ajouter dans notre base de donée
                     // on récupére lur de l'image que on viens d'ajouter
                     // String image_url = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString() ;
-                    String image_url = taskSnapshot.getStorage().getDownloadUrl().toString();
+                    String image_url = imageStorageReference.getDownloadUrl().toString();
+
                     // on instencie l'objet a ajouter dans la base
 
                     reference.update("imageUrl", image_url).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -171,10 +220,42 @@ public class ProductRepository {
                 }
             });
 
-        }
+        }*/
     }
 
+    //recuperer tous les produis d'un vendeur seulement
+    public MutableLiveData<ArrayList<Product>>getProductsBySeller(String sellerUid){
+        MutableLiveData<ArrayList<Product>> data = new MutableLiveData<>();
+        loadProductsBySeller(data,sellerUid);
+        return data;
+    }
 
+    // recuperer tous les produits d'un vendeur de firestore et les mettre dans un mutable live data
+    private void loadProductsBySeller(MutableLiveData<ArrayList<Product>> productLiveData,String sellerUid) {
+        ArrayList<Product>productArrayList = new ArrayList<>();
+
+        productRef.whereEqualTo("productOwner",sellerUid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                        productArrayList.add(documentSnapshot.toObject(Product.class));
+                    }
+                    productLiveData.setValue(productArrayList);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: ", e);
+            }
+        });
+
+    }
 
 
 }

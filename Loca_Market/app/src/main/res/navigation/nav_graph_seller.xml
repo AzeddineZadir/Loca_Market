@@ -35,11 +35,6 @@
             app:destination="@id/manageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/updateProductFragment"
-        android:name="com.example.loca_market.ui.seller.UpdateProductFragment"
-        android:label="fragment_update_product"
-        tools:layout="@layout/fragment_update_product" />
-    <fragment
         android:id="@+id/deleteProductFragment"
         android:name="com.example.loca_market.ui.seller.DeleteProductFragment"
         android:label="fragment_delete_product"
@@ -56,7 +51,12 @@
             android:id="@+id/action_manageFragment_to_addProductFragment"
             app:destination="@id/addProductFragment" />
         <action
-            android:id="@+id/action_manageFragment_to_updateProductFragment"
-            app:destination="@id/updateProductFragment" />
+            android:id="@+id/action_manageFragment_to_updateProductFragmentList"
+            app:destination="@id/updateProductFragmentList" />
     </fragment>
+    <fragment
+        android:id="@+id/updateProductFragmentList"
+        android:name="com.example.loca_market.ui.seller.updateProductList.UpdateProductFragmentList"
+        android:label="fragment_update_product_list"
+        tools:layout="@layout/fragment_update_product_list" />
 </navigation>

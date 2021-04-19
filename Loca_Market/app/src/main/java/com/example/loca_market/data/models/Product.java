@@ -1,4 +1,3 @@
-
 package com.example.loca_market.data.models;
 
 public class Product {
@@ -6,15 +5,17 @@ public class Product {
     private String name;
     private String brand;
     private float price;
-    private String category ;
+    private String category;
     private String description ;
     private String imageUrl ;
+    private String productOwner ;
     private boolean bestSell;
 
 
     public Product() {
     }
 
+    public Product(String name, String brand, float price, String category, String description, String imageUrl, String productOwner) {
     public Product(String name, String brand, float price, String category, String description, String imageUrl, boolean bestSell) {
         this.name = name;
         this.brand = brand;
@@ -22,6 +23,7 @@ public class Product {
         this.category = category;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.productOwner = productOwner;
         this.bestSell = bestSell;
     }
 
@@ -65,13 +67,22 @@ public class Product {
         this.description = description;
     }
 
-    public String getImageUrl() {
+    public String getimageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setimageUrl(String imgaeUrl) {
+        this.imageUrl = imgaeUrl;
     }
+
+    public String getProductOwner() {
+        return productOwner;
+    }
+
+    public void setProductOwner(String productOwner) {
+        this.productOwner = productOwner;
+    }
+}
 
     public boolean isBestSell() {
         return bestSell;

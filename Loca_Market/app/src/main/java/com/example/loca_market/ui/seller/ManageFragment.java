@@ -50,7 +50,7 @@ import com.example.loca_market.ui.seller.ManageFragmentDirections;
         card_update_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageFragmentDirections.actionManageFragmentToUpdateProductFragment();
+                NavDirections action = ManageFragmentDirections.actionManageFragmentToUpdateProductFragmentList();
                 Navigation.findNavController(view).navigate(action);
 
             }

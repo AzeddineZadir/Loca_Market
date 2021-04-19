@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.repositores.ProductRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -20,10 +22,10 @@ public class AddProductViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Product>> productLiveData = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Category>> categoryLiveData = new MutableLiveData<>();
     private ProductRepository productRepository;
-
     public MutableLiveData<Product> product = new MutableLiveData<Product>();
     public Uri imageUri;
     public String image_ext, image_name;
+    public FirebaseUser currentuser ;
 
     // navigation variables
     MutableLiveData<Boolean> navigationToManageFragment = new MutableLiveData<Boolean>();
@@ -37,12 +39,12 @@ public class AddProductViewModel extends ViewModel {
             productRepository = ProductRepository.getInstance();
             return;
         }
+
     }
 
     public void addProduct() {
-        Log.e(TAG, "addProduct: " + product.getValue().getName());
-        Log.e(TAG, "addProduct: " + product.getValue().getBrand());
-        Log.e(TAG, "addProduct: " + product.getValue().getCategory());
+
+       product.getValue().setProductOwner(currentuser.getUid());
         image_name = product.getValue().getName() + "_" + product.getValue().getBrand();
         ProductRepository.addProduct(product.getValue(), imageUri, image_name, image_ext);
         goToManagmentFragment();
@@ -62,6 +64,10 @@ public class AddProductViewModel extends ViewModel {
         return categoryLiveData;
     }
 
+    public LiveData<ArrayList<Product>> getProductBySellerUid(){
+        productLiveData = productRepository.getProductsBySeller(currentuser.getUid());
+        return productLiveData;
+    }
 
     public void goToManagmentFragment() {
         navigationToManageFragment.setValue(true);
