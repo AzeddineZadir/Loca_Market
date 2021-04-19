@@ -27,6 +27,7 @@
                     android:textSize="18sp"/>
 
                 <TextView
+                    android:id="@+id/t_viewAllCategories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -58,15 +59,6 @@
                     android:text="Nouveautés"
                     android:textSize="18sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="right"
-                    android:layout_marginEnd="5dp"
-                    android:text="Voir tout"
-                    android:textSize="15sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newProductRecycler"
@@ -89,15 +81,6 @@
                     android:textStyle="bold"
                     android:text="Meilleurs ventes"
                     android:textSize="18sp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="right"
-                    android:layout_marginEnd="5dp"
-                    android:text="Voir tout"
-                    android:textSize="15sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bestSellsRecycler"

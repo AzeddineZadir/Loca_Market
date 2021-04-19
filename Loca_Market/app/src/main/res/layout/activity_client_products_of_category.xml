@@ -5,29 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_200"
-    tools:context=".ui.client.ClientHomeActivity">
+    tools:context=".ui.client.Activities.ProductsOfCategoryActivity">
 
     <LinearLayout
-        android:id="@+id/layout_toolbar_client_home"
+        android:id="@+id/layout_toolbar_client_products_of_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_client_home"
+            android:id="@+id/toolbar_products_of_category"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/red_600"/>
+            android:background="@color/red_600" />
 
         <LinearLayout
-            android:id="@+id/layout_search_bar_client_home"
+            android:id="@+id/layout_search_layout_products_of_category"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/search_bg"
             android:orientation="horizontal"
@@ -42,7 +43,7 @@
                 android:src="@drawable/ic_baseline_search_24" />
 
             <EditText
-                android:id="@+id/et_search_text_client_home"
+                android:id="@+id/et_search_text_products_of_category"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Chercher un produit" />
@@ -50,15 +51,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/client_home_container"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_products_of_category"
+        android:layout_width="300dp"
         android:layout_height="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_home"
-        tools:context=".ui.client.ClientHomeActivity">
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_products_of_category"
+        app:layout_constraintVertical_bias="1.0" />
 
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

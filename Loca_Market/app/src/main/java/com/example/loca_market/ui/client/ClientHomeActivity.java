@@ -38,10 +38,10 @@ public class ClientHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client_home);
         clientHomeFragment =new ClientHomeFragment();
         loadFragment(clientHomeFragment);
-        mToolbar=findViewById(R.id.home_toolbar);
         mAuth =FirebaseAuth.getInstance();
+        mToolbar=findViewById(R.id.toolbar_client_home);
         setSupportActionBar(mToolbar);
-        et_search_text = findViewById(R.id.et_search_text);
+        et_search_text = findViewById(R.id.et_search_text_client_home);
         mStore=FirebaseFirestore.getInstance();
         et_search_text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,7 +89,7 @@ public class ClientHomeActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.client_home_main_menu,menu);
+        getMenuInflater().inflate(R.menu.client_main_menu,menu);
         return true;
     }
     @Override

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loca_market.ui.client.ProductActivity;
+import com.example.loca_market.ui.client.Activities.ProductsOfCategoryActivity;
 import com.example.loca_market.data.models.Category;
 import com.example.loca_market.R;
 
@@ -29,7 +29,7 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
     @NonNull
     @Override
     public CategorieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.single_category_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.client_home_single_category_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -41,7 +41,7 @@ public class CategorieAdapter extends RecyclerView.Adapter<CategorieAdapter.View
 
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context, ProductActivity.class);
+                Intent intent =new Intent(context, ProductsOfCategoryActivity.class);
                 intent.putExtra("Category",mCategoryList.get(position).getName());
                 context.startActivity(intent);
             }

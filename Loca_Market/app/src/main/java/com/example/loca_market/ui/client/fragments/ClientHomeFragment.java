@@ -1,6 +1,7 @@
 package com.example.loca_market.ui.client.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.Activities.AllCategories;
 import com.example.loca_market.ui.client.adapter.BestSellsAdapter;
 import com.example.loca_market.ui.client.adapter.CategorieAdapter;
 import com.example.loca_market.ui.client.adapter.NewProductAdapter;
@@ -47,6 +50,9 @@ public class ClientHomeFragment extends Fragment {
     private BestSellsAdapter mBestSellsAdapter;
     private RecyclerView mBestSellsRecyclerView;
 
+    // View All catégories
+    TextView tViewAllCategories;
+
     public ClientHomeFragment() {
         // Required empty public constructor
     }
@@ -64,6 +70,7 @@ public class ClientHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  =inflater.inflate(R.layout.fragment_client_home, container, false);
         mstore=FirebaseFirestore.getInstance();
+        tViewAllCategories = view.findViewById(R.id.t_viewAllCategories);
         // get the data
 
         // for categories
@@ -77,7 +84,6 @@ public class ClientHomeFragment extends Fragment {
         mNewProductsAdapter = new NewProductAdapter(getContext(),mNewProductsList);
         mNewProductsRecyclerView= view.findViewById(R.id.newProductRecycler);
         mNewProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-        //  mNewProductsRecyclerView.setBackgroundColor(R.color.red_600);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
 
@@ -129,7 +135,6 @@ public class ClientHomeFragment extends Fragment {
         mBestSellsAdapter = new BestSellsAdapter(getContext(),mBestSellsList);
         mBestSellsRecyclerView= view.findViewById(R.id.bestSellsRecycler);
         mBestSellsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-   //     mBestSellsRecyclerView.setBackgroundColor(R.color.red_600);
         mBestSellsRecyclerView.setAdapter(mBestSellsAdapter);
 
         mstore.collection("Products")
@@ -152,7 +157,14 @@ public class ClientHomeFragment extends Fragment {
                         }
                     }
                 });
-
+        // click buton for all categories
+        tViewAllCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), AllCategories.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }
