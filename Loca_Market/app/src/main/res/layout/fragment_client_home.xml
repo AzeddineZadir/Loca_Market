@@ -21,6 +21,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/red_500"
+                    android:textStyle="bold"
                     android:text="Catégories"
                     android:textSize="18sp"/>
 
@@ -32,12 +34,12 @@
                     android:gravity="right"
                     android:layout_marginEnd="5dp"
                     android:text="Voir tout"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_recycler"
                 android:layout_width="match_parent"
-                android:background="@color/red_600"
+                android:background="@color/gray_800"
                 android:layout_height="125dp"/>
         </LinearLayout>
         <LinearLayout
@@ -51,6 +53,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/red_600"
+                    android:textStyle="bold"
                     android:text="Nouveautés"
                     android:textSize="18sp"/>
 
@@ -62,12 +66,12 @@
                     android:gravity="right"
                     android:layout_marginEnd="5dp"
                     android:text="Voir tout"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newProductRecycler"
                 android:layout_width="match_parent"
-                android:background="@color/red_600"
+                android:background="@color/gray_800"
                 android:layout_height="240dp"/>
         </LinearLayout>
         <LinearLayout
@@ -81,6 +85,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/red_600"
+                    android:textStyle="bold"
                     android:text="Meilleurs ventes"
                     android:textSize="18sp"/>
                 <TextView
@@ -91,12 +97,12 @@
                     android:gravity="right"
                     android:layout_marginEnd="5dp"
                     android:text="Voir tout"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bestSellsRecycler"
                 android:layout_width="match_parent"
-                android:background="@color/red_600"
+                android:background="@color/gray_800"
                 android:layout_height="240dp"/>
         </LinearLayout>
     </LinearLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_200"
     tools:context=".ui.client.ClientHomeActivity">
 
     <LinearLayout
@@ -14,15 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="40dp"
+            android:background="@color/red_600"/>
 
         <LinearLayout
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/search_bg"
