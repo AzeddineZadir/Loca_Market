@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -185,7 +184,5 @@
             android:id="@+id/fab_add_product"
             android:onClick="@{()->productToAddViewModel.addProduct()}"
             />
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -91,6 +91,7 @@ public class ClientHomeFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("Home Fragment", document.getId() + " => " + document.getData());
                                 Category category=document.toObject(Category.class);
+
                                 mCategoryList.add(category);
                                 mCategoryAdapter.notifyDataSetChanged();
 

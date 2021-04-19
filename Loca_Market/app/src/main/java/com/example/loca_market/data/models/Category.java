@@ -2,15 +2,15 @@ package com.example.loca_market.data.models;
 
 public class Category {
    String name ;
-   String descrioption ;
-   String imageUrl ;
+   String description;
+    String imageUrl;
 
     public Category() {
     }
 
-    public Category(String name, String descrioption, String imageUrl) {
+    public Category(String name, String description, String imageUrl) {
         this.name = name;
-        this.descrioption = descrioption;
+        this.description = description;
         this.imageUrl = imageUrl;
     }
 
@@ -22,12 +22,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescrioption() {
-        return descrioption;
+    public String getDescription() {
+        return description;
     }
-
-    public void setDescrioption(String descrioption) {
-        this.descrioption = descrioption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {

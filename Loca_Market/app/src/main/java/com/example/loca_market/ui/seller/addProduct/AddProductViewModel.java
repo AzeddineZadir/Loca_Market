@@ -40,7 +40,6 @@ public class AddProductViewModel extends ViewModel {
     }
 
     public void addProduct() {
-
         Log.e(TAG, "addProduct: " + product.getValue().getName());
         Log.e(TAG, "addProduct: " + product.getValue().getBrand());
         Log.e(TAG, "addProduct: " + product.getValue().getCategory());

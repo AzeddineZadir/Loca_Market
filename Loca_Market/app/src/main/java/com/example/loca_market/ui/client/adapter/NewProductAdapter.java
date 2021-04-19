@@ -36,7 +36,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
     public void onBindViewHolder(@NonNull NewProductAdapter.ViewHolder holder, int position) {
         holder.mNewProductName.setText(mProductList.get(position).getName());
         holder.mNewProductPrice.setText(mProductList.get(position).getPrice()+"€");
-        Glide.with(context).load(mProductList.get(position).getimageUrl()).into(holder.mNewProductImg);
+        Glide.with(context).load(mProductList.get(position).getImageUrl()).into(holder.mNewProductImg);
     }
 
     @Override

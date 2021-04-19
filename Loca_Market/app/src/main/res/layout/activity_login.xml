@@ -77,6 +77,7 @@
                     android:id="@+id/et_email_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="ahmed.kaci59@gmail.com"
                     android:hint="janedo123@gmail.com"/>
             </LinearLayout>
         </LinearLayout>
@@ -116,6 +117,7 @@
                     android:id="@+id/et_password_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="qwerty123"
                     android:hint="**********"
                     android:inputType="textPassword"/>
             </LinearLayout>
