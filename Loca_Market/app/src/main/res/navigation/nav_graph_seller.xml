@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateProductFragmentList"
-        android:name="com.example.loca_market.ui.seller.updateProductList.UpdateProductFragmentList"
+        android:name="com.example.loca_market.ui.seller.ProductList.ProductListFragment"
         android:label="fragment_update_product_list"
-        tools:layout="@layout/fragment_update_product_list" />
+        tools:layout="@layout/fragment_product_list" />
 </navigation>

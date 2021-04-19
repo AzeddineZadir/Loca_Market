@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.loca_market.data.models.Category;
@@ -17,7 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -57,9 +62,9 @@ public class ProductRepository {
                 Log.e(TAG + "ADD", "onSuccess: ");
                 // si le produits a été ajouter correctement
                 // on upload son image
-
-                uploadProductImage(mImageUri, image_name, image_extention, new_product_uid);
-
+                if (mImageUri!= null) {
+                    uploadProductImage(mImageUri, image_name, image_extention, new_product_uid);
+                }
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -234,12 +239,15 @@ public class ProductRepository {
     private void loadProductsBySeller(MutableLiveData<ArrayList<Product>> productLiveData,String sellerUid) {
         ArrayList<Product>productArrayList = new ArrayList<>();
 
-        productRef.whereEqualTo("productOwner",sellerUid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        productRef.whereEqualTo("productOwner",sellerUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.w(TAG, "Listen failed.", error);
+                    return;
+                }
+                if (!value.isEmpty()) {
+                    List<DocumentSnapshot> documentSnapshotList = value.getDocuments();
 
                     for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                         productArrayList.add(documentSnapshot.toObject(Product.class));
@@ -248,12 +256,8 @@ public class ProductRepository {
 
                 }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "onFailure: ", e);
-            }
         });
+
 
     }
 
