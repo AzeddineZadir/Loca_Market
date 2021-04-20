@@ -1,7 +1,10 @@
 package com.example.loca_market.data.models;
 
-public class Product {
+import com.google.firebase.firestore.DocumentId;
 
+public class Product {
+    @DocumentId
+    private String pid ;
     private String name;
     private String brand;
     private float price;
@@ -25,6 +28,14 @@ public class Product {
         this.imageUrl = imageUrl;
         this.productOwner = productOwner;
         this.bestSell = bestSell;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public String getName() {

@@ -1,6 +1,7 @@
-package com.example.loca_market.ui.seller.ProductList;
+package com.example.loca_market.ui.seller.productList;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
+
 import com.example.loca_market.ui.seller.adapters.ProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements ProductAdapter.OnProductItemListener {
+    private static final String TAG ="ProductListFragment" ;
     private ProductListViewModel updateProductListViewModel ;
     private RecyclerView rv_sellers_product_list;
     private ProductAdapter productAdapter;
@@ -43,7 +48,7 @@ public class ProductListFragment extends Fragment {
 
         rv_sellers_product_list = view.findViewById(R.id.rv_sellers_product_list);
         productList = new ArrayList<>();
-        productAdapter = new ProductAdapter(getContext());
+        productAdapter = new ProductAdapter(getContext(),this);
         rv_sellers_product_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_sellers_product_list.setAdapter(productAdapter);
         // view model
@@ -56,10 +61,20 @@ public class ProductListFragment extends Fragment {
         updateProductListViewModel.getProductBySellerUid().observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
             @Override
             public void onChanged(ArrayList<Product> products) {
+                productList = products ;
                 productAdapter.setProducts(products);
             }
         });
     }
 
 
+    @Override
+    public void onProductClick(int position) {
+        Log.d(TAG, "onProductClick: in position = "+position);
+        String productUid =productList.get(position).getPid();
+        ProductListFragmentDirections.ActionUpdateProductFragmentListToProductDetailsFragment action  =ProductListFragmentDirections.actionUpdateProductFragmentListToProductDetailsFragment(productUid);
+        action.setProductUid(productUid);
+        Navigation.findNavController(getView()).navigate(action);
+
+    }
 }

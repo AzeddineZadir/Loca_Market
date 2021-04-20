@@ -56,7 +56,21 @@
     </fragment>
     <fragment
         android:id="@+id/updateProductFragmentList"
-        android:name="com.example.loca_market.ui.seller.ProductList.ProductListFragment"
+        android:name="com.example.loca_market.ui.seller.productList.ProductListFragment"
         android:label="fragment_update_product_list"
-        tools:layout="@layout/fragment_product_list" />
+        tools:layout="@layout/fragment_product_list" >
+        <action
+            android:id="@+id/action_updateProductFragmentList_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.example.loca_market.ui.seller.productDetails.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details">
+
+        <argument
+            android:name="productUid"
+            app:argType="string" />
+    </fragment>
 </navigation>

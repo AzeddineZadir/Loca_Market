@@ -261,5 +261,27 @@ public class ProductRepository {
 
     }
 
+    public MutableLiveData<Product>getProductByUid(String productUid){
+        MutableLiveData<Product> data = new MutableLiveData<>();
+        loadProductByUid(data,productUid);
+        return data;
+    }
 
+    private void loadProductByUid(MutableLiveData<Product> productMutableLiveData ,String productuid) {
+
+        productRef.document(productuid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                productMutableLiveData.setValue(documentSnapshot.toObject(Product.class));
+
+                Log.e(TAG, "onSuccess: product details ritraved "+ documentSnapshot.toObject(Product.class).getName());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: in getting product details " );
+            }
+        });
+    }
 }

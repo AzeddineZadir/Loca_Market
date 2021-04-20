@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.seller.ProductList;
+package com.example.loca_market.ui.seller.productList;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

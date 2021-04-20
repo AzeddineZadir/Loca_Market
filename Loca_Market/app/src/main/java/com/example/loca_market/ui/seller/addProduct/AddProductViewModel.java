@@ -44,7 +44,7 @@ public class AddProductViewModel extends ViewModel {
 
     public void addProduct() {
 
-       product.getValue().setProductOwner(currentuser.getUid());
+        product.getValue().setProductOwner(currentuser.getUid());
         image_name = product.getValue().getName() + "_" + product.getValue().getBrand();
         ProductRepository.addProduct(product.getValue(), imageUri, image_name, image_ext);
         goToManagmentFragment();
