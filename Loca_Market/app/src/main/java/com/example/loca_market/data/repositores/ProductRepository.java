@@ -1,6 +1,5 @@
 package com.example.loca_market.data.repositores;
 
-import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -21,9 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -44,7 +42,7 @@ public class ProductRepository {
     private static final FirebaseStorage storage = FirebaseStorage.getInstance();
     //construction d'une référance
     private static final StorageReference storageRef = storage.getReference("products_imges");
-
+    private boolean updateStatue ;
 
     public static ProductRepository getInstance() {
         if (instance == null) {
@@ -283,5 +281,26 @@ public class ProductRepository {
                 Log.e(TAG, "onFailure: in getting product details " );
             }
         });
+    }
+
+    public Boolean updateProduct(Product product,Uri mImageUri, String image_name, String image_extention){
+
+            DocumentReference reference = productRef.document(product.getPid());
+            productRef.document( product.getPid()).set(product, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.e(TAG, "onSuccess: to update the product "+product.getName() );
+                    uploadProductImage(mImageUri,image_name,image_extention,reference);
+                    updateStatue=true ;
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e(TAG, "onFailure: to update the product "+product.getName() );
+                    updateStatue=false ;
+                }
+            });
+
+            return updateStatue;
     }
 }

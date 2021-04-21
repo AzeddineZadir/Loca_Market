@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.loca_market.data.models.User;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -146,9 +147,15 @@ public class RegistrationActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplicationContext(), "user correctly registered", Toast.LENGTH_SHORT).show();
-
+                                Log.d("user created correctely","user uid "+ uid);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("user creation", "onFailure: "+e.getMessage());
                             }
                         });
+                        ;
 
                     }
                     finish();

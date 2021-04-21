@@ -18,8 +18,10 @@ import java.util.ArrayList;
 public class ProductDetailsViewModel  extends ViewModel {
     private ProductRepository productRepository;
     public MutableLiveData<Product> product = new MutableLiveData<>() ;
-
-
+    public  Uri new_image ;
+    public String new_imge_extention ,new_image_name ;
+    //UI VARIABLES
+    MutableLiveData<Boolean> sbConfirmation = new  MutableLiveData<>();
 
     public ProductDetailsViewModel() {
         productRepository = ProductRepository.getInstance();
@@ -43,5 +45,22 @@ public class ProductDetailsViewModel  extends ViewModel {
         product=productRepository.getProductByUid(productUid) ;
 
         return  product ;
+    }
+
+    public Boolean updateProduct(){
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        new_image_name = ts;
+        Boolean  result =  productRepository.updateProduct(product.getValue(),new_image,new_image_name,new_imge_extention) ;
+        if (result==true){
+            showConfirmationSb();
+        }
+        return result ;
+    }
+
+
+    //UI Methodes
+    public void showConfirmationSb(){
+        sbConfirmation.setValue(true);
     }
 }
