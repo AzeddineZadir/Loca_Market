@@ -59,7 +59,7 @@ import com.example.loca_market.ui.seller.ManageFragmentDirections;
         card_delete_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageFragmentDirections.actionManageFragmentToDeleteProductFragment();
+                NavDirections action = ManageFragmentDirections.actionManageFragmentToDeleteProductListFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }

@@ -1,4 +1,4 @@
-package com.example.loca_market.ui.seller.productDetails;
+package com.example.loca_market.ui.seller.updateProductDetails;
 
 import android.app.Activity;
 import android.content.ContentResolver;

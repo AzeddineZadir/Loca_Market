@@ -42,7 +42,8 @@ public class ProductRepository {
     private static final FirebaseStorage storage = FirebaseStorage.getInstance();
     //construction d'une référance
     private static final StorageReference storageRef = storage.getReference("products_imges");
-    private boolean updateStatue ;
+    public boolean updateStatue;
+    public boolean dropStatue ;
 
     public static ProductRepository getInstance() {
         if (instance == null) {
@@ -50,6 +51,7 @@ public class ProductRepository {
         }
         return instance;
     }
+
     //ajouter un produit a la collection products toute en uploadent l'image de ce dernier dans le cloud
     public static void addProduct(Product product, Uri mImageUri, String image_name, String image_extention) {
 
@@ -60,7 +62,7 @@ public class ProductRepository {
                 Log.e(TAG + "ADD", "onSuccess: ");
                 // si le produits a été ajouter correctement
                 // on upload son image
-                if (mImageUri!= null) {
+                if (mImageUri != null) {
                     uploadProductImage(mImageUri, image_name, image_extention, new_product_uid);
                 }
 
@@ -86,7 +88,7 @@ public class ProductRepository {
     //recuperer tous les produits de la collections products de firstore et les mettres dans un mutable live data
     private void loadProductData(MutableLiveData<ArrayList<Product>> productLiveData) {
 
-        ArrayList<Product>productArrayList = new ArrayList<>();
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
         productRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -122,7 +124,7 @@ public class ProductRepository {
 
     //recuperer toutes les catégories de firstore et les mettres dans un mutable live data
     private void loadCategoryData(MutableLiveData<ArrayList<Category>> categoryLiveData) {
-        ArrayList<Category>categoryArrayList = new ArrayList<>();
+        ArrayList<Category> categoryArrayList = new ArrayList<>();
 
         categoryRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -171,7 +173,7 @@ public class ProductRepository {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     String image_url = downloadUri.toString();
-                    Log.e(TAG, "onComplete: get uri + "+image_url );
+                    Log.e(TAG, "onComplete: get uri + " + image_url);
                     reference.update("imageUrl", image_url).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -227,17 +229,17 @@ public class ProductRepository {
     }
 
     //recuperer tous les produis d'un vendeur seulement
-    public MutableLiveData<ArrayList<Product>>getProductsBySeller(String sellerUid){
+    public MutableLiveData<ArrayList<Product>> getProductsBySeller(String sellerUid) {
         MutableLiveData<ArrayList<Product>> data = new MutableLiveData<>();
-        loadProductsBySeller(data,sellerUid);
+        loadProductsBySeller(data, sellerUid);
         return data;
     }
 
     // recuperer tous les produits d'un vendeur de firestore et les mettre dans un mutable live data
-    private void loadProductsBySeller(MutableLiveData<ArrayList<Product>> productLiveData,String sellerUid) {
-        ArrayList<Product>productArrayList = new ArrayList<>();
+    private void loadProductsBySeller(MutableLiveData<ArrayList<Product>> productLiveData, String sellerUid) {
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
-        productRef.whereEqualTo("productOwner",sellerUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        productRef.whereEqualTo("productOwner", sellerUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -250,6 +252,7 @@ public class ProductRepository {
                     for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                         productArrayList.add(documentSnapshot.toObject(Product.class));
                     }
+
                     productLiveData.setValue(productArrayList);
 
                 }
@@ -259,13 +262,13 @@ public class ProductRepository {
 
     }
 
-    public MutableLiveData<Product>getProductByUid(String productUid){
+    public MutableLiveData<Product> getProductByUid(String productUid) {
         MutableLiveData<Product> data = new MutableLiveData<>();
-        loadProductByUid(data,productUid);
+        loadProductByUid(data, productUid);
         return data;
     }
 
-    private void loadProductByUid(MutableLiveData<Product> productMutableLiveData ,String productuid) {
+    private void loadProductByUid(MutableLiveData<Product> productMutableLiveData, String productuid) {
 
         productRef.document(productuid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -273,34 +276,58 @@ public class ProductRepository {
 
                 productMutableLiveData.setValue(documentSnapshot.toObject(Product.class));
 
-                Log.e(TAG, "onSuccess: product details ritraved "+ documentSnapshot.toObject(Product.class).getName());
+                Log.e(TAG, "onSuccess: product details ritraved " + documentSnapshot.toObject(Product.class).getName());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "onFailure: in getting product details " );
+                Log.e(TAG, "onFailure: in getting product details ");
             }
         });
     }
 
-    public Boolean updateProduct(Product product,Uri mImageUri, String image_name, String image_extention){
+    public boolean updateProduct(Product product, Uri mImageUri, String image_name, String image_extention) {
 
-            DocumentReference reference = productRef.document(product.getPid());
-            productRef.document( product.getPid()).set(product, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Log.e(TAG, "onSuccess: to update the product "+product.getName() );
-                    uploadProductImage(mImageUri,image_name,image_extention,reference);
-                    updateStatue=true ;
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG, "onFailure: to update the product "+product.getName() );
-                    updateStatue=false ;
-                }
-            });
+        DocumentReference reference = productRef.document(product.getPid());
+        productRef.document(product.getPid()).set(product, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e(TAG, "onSuccess: to update the product " + product.getName());
+                if (mImageUri != null) {
+                    uploadProductImage(mImageUri, image_name, image_extention, reference);
 
-            return updateStatue;
+                }
+
+                updateStatue = true;
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: to update the product " + product.getName());
+
+            }
+        });
+
+        return updateStatue;
+    }
+
+    public boolean deleteProductByUid(String productUid){
+
+
+        productRef.document(productUid).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            @Override
+            public void onSuccess(Void aVoid) {
+               dropStatue = true ;
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dropStatue = false ;
+            }
+        });
+
+        return  dropStatue ;
+
     }
 }

@@ -1,4 +1,6 @@
-package com.example.loca_market.ui.seller.productList;
+package com.example.loca_market.ui.seller.deleteProductList;
+
+import android.net.Uri;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,14 +13,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-public class ProductListViewModel extends ViewModel {
-
-    public static final String TAG = "ProductListViewModel";
+public class DeleteProductListViewModel  extends ViewModel {
     private MutableLiveData<ArrayList<Product>> productLiveData ;
     private ProductRepository productRepository;
     public FirebaseUser currentuser ;
+    //UI VARIABLES
+    MutableLiveData<Boolean> sbConfirmation = new  MutableLiveData<>();
 
-    public ProductListViewModel(){
+    public DeleteProductListViewModel() {
         productLiveData = new MutableLiveData<>();
         productRepository = ProductRepository.getInstance();
         currentuser= FirebaseAuth.getInstance().getCurrentUser();
@@ -37,5 +39,12 @@ public class ProductListViewModel extends ViewModel {
         productLiveData = productRepository.getProductsBySeller(currentuser.getUid());
         return productLiveData;
     }
+
+    public boolean dropProduct(String productUid){
+
+        return productRepository.deleteProductByUid(productUid);
+    }
+
+
 
 }

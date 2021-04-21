@@ -1,19 +1,12 @@
-package com.example.loca_market.ui.seller.productDetails;
+package com.example.loca_market.ui.seller.updateProductDetails;
 
 import android.net.Uri;
-import android.view.View;
 
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.repositores.ProductRepository;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
 
 public class ProductDetailsViewModel  extends ViewModel {
     private ProductRepository productRepository;
@@ -27,7 +20,7 @@ public class ProductDetailsViewModel  extends ViewModel {
         productRepository = ProductRepository.getInstance();
         product.setValue(new Product());
 
-         ;
+
     }
 
     public void init(String productUid) {
@@ -41,7 +34,6 @@ public class ProductDetailsViewModel  extends ViewModel {
 
     public MutableLiveData<Product> getProductDetails(String productUid){
 
-
         product=productRepository.getProductByUid(productUid) ;
 
         return  product ;
@@ -52,7 +44,7 @@ public class ProductDetailsViewModel  extends ViewModel {
         String ts = tsLong.toString();
         new_image_name = ts;
         Boolean  result =  productRepository.updateProduct(product.getValue(),new_image,new_image_name,new_imge_extention) ;
-        if (result==true){
+        if (result == true){
             showConfirmationSb();
         }
         return result ;
