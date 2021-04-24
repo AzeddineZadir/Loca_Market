@@ -1,28 +1,32 @@
 package com.example.loca_market.ui.client;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
-import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.Task;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +35,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientHomeActivity extends AppCompatActivity {
+public class ClientHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private Fragment clientHomeFragment;
     private EditText et_search_text;
     private Toolbar mToolbar;
@@ -41,6 +46,8 @@ public class ClientHomeActivity extends AppCompatActivity {
     private RecyclerView mProductSearchRecyclerView;
     private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
 
+    // navigation drawer
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,19 @@ public class ClientHomeActivity extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();
         mToolbar=findViewById(R.id.toolbar_client_home);
         setSupportActionBar(mToolbar);
+        // navigation drawer
+        mDrawer=findViewById(R.id.drawer_layout_home_activity);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        // search bar
         et_search_text = findViewById(R.id.et_search_text_client_home);
         mStore=FirebaseFirestore.getInstance();
         mProductslistSearch =new ArrayList<>();
@@ -111,19 +131,72 @@ public class ClientHomeActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_home_activity);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.client_main_menu,menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.client_home_menu, menu);
         return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.b_Logout_main_menu){
-            mAuth.signOut();
-            Intent intent=new Intent(ClientHomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+       /* if (id == R.id.nav_cart)
+        {
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+
+
         }
+        else if (id == R.id.nav_search)
+        {
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
+        }
+        else if (id == R.id.nav_categories)
+        {
+
+        }
+        else if (id == R.id.nav_settings)
+        {
+                Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                startActivity(intent);
+
+        }
+        else if (id == R.id.nav_logout)
+        {
+
+                 mAuth.signOut();
+                 Intent intent=new Intent(ClientHomeActivity.this, LoginActivity.class);
+                 startActivity(intent);
+                 finish();
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);*/
         return true;
     }
+
 }

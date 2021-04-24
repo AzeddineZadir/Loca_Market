@@ -1,8 +1,11 @@
 package com.example.loca_market.ui.client.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +26,7 @@ import com.example.loca_market.ui.client.adapter.ProductsOfCategoryAdapter;
 import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +37,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ProductsOfCategoryActivity extends AppCompatActivity {
+public class ProductsOfCategoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String categoryName;
 
@@ -48,6 +52,9 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
     private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
     private FirebaseAuth mAuth;
 
+    // navigation drawer
+    private DrawerLayout mDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,13 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
       /* Toolbar */
         mToolbar=findViewById(R.id.toolbar_products_of_category);
         setSupportActionBar(mToolbar);
+        // navigation drawer
+        mDrawer=findViewById(R.id.drawer_layout_product_of_category_activity);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         /* search bar */
         mAuth =FirebaseAuth.getInstance();
         mStore=FirebaseFirestore.getInstance();
@@ -131,19 +145,68 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
     }
     /*  Main menu */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.client_main_menu,menu);
-        return true;
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_product_of_category_activity);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.b_Logout_main_menu){
-            mAuth.signOut();
-            Intent intent=new Intent(ProductsOfCategoryActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.client_home_menu, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+       /* if (id == R.id.nav_cart)
+        {
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+
+
+        }
+        else if (id == R.id.nav_search)
+        {
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
+        }
+        else if (id == R.id.nav_categories)
+        {
+
+        }
+        else if (id == R.id.nav_settings)
+        {
+                Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                startActivity(intent);
+
+        }
+        else if (id == R.id.nav_logout)
+        {
+
+                 mAuth.signOut();
+                 Intent intent=new Intent(ClientHomeActivity.this, LoginActivity.class);
+                 startActivity(intent);
+                 finish();
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);*/
+        return true;
+    }
 }
