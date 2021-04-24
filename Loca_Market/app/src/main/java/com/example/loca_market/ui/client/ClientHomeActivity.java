@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.Task;
@@ -25,12 +29,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientHomeActivity extends AppCompatActivity {
     private Fragment clientHomeFragment;
     private EditText et_search_text;
     private Toolbar mToolbar;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mStore;
+    private List<Product> mProductsList;
+    private RecyclerView mProductRecyclerView;
+    private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,12 @@ public class ClientHomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         et_search_text = findViewById(R.id.et_search_text_client_home);
         mStore=FirebaseFirestore.getInstance();
+        mProductsList=new ArrayList<>();
+        mProductRecyclerView = findViewById(R.id.search_recycler);
+        mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        productSearchRecyclerAdapter = new ProductSearchRecyclerAdapter(this,mProductsList);
+        mProductRecyclerView.setAdapter(productSearchRecyclerAdapter);
+
         et_search_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -51,12 +68,20 @@ public class ClientHomeActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
+                    mProductsList.clear();
+                    productSearchRecyclerAdapter.notifyDataSetChanged();
+                }else {
+                    mProductsList.clear();
+                    productSearchRecyclerAdapter.notifyDataSetChanged();
+                    searchItem(s.toString());
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                    searchItem(s.toString());
+
             }
         });
 
@@ -64,21 +89,25 @@ public class ClientHomeActivity extends AppCompatActivity {
     }
 
     private void searchItem(String text) {
-    mStore.collection("Products").whereGreaterThanOrEqualTo("name",text).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-        @Override
-        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-            if(task.isSuccessful() && task.getResult()!=null){
-                for(DocumentSnapshot doc:task.getResult().getDocuments()){
-                    Log.i("ClientHomeActivity","on complete "+ doc.getData());
-                   /* Items items=doc.toObject(Items.class);
-                    mItemsList.add(items);
-                    itemsRecyclerAdapter.notifyDataSetChanged();
+        if(!text.isEmpty()){
+            mStore.collection("Products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful() && task.getResult()!=null){
+                        for(DocumentSnapshot doc:task.getResult().getDocuments()){
+                            Log.i("ClientHomeActivity",text);
+                            Product product=doc.toObject(Product.class);
+                            if(product.getName().toLowerCase().contains(text.toLowerCase())){
+                                mProductsList.add(product);
+                                productSearchRecyclerAdapter.notifyDataSetChanged();
+                            }
 
-                    */
+                        }
+                    }
                 }
-            }
+            } );
         }
-    } );
+
     }
 
     private void loadFragment(Fragment clientHomeFragment) {

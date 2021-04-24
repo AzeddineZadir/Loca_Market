@@ -3,6 +3,7 @@ package com.example.loca_market.ui.client.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,7 +75,7 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
         mStore=FirebaseFirestore.getInstance();
         mProductsList =new ArrayList<>();
         productRecyclerView =findViewById(R.id.recycler_products_of_category);
-       productRecyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+       productRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         productrecyclerAdapter=new ProductsOfCategoryAdapter(this, mProductsList);
         productRecyclerView.setAdapter(productrecyclerAdapter);

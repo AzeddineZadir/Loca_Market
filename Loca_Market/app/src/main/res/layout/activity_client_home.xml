@@ -49,6 +49,13 @@
 
         </LinearLayout>
     </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_home" />
 
     <FrameLayout
         android:id="@+id/client_home_container"
@@ -57,8 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_home"
+        app:layout_constraintTop_toBottomOf="@+id/search_recycler"
         tools:context=".ui.client.ClientHomeActivity">
-
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
