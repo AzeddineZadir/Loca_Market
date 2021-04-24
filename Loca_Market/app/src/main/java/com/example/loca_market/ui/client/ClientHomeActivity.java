@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -38,8 +37,8 @@ public class ClientHomeActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mStore;
-    private List<Product> mProductsList;
-    private RecyclerView mProductRecyclerView;
+    private List<Product> mProductslistSearch;
+    private RecyclerView mProductSearchRecyclerView;
     private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
 
 
@@ -54,11 +53,11 @@ public class ClientHomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         et_search_text = findViewById(R.id.et_search_text_client_home);
         mStore=FirebaseFirestore.getInstance();
-        mProductsList=new ArrayList<>();
-        mProductRecyclerView = findViewById(R.id.search_recycler);
-        mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        productSearchRecyclerAdapter = new ProductSearchRecyclerAdapter(this,mProductsList);
-        mProductRecyclerView.setAdapter(productSearchRecyclerAdapter);
+        mProductslistSearch =new ArrayList<>();
+        mProductSearchRecyclerView = findViewById(R.id.search_recycler);
+        mProductSearchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productSearchRecyclerAdapter = new ProductSearchRecyclerAdapter(this, mProductslistSearch);
+        mProductSearchRecyclerView.setAdapter(productSearchRecyclerAdapter);
 
         et_search_text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,16 +68,14 @@ public class ClientHomeActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.toString().isEmpty()){
-                    mProductsList.clear();
+                    mProductslistSearch.clear();
                     productSearchRecyclerAdapter.notifyDataSetChanged();
                 }else {
-                    mProductsList.clear();
+                    mProductslistSearch.clear();
                     productSearchRecyclerAdapter.notifyDataSetChanged();
-                    searchItem(s.toString());
+                    searchProduct(s.toString());
                 }
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -88,20 +85,18 @@ public class ClientHomeActivity extends AppCompatActivity {
 
     }
 
-    private void searchItem(String text) {
+    private void searchProduct(String text) {
         if(!text.isEmpty()){
             mStore.collection("Products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if(task.isSuccessful() && task.getResult()!=null){
                         for(DocumentSnapshot doc:task.getResult().getDocuments()){
-                            Log.i("ClientHomeActivity",text);
                             Product product=doc.toObject(Product.class);
                             if(product.getName().toLowerCase().contains(text.toLowerCase())){
-                                mProductsList.add(product);
+                                mProductslistSearch.add(product);
                                 productSearchRecyclerAdapter.notifyDataSetChanged();
                             }
-
                         }
                     }
                 }

@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.adapter.ProductsOfCategoryAdapter;
 import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,18 +29,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductsOfCategoryActivity extends AppCompatActivity {
 
     private String categoryName;
 
     private FirebaseFirestore mStore;
-    public List <Product> mProductsList;
+    public List<Product> mProductsList;
     private RecyclerView productRecyclerView;
     ProductsOfCategoryAdapter productrecyclerAdapter;
     private Toolbar mToolbar;
     EditText et_search_text;
+    private List<Product> mProductslistSearch;
+    private RecyclerView mProductSearchRecyclerView;
+    private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
     private FirebaseAuth mAuth;
 
 
@@ -53,8 +59,13 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         /* search bar */
         mAuth =FirebaseAuth.getInstance();
-        et_search_text = findViewById(R.id.et_search_text_products_of_category);
         mStore=FirebaseFirestore.getInstance();
+        et_search_text = findViewById(R.id.et_search_text_products_of_category);
+        mProductslistSearch =new ArrayList<>();
+        mProductSearchRecyclerView = findViewById(R.id.search_recycler);
+        mProductSearchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productSearchRecyclerAdapter = new ProductSearchRecyclerAdapter(this, mProductslistSearch);
+        mProductSearchRecyclerView.setAdapter(productSearchRecyclerAdapter);
         et_search_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -63,6 +74,14 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
+                    mProductslistSearch.clear();
+                    productSearchRecyclerAdapter.notifyDataSetChanged();
+                }else {
+                    mProductslistSearch.clear();
+                    productSearchRecyclerAdapter.notifyDataSetChanged();
+                    searchProduct(s.toString());
+                }
 
             }
 
@@ -71,15 +90,16 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
                 searchProduct(s.toString());
             }
         });
+
         /* retrieve products of category */
         mStore=FirebaseFirestore.getInstance();
         mProductsList =new ArrayList<>();
         productRecyclerView =findViewById(R.id.recycler_products_of_category);
-       productRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
-
+        productRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         productrecyclerAdapter=new ProductsOfCategoryAdapter(this, mProductsList);
         productRecyclerView.setAdapter(productrecyclerAdapter);
         if(categoryName!=null){
+            mProductsList.clear();
             mStore.collection("Products").whereEqualTo("category",categoryName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -93,6 +113,19 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
                     }
                 }
             });
+        }
+
+    }
+    /* search bar */
+    private void searchProduct(String text) {
+        mProductslistSearch.clear();
+        if(!text.isEmpty()){
+            for(Product product : mProductsList){
+                if(product.getName().toLowerCase().contains(text.toLowerCase())){
+                    mProductslistSearch.add(product);
+                    productSearchRecyclerAdapter.notifyDataSetChanged();
+                }
+            }
         }
 
     }
@@ -112,21 +145,5 @@ public class ProductsOfCategoryActivity extends AppCompatActivity {
         }
         return true;
     }
-    private void searchProduct(String text) {
-        mStore.collection("Products").whereGreaterThanOrEqualTo("name",text).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful() && task.getResult()!=null){
-                    for(DocumentSnapshot doc:task.getResult().getDocuments()){
-                        Log.i("ProductsActivity","on complete "+ doc.getData());
-                   /* Items items=doc.toObject(Items.class);
-                    mItemsList.add(items);
-                    itemsRecyclerAdapter.notifyDataSetChanged();
 
-                    */
-                    }
-                }
-            }
-        } );
-    }
 }
