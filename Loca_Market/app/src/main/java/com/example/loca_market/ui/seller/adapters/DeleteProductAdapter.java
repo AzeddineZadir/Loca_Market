@@ -52,8 +52,9 @@ public class DeleteProductAdapter extends RecyclerView.Adapter<DeleteProductAdap
 
 
     public void setProducts(List<Product> products){
+
         this.products = products ;
-        /*notifyDataSetChanged();*/
+        notifyDataSetChanged();
     }
 
     class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

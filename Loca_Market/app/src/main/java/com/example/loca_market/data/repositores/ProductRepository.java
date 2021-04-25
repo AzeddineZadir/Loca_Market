@@ -43,7 +43,7 @@ public class ProductRepository {
     //construction d'une référance
     private static final StorageReference storageRef = storage.getReference("products_imges");
     public boolean updateStatue;
-    public boolean dropStatue ;
+
 
     public static ProductRepository getInstance() {
         if (instance == null) {
@@ -311,23 +311,28 @@ public class ProductRepository {
         return updateStatue;
     }
 
-    public boolean deleteProductByUid(String productUid){
+    public MutableLiveData<Boolean> deleteProductByUid(String productUid){
+        MutableLiveData<Boolean > data = new MutableLiveData<>();
+        delete(data,productUid);
+        return  data;
 
 
+
+    }
+    private void delete(MutableLiveData<Boolean> dropStatus ,  String productUid){
         productRef.document(productUid).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
 
             @Override
             public void onSuccess(Void aVoid) {
-               dropStatue = true ;
+                dropStatus.setValue(true) ;
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                dropStatue = false ;
+                dropStatus.setValue(false) ;
             }
         });
-
-        return  dropStatue ;
 
     }
 }

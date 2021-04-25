@@ -33,16 +33,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteProductListFragment  extends Fragment implements DeleteProductAdapter.OnProductItemListener {
-    private static final String TAG ="DeleteProductList" ;
+    private static final String TAG = "DeleteProductList";
     private RecyclerView rv_sellers_product_list;
     private DeleteProductAdapter deleteProductAdapter;
-    private DeleteProductListViewModel deleteProductListViewModel ;
+    private DeleteProductListViewModel deleteProductListViewModel;
     private ProductRepository productRepository;
     private List<Product> productList;
-    private ImageView iv_drope_product ;
+    private ImageView iv_drope_product;
 
 
-    public FirebaseUser currentuser ;
+    public FirebaseUser currentuser;
 
     public DeleteProductListFragment() {
 
@@ -57,10 +57,10 @@ public class DeleteProductListFragment  extends Fragment implements DeleteProduc
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_delete_product_list, container, false);
-
+        Log.d(TAG, " in DeleteProductListFragment  ");
         rv_sellers_product_list = view.findViewById(R.id.rv_sellers_delete_product_list);
         productList = new ArrayList<>();
-        deleteProductAdapter = new DeleteProductAdapter(getContext(),this);
+        deleteProductAdapter = new DeleteProductAdapter(getContext(), this);
         rv_sellers_product_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_sellers_product_list.setAdapter(deleteProductAdapter);
 
@@ -71,11 +71,11 @@ public class DeleteProductListFragment  extends Fragment implements DeleteProduc
     }
 
     private void observeProductsBySeller() {
-        deleteProductListViewModel.getProductBySellerUid() .observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
+        deleteProductListViewModel.getProductBySellerUid().observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
             @Override
             public void onChanged(ArrayList<Product> products) {
+                productList = products;
 
-                productList = products ;
                 deleteProductAdapter.setProducts(products);
 
             }
@@ -85,32 +85,37 @@ public class DeleteProductListFragment  extends Fragment implements DeleteProduc
     @Override
     public void onProductClick(int position) {
 
-        Log.d(TAG, "onProductClick: in position = "+position);
-        String productUid =productList.get(position).getPid();
+        Log.d(TAG, "onProductClick: in position = " + position);
+        String productUid = productList.get(position).getPid();
 
     }
 
     @Override
     public void onDropProductButtonClick(int position) {
 
-        String productToDeleteUid= productList.get(position).getPid();
-        Log.e(TAG, "onDropProductButtonClick:" );
-        Snackbar snackbar = Snackbar.make(getView(),"voulez vous vraiment supprimer le produits "+productList.get(position).getName(), BaseTransientBottomBar.LENGTH_LONG)
+        String productToDeleteUid = productList.get(position).getPid();
+        Log.e(TAG, "onDropProductButtonClick:");
+        Snackbar snackbar = Snackbar.make(getView(), "voulez vous vraiment supprimer le produits " + productList.get(position).getName(), BaseTransientBottomBar.LENGTH_LONG)
                 .setAction("OUI", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean result = deleteProductListViewModel.dropProduct(productToDeleteUid);
+                        deleteProductListViewModel.dropProduct(productToDeleteUid).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(Boolean aBoolean) {
+                                if (aBoolean == true) {
+                                    Snackbar.make(getView(), "le produit a été supprimé correctement", BaseTransientBottomBar.LENGTH_LONG).show();
 
-                        if (result == true){
-                            Snackbar.make(getView(),"le produit a été supprimé correctement",BaseTransientBottomBar.LENGTH_LONG).show();
-                            productList.remove(position);
-                            deleteProductAdapter.notifyItemRemoved(position);
 
-                        }else{
-                            Snackbar.make(getView(),"un probleme lors de la suppression ",BaseTransientBottomBar.LENGTH_LONG).show();
-                        }
+                                } else {
+                                    Snackbar.make(getView(), "un probleme lors de la suppression ", BaseTransientBottomBar.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+
                     }
                 });
         snackbar.show();
     }
+
 }

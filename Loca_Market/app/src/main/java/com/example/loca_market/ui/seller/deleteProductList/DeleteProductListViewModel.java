@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class DeleteProductListViewModel  extends ViewModel {
     private MutableLiveData<ArrayList<Product>> productLiveData ;
+    private MutableLiveData<Boolean> dropStatuLiveData ;
     private ProductRepository productRepository;
     public FirebaseUser currentuser ;
     //UI VARIABLES
@@ -22,6 +23,7 @@ public class DeleteProductListViewModel  extends ViewModel {
 
     public DeleteProductListViewModel() {
         productLiveData = new MutableLiveData<>();
+        dropStatuLiveData = new MutableLiveData<>();
         productRepository = ProductRepository.getInstance();
         currentuser= FirebaseAuth.getInstance().getCurrentUser();
         productLiveData = productRepository.getProductsBySeller(currentuser.getUid());
@@ -40,9 +42,10 @@ public class DeleteProductListViewModel  extends ViewModel {
         return productLiveData;
     }
 
-    public boolean dropProduct(String productUid){
+    public LiveData<Boolean> dropProduct(String productUid){
 
-        return productRepository.deleteProductByUid(productUid);
+        dropStatuLiveData = productRepository.deleteProductByUid(productUid);
+        return dropStatuLiveData;
     }
 
 
