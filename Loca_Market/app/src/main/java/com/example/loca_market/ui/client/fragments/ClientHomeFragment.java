@@ -88,7 +88,7 @@ public class ClientHomeFragment extends Fragment {
 
 
 
-        mstore.collection("Categories")
+        mstore.collection("categories")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -110,7 +110,7 @@ public class ClientHomeFragment extends Fragment {
 
 
 
-        mstore.collection("Products")
+        mstore.collection("products")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -137,7 +137,7 @@ public class ClientHomeFragment extends Fragment {
         mBestSellsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
         mBestSellsRecyclerView.setAdapter(mBestSellsAdapter);
 
-        mstore.collection("Products")
+        mstore.collection("products")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

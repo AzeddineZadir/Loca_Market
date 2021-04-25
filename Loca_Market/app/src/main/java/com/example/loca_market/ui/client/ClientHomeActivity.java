@@ -107,7 +107,7 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
 
     private void searchProduct(String text) {
         if(!text.isEmpty()){
-            mStore.collection("Products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            mStore.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if(task.isSuccessful() && task.getResult()!=null){

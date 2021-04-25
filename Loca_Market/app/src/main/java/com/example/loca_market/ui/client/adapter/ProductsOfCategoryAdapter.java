@@ -36,7 +36,7 @@ public class ProductsOfCategoryAdapter extends RecyclerView.Adapter<ProductsOfCa
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mProductName.setText(productsList.get(position).getName());
         holder.mProductPrice.setText(productsList.get(position).getPrice()+"€");
-        Glide.with(applicationContext).load(productsList.get(position).getImageUrl()).into(holder.mProductImage);
+        Glide.with(applicationContext).load(productsList.get(position).getimageUrl()).into(holder.mProductImage);
     }
 
     @Override

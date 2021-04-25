@@ -114,7 +114,7 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         productRecyclerView.setAdapter(productrecyclerAdapter);
         if(categoryName!=null){
             mProductsList.clear();
-            mStore.collection("Products").whereEqualTo("category",categoryName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            mStore.collection("products").whereEqualTo("category",categoryName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if(task.isSuccessful()){
