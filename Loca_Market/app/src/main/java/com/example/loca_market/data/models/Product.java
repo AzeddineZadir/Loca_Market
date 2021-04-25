@@ -18,8 +18,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String brand, float price, String category, String description, String imageUrl, String productOwner) {
-    public Product(String name, String brand, float price, String category, String description, String imageUrl, boolean bestSell) {
+    public Product(String pid, String name, String brand, float price, String category, String description, String imageUrl, String productOwner) {
+        this.pid = pid;
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -27,6 +27,15 @@ public class Product {
         this.description = description;
         this.imageUrl = imageUrl;
         this.productOwner = productOwner;
+    }
+
+    public Product(String name, String brand, float price, String category, String description, String imageUrl, boolean bestSell) {
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.bestSell = bestSell;
     }
 
@@ -93,8 +102,6 @@ public class Product {
     public void setProductOwner(String productOwner) {
         this.productOwner = productOwner;
     }
-}
-
     public boolean isBestSell() {
         return bestSell;
     }
@@ -103,4 +110,7 @@ public class Product {
         this.bestSell = bestSell;
     }
 }
+
+
+
 

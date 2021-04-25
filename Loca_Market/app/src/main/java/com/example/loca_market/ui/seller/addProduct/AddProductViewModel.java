@@ -32,6 +32,7 @@ public class AddProductViewModel extends ViewModel {
 
     public AddProductViewModel() {
         product.setValue(new Product());
+        currentuser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public void init() {
