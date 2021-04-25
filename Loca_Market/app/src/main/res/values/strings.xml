@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Loca_Market</string>
+    <string name="app_name">KZ_Market</string>
     <string name="tv_welcome">Bienvenu</string>
     <string name="msg_splash_screen">Sélectionner comment voulez \n vous utiliser l\'application \n SVP</string>
     <string name="b_seller">Commerçant</string>
@@ -38,6 +38,9 @@ pour réinitialiser votre mot de passe</string>
     <string name="cat_gorie">Catégorie</string>
     <string name="d_scription">Déscription</string>
     <string name="ajouter">Ajouter</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="modifer">Modifer</string>

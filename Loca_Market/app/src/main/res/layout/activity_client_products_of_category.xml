@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout_home_activity"
+    android:id="@+id/drawer_layout_product_of_category_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_200"
-        tools:context=".ui.client.ClientHomeActivity">
+        tools:context=".ui.client.Activities.ProductsOfCategoryActivity">
         <LinearLayout
-            android:id="@+id/layout_toolbar_client_home"
+            android:id="@+id/layout_toolbar_client_products_of_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_client_home"
+                android:id="@+id/toolbar_products_of_category"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:fitsSystemWindows="true"
@@ -31,11 +30,11 @@
             </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
-                android:id="@+id/layout_search_bar_client_home"
+                android:id="@+id/layout_search_layout_products_of_category"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/search_bg"
                 android:orientation="horizontal"
@@ -50,7 +49,7 @@
                     android:src="@drawable/ic_baseline_search_24" />
 
                 <EditText
-                    android:id="@+id/et_search_text_client_home"
+                    android:id="@+id/et_search_text_products_of_category"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Chercher un produit" />
@@ -63,28 +62,27 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_home" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_client_products_of_category" />
 
-        <FrameLayout
-            android:id="@+id/client_home_container"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_products_of_category"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_recycler"
-            tools:context=".ui.client.ClientHomeActivity">
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintVertical_bias="1.0" />
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_home"
-            app:menu="@menu/client_main_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/client_main_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
