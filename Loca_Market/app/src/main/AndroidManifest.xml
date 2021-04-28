@@ -10,8 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Loca_Market">
-        <activity android:name=".ui.client.Activities.AllCategories"/>
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:theme"
+        android:theme="@style/Theme.Loca_Market"
+
+       >
+        <activity android:name=".ui.client.Activities.ProductDetailsActivity"></activity>
+        <activity android:name=".ui.client.Activities.AllCategories" />
         <activity android:name=".ui.seller.SellerHomeActivity" />
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />

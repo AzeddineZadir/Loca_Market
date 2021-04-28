@@ -1,6 +1,7 @@
 package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.Activities.ProductDetailsActivity;
 
 import java.util.List;
 
@@ -37,6 +39,14 @@ public class BestSellsAdapter extends RecyclerView.Adapter<BestSellsAdapter.View
             holder.mBestSellsName.setText(mBestSellsList.get(position).getName().trim());
             holder.mBestSellsPrice.setText(mBestSellsList.get(position).getPrice()+"€");
             Glide.with(context).load(mBestSellsList.get(position).getImageUrl()).into(holder.mBestSellsImg);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    intent.putExtra("productDetail",mBestSellsList.get(position));
+                    context.startActivity(intent);
+                }
+            });
     }
 
     @Override

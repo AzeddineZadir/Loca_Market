@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical"
+    tools:context=".ui.client.Activities.ProductDetailsActivity">
+
+
+        <ImageView
+            android:id="@+id/i_product_image_details"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="50dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom : "
+                android:textColor="@color/red_900"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:textSize="18sp"
+
+                />
+            <TextView
+                android:id="@+id/t_product_name_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marque : "
+                android:textColor="@color/red_900"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:textSize="18sp"
+
+                />
+            <TextView
+                android:id="@+id/t_product_brand_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Brand"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Déscription : "
+                android:textColor="@color/red_900"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:textSize="18sp"
+                />
+            <ScrollView
+                android:id="@+id/product_descrption_scroller"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/t_product_brand_details"
+                android:scrollbars="vertical"
+                android:fillViewport="true">
+            <TextView
+                android:id="@+id/t_product_description_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Description"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                />
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prix : "
+            android:textColor="@color/red_900"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/t_product_price_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SCROLLER_ID"
+            android:text="Product Price"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+
+            />
+        </LinearLayout>
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/b_number_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            app:textSize="8dp"
+            app:initialNumber="1"
+            app:finalNumber="20"
+            android:gravity="center"
+            app:backGroundColor="@color/red_900"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="10dp"
+            >
+        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/b_return"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/red_500"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"
+            android:text="Retour"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            />
+        <Button
+            android:id="@+id/b_add_pd_to_cart_btn"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/green50_400"
+            android:text="Ajouter au panier"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+</LinearLayout>
