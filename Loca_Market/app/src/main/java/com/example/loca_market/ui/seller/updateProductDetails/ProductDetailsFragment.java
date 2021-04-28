@@ -129,7 +129,7 @@ public class ProductDetailsFragment extends Fragment {
             @Override
             public void onChanged(Product product) {
 
-                Glide.with(getContext()).load(product.getimageUrl()).into(iv_details_product);
+                Glide.with(getContext()).load(product.getImageUrl()).into(iv_details_product);
 
             }
         });

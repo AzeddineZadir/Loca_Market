@@ -95,7 +95,7 @@ public class ClientHomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Home Fragment", document.getId() + " => " + document.getData());
+                                Log.d("Home Fragment cat", document.getId() + " => " + document.getData());
                                 Category category=document.toObject(Category.class);
 
                                 mCategoryList.add(category);
@@ -117,7 +117,7 @@ public class ClientHomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Home Fragment", document.getId() + " => " + document.getData());
+                                Log.d("Home Fragment best", document.getId() + " => " + document.getData());
                                 if(document.getData().get("bestSell").equals(false)) {
                                     Product product = document.toObject(Product.class);
                                     mNewProductsList.add(product);

@@ -87,21 +87,22 @@ public class Product {
         this.description = description;
     }
 
-    public String getimageUrl() {
+
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setimageUrl(String imgaeUrl) {
-        this.imageUrl = imgaeUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getProductOwner() {
         return productOwner;
     }
-
     public void setProductOwner(String productOwner) {
         this.productOwner = productOwner;
     }
+
     public boolean isBestSell() {
         return bestSell;
     }
@@ -109,6 +110,9 @@ public class Product {
     public void setBestSell(boolean bestSell) {
         this.bestSell = bestSell;
     }
+
+
+
 }
 
 

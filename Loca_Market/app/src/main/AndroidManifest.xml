@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market">
-        <activity android:name=".ui.client.Activities.AllCategories"></activity>
+        <activity android:name=".ui.client.Activities.AllCategories"/>
         <activity android:name=".ui.seller.SellerHomeActivity" />
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />
