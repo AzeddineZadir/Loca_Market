@@ -2,7 +2,9 @@ package com.example.loca_market.data.models;
 
 import com.google.firebase.firestore.DocumentId;
 
-public class ProductCart {
+import java.io.Serializable;
+
+public class ProductCart implements Serializable {
     @DocumentId
     private String docId ;
     Product product;

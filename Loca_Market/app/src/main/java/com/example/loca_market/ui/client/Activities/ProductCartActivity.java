@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -59,7 +61,10 @@ public class ProductCartActivity extends AppCompatActivity  implements CartProdu
         buyProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                        // à implémenter pour la commande
+                Intent intent = new Intent(ProductCartActivity.this,Client_confirm_orderActivity.class);
+                intent.putExtra("itemsList", (Serializable) productsCartList);
+                intent.putExtra("totalAmount",totalAmount.getText().toString());
+                startActivity(intent);
             }
         });
         cartProductAdapter = new CartProductAdapter(productsCartList,this);
