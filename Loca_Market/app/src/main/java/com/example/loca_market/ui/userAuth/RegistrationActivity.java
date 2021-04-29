@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.loca_market.data.models.Store;
 import com.example.loca_market.data.models.User;
 import com.example.loca_market.R;
+import com.example.loca_market.data.repositores.StoreRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +37,7 @@ public class RegistrationActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore fdb ;
     CheckBox cb_client , cb_seller ;
+    StoreRepository storeRepository = StoreRepository.getInstance();
     public static  String role ;
 
 
@@ -148,6 +151,13 @@ public class RegistrationActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplicationContext(), "user correctly registered", Toast.LENGTH_SHORT).show();
                                 Log.d("user created correctely","user uid "+ uid);
+                                // si c'est un vendeur on crée une boutique par defaut
+                                if (new_user.getRole().equals("seller")){
+                                    CollectionReference sotresRef = fdb.collection("stores");
+                                    Store store = new Store(uid);
+                                    storeRepository.addStore(store);
+                                }
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

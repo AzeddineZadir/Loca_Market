@@ -38,7 +38,7 @@ public class StoreFragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_store, container, false);
 
-        tv_text = (TextView)view.findViewById(R.id.tv_text);
+        tv_text = (TextView)view.findViewById(R.id.tv_store_name);
         b_logout = (Button)view.findViewById(R.id.b_store_logout) ;
 
         tv_text.setOnClickListener(new View.OnClickListener() {

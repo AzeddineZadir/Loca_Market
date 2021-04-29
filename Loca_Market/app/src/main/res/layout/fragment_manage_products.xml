@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_300"
-    tools:context=".ui.seller.ManageFragment">
+    tools:context=".ui.seller.ManageProductFragment">
 
     <TextView
         android:id="@+id/tv_gestion_produit"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="Gestion"
+        android:text="Gestion Produits "
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.113">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_manage_product"
+            android:id="@+id/card_add_product"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="8dp"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/g_rer_mes_produits"
+                    android:text="@string/ajouter_un_produit"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/imageView_add"
@@ -79,7 +79,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_manage_store"
+            android:id="@+id/card_update_product"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="8dp"
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/g_rer_ma_boutique"
+                    android:text="@string/modifier_un_produit"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/imageView_update"
@@ -119,5 +119,48 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_delete_product"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Supprimer un Produit"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView_delete"
+                    app:layout_constraintHorizontal_bias="0.127"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView_delete"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_baseline_remove_circle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

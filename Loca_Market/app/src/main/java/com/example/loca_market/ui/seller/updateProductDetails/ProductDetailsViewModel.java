@@ -44,12 +44,11 @@ public class ProductDetailsViewModel  extends ViewModel {
         String ts = tsLong.toString();
         new_image_name = ts;
         Boolean  result =  productRepository.updateProduct(product.getValue(),new_image,new_image_name,new_imge_extention) ;
-        if (result == true){
+        if (result){
             showConfirmationSb();
         }
         return result ;
     }
-
 
     //UI Methodes
     public void showConfirmationSb(){

@@ -319,6 +319,7 @@ public class ProductRepository {
 
 
     }
+
     private void delete(MutableLiveData<Boolean> dropStatus ,  String productUid){
         productRef.document(productUid).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 

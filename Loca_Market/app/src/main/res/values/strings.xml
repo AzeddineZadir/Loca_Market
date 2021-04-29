@@ -44,5 +44,9 @@ pour réinitialiser votre mot de passe</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="modifer">Modifer</string>
+    <string name="g_rer_mes_produits">Gérer mes produits</string>
+    <string name="g_rer_ma_boutique">Gérer ma Boutique</string>
+    <string name="vue_lin_aire">vue linéaire</string>
+    <string name="vue_tableaux">vue tableaux</string>
 
 </resources>

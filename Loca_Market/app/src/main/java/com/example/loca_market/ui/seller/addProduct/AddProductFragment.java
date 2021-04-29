@@ -121,7 +121,7 @@ public class AddProductFragment extends Fragment {
     private void observeNavigationToManagementFragment(View view){
         addProductViewModel.navigationToManageFragment.observe(getViewLifecycleOwner(),result -> {
             if (result == true ){
-                NavDirections action = AddProductFragmentDirections.actionAddProductFragmentToManageFragment();
+                NavDirections action = AddProductFragmentDirections.actionAddProductFragmentToManageProductFragment();
                 Navigation.findNavController(view).navigate(action);
             }
         });
