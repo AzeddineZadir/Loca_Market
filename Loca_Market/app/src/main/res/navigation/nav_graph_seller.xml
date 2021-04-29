@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/storeFragment"
-        android:name="com.example.loca_market.ui.seller.StoreFragment"
+        android:name="com.example.loca_market.ui.seller.sellerStore.StoreFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" />
     <fragment
