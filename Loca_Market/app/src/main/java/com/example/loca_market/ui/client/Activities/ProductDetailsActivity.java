@@ -92,18 +92,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
-
-                        ProductCart productCart2 = doc.toObject(ProductCart.class);
-                        DocumentReference docRef = doc.getReference();
-                        Log.i("ProductDetail",docRef.getId());
-                        if(productCart.getProduct().getName().equals(productCart2.getProduct().getName())){
-                            tempQuatity[0] =productCart2.getQuantity()+productCart.getQuantity();
-                            Map<String,Object> updates = new HashMap<>();
-                            updates.put("quantity",tempQuatity[0]);
-                            docRef.update(updates);
-                            Toast.makeText(ProductDetailsActivity.this, "Produit mis à jour dans le panier", Toast.LENGTH_SHORT).show();
-                            updated[0] =true;
+                    if(task.getResult()!=null) {
+                        for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            ProductCart productCart2 = doc.toObject(ProductCart.class);
+                            DocumentReference docRef = doc.getReference();
+                            Log.i("ProductDetail", docRef.getId());
+                            if (productCart.getProduct().getName().equals(productCart2.getProduct().getName())) {
+                                tempQuatity[0] = productCart2.getQuantity() + productCart.getQuantity();
+                                Map<String, Object> updates = new HashMap<>();
+                                updates.put("quantity", tempQuatity[0]);
+                                docRef.update(updates);
+                                Toast.makeText(ProductDetailsActivity.this, "Produit mis à jour dans le panier", Toast.LENGTH_SHORT).show();
+                                updated[0] = true;
+                            }
                         }
                     }
                     if(!updated[0]){

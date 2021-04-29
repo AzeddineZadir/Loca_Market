@@ -1,6 +1,10 @@
 package com.example.loca_market.data.models;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class ProductCart {
+    @DocumentId
+    private String docId ;
     Product product;
     int quantity;
 
@@ -26,5 +30,13 @@ public class ProductCart {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 }

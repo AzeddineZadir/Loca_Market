@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.client.Activities.ClientCartActivity">
+    tools:context=".ui.client.Activities.ProductCartActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/cart_toolbar"
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Total : $300"
+        android:textColor="@android:color/holo_green_dark"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/cart_product_buy_now"
         app:layout_constraintEnd_toEndOf="parent"

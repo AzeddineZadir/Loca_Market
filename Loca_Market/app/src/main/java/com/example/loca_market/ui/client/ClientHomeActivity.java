@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.Activities.ProductCartActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.google.android.gms.tasks.Task;
@@ -163,14 +165,14 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-       /* if (id == R.id.nav_cart)
+        if (id == R.id.nav_cart)
         {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                Intent intent = new Intent(ClientHomeActivity.this, ProductCartActivity.class);
                 startActivity(intent);
 
 
         }
-        else if (id == R.id.nav_search)
+     /*   else if (id == R.id.nav_search)
         {
                 Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
                 startActivity(intent);
