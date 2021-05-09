@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.Activities.OrdersManagement;
 import com.example.loca_market.ui.client.Activities.ProductCartActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
@@ -172,12 +173,12 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
 
 
         }
-     /*   else if (id == R.id.nav_search)
+       else if (id == R.id.nav_orders)
         {
-                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                Intent intent = new Intent(ClientHomeActivity.this, OrdersManagement.class);
                 startActivity(intent);
         }
-        else if (id == R.id.nav_categories)
+     /*   else if (id == R.id.nav_categories)
         {
 
         }

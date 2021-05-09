@@ -2,6 +2,7 @@ package com.example.loca_market.ui.client.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,10 +36,16 @@ public class Client_confirm_orderActivity extends AppCompatActivity {
     private Button confirmOrderBtn;
     private FirebaseFirestore mStore;
     private FirebaseAuth mAuth;
+    private Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_confirm_order);
+        // tootlbar managment
+        mToolbar=findViewById(R.id.confirm_order_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Nouvelle Commande");
         firstNameEditText = findViewById(R.id.ed_shippment_firstName);
         lastNameEditText = findViewById(R.id.ed_shippment_lastName);
         phoneEditText = findViewById(R.id.ed_shippment_phone_number);

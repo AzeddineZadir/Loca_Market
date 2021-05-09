@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.models.ProductCart;
+import com.example.loca_market.ui.client.ClientHomeActivity;
 import com.example.loca_market.ui.client.adapter.CartProductAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +48,7 @@ public class ProductCartActivity extends AppCompatActivity  implements CartProdu
         mToolbar=findViewById(R.id.cart_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Panier");
 
         mStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -61,10 +63,15 @@ public class ProductCartActivity extends AppCompatActivity  implements CartProdu
         buyProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProductCartActivity.this,Client_confirm_orderActivity.class);
-                intent.putExtra("itemsList", (Serializable) productsCartList);
-                intent.putExtra("totalAmount",totalAmount.getText().toString());
-                startActivity(intent);
+                if(productsCartList.isEmpty()){
+                    Toast.makeText(ProductCartActivity.this,"votre panier est vide !",Toast.LENGTH_LONG).show();
+                }else{
+                    Intent intent = new Intent(ProductCartActivity.this,Client_confirm_orderActivity.class);
+                    intent.putExtra("itemsList", (Serializable) productsCartList);
+                    intent.putExtra("totalAmount",totalAmount.getText().toString());
+                    startActivity(intent);
+                }
+
             }
         });
         cartProductAdapter = new CartProductAdapter(productsCartList,this);

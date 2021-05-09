@@ -19,4 +19,7 @@
     <color name="orange_200">#FF8A65</color>
     <color name="orange_700">#E64A19</color>
     <color name="green50_400">#66BB6A</color>
+    <color name="green50_500">#4CAF50</color>
+    <color name="green50_900">#1B5E20</color>
+    <color name="green50_A700">#00C853</color>
 </resources>
