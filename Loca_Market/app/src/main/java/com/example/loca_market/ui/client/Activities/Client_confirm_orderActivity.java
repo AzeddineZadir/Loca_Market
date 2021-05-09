@@ -96,14 +96,16 @@ public class Client_confirm_orderActivity extends AppCompatActivity {
 
     private void ConfirmOrder() {
 
-        final String saveCurrentDate, saveCurrentTime;
+      String saveCurrentDate, saveCurrentTime;
 
         Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd / mm / yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
         saveCurrentDate = currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
-        saveCurrentTime = currentDate.format(calForDate.getTime());
+        String dateTime[] =saveCurrentDate.split(" ");
+        String dayMonthYear[]=dateTime[0].split("-");
+        saveCurrentDate=dayMonthYear[1]+"/"+dayMonthYear[0]+"/"+dayMonthYear[2];
+        String hourMinSec[]=dateTime[1].split(":");
+        saveCurrentTime = hourMinSec[0]+":"+hourMinSec[1];
         String totalAmount = getIntent().getStringExtra("totalAmount");
         List<ProductCart>productsOrdered =(ArrayList<ProductCart>) getIntent().getSerializableExtra("itemsList");
         Order order =new Order();

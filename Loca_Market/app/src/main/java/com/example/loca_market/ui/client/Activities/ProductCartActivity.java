@@ -68,7 +68,7 @@ public class ProductCartActivity extends AppCompatActivity  implements CartProdu
                 }else{
                     Intent intent = new Intent(ProductCartActivity.this,Client_confirm_orderActivity.class);
                     intent.putExtra("itemsList", (Serializable) productsCartList);
-                    intent.putExtra("totalAmount",totalAmount.getText().toString());
+                    intent.putExtra("totalAmount",totalAmount.getText().toString().split(":")[1].trim());
                     startActivity(intent);
                 }
 

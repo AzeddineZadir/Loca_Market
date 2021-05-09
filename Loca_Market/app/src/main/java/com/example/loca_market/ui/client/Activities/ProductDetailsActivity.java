@@ -60,7 +60,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDescription = (TextView)findViewById(R.id.t_product_description_details);
         productPrice = (TextView) findViewById(R.id.t_product_price_details);
         numberButton =(ElegantNumberButton)findViewById(R.id.b_number_btn);
-        final String[] strQty = {"0"};
+        final String[] strQty = {"1"};
         numberButton.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {

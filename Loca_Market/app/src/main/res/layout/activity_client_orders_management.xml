@@ -15,24 +15,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/order_item_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cart_total_amount"
-        app:layout_constraintTop_toBottomOf="@+id/cart_toolbar"/>
+        app:layout_constraintTop_toBottomOf="@+id/order_management_toolbar"
+        tools:layout_editor_absoluteX="-16dp" />
 
 
-    <Button
-        android:id="@+id/b_order_back"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_weight="5"
-        android:background="@color/colorPrimary"
-        android:text="Retour"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
