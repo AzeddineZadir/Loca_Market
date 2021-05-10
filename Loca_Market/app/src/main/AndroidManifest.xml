@@ -13,11 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market"
         tools:replace="android:theme">
-        <activity android:name=".ui.client.Activities.OrdersManagement"
-            android:parentActivityName=".ui.client.ClientHomeActivity"/>
+        <activity android:name=".ui.client.Activities.DetailOrderActivity"
+            android:parentActivityName=".ui.client.Activities.OrdersManagement"></activity>
+        <activity
+            android:name=".ui.client.Activities.OrdersManagement"
+            android:parentActivityName=".ui.client.ClientHomeActivity" />
         <activity android:name=".ui.client.Activities.ClientOrderConfirmedActivity" />
-        <activity android:name=".ui.client.Activities.Client_confirm_orderActivity"
-            android:parentActivityName=".ui.client.Activities.ProductCartActivity"/>
+        <activity
+            android:name=".ui.client.Activities.Client_confirm_orderActivity"
+            android:parentActivityName=".ui.client.Activities.ProductCartActivity" />
         <activity
             android:name=".ui.client.Activities.ProductCartActivity"
             android:parentActivityName=".ui.client.ClientHomeActivity" />

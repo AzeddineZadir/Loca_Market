@@ -2,9 +2,10 @@ package com.example.loca_market.data.models;
 
 import com.google.firebase.firestore.DocumentId;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     @DocumentId
     private String orderId;
     private String lastName,firstName, phone, address, city, state, date, time, totalAmount,clientId;

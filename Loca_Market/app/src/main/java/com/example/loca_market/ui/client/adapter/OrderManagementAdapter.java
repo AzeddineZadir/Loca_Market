@@ -1,6 +1,7 @@
 package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Order;
+import com.example.loca_market.ui.client.Activities.DetailOrderActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,6 +68,14 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
                 }
             });
         }
+        holder.detailOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailOrderActivity.class);
+                intent.putExtra("orderDetail",orderListe.get(position));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -80,6 +90,7 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
         TextView orderState;
         TextView orderTotalPrice;
         TextView removeOrder;
+        TextView detailOrder;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             orderTitle=itemView.findViewById(R.id.t_order_title);
@@ -87,6 +98,7 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
             orderState=itemView.findViewById(R.id.t_order_state);
             orderTotalPrice =itemView.findViewById(R.id.t_order_total_price);
             removeOrder =itemView.findViewById(R.id.t_b_aboart_order);
+            detailOrder=itemView.findViewById(R.id.t_b_order_details);
         }
     }
 
