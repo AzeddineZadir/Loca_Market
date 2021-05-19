@@ -54,14 +54,14 @@ public class DetailOrderActivity extends AppCompatActivity {
         orderReceiverCity = findViewById(R.id.t_order_detail_receiver_city);
         orderReceiverPhoneNumber = findViewById(R.id.t_order_detail_receiver_phone);
 
-        orderDateTime.setText("Date commande : "+curentOrder.getDate()+" à "+curentOrder.getTime());
-        orderState.setText("Etat commande : "+curentOrder.getState());
-        orderTotalAmount.setText("Montant Total : "+curentOrder);
-        orderReceiverLastname.setText("Nom Receveur : "+curentOrder.getLastName());
-        orderReceiverFirstname.setText("Prénom Receveur : "+curentOrder.getFirstName());
-        orderReceiverAddress.setText("Adresse Receveur : "+curentOrder.getAddress());
-        orderReceiverCity.setText("Ville Receveur: "+curentOrder.getCity());
-        orderReceiverPhoneNumber.setText("Tel : "+curentOrder.getPhone());
+        orderDateTime.setText(curentOrder.getDate()+" à "+curentOrder.getTime());
+        orderState.setText(curentOrder.getState());
+        orderTotalAmount.setText(curentOrder.getTotalAmount());
+        orderReceiverLastname.setText(curentOrder.getLastName());
+        orderReceiverFirstname.setText(curentOrder.getFirstName());
+        orderReceiverAddress.setText(curentOrder.getAddress());
+        orderReceiverCity.setText(curentOrder.getCity());
+        orderReceiverPhoneNumber.setText(curentOrder.getPhone());
 
         productsOrdredRecyclerView =findViewById(R.id.order_detail_container);
         productsOrdredRecyclerView.setLayoutManager(new LinearLayoutManager(this));
