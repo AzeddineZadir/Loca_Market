@@ -42,7 +42,7 @@ public class SellerStoreProductStaggeredAdapter  extends RecyclerView.Adapter<Se
         Product currentProduct = products.get(position);
         holder.tv_product_name.setText(currentProduct.getName());
         holder.tv_product_price.setText(currentProduct.getPrice()+" €");
-        Glide.with(context).load(currentProduct.getimageUrl()).into(holder.iv_item_product);
+        Glide.with(context).load(currentProduct.getImageUrl()).into(holder.iv_item_product);
     }
 
 
