@@ -2,17 +2,24 @@ package com.example.loca_market.ui.seller.manageStore;
 
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Store;
+import com.example.loca_market.data.repositores.ProductRepository;
 import com.example.loca_market.data.repositores.StoreRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class ManageStoreFragmentViewModel  extends ViewModel {
     private StoreRepository storeRepository ;
     public MutableLiveData<Store> storeMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Category>> categoryLiveData = new MutableLiveData<>();
+    private ProductRepository productRepository;
     public Uri store_image_uri ;
     public String store_image_extention , store_image_name ;
     MutableLiveData<Boolean>  sbConfirmation = new  MutableLiveData<>();
@@ -27,6 +34,7 @@ public class ManageStoreFragmentViewModel  extends ViewModel {
     public void init(){
         getStoreDetails();
         if (storeMutableLiveData != null) {
+            productRepository = ProductRepository.getInstance();
             return;
         }
     }
@@ -48,8 +56,15 @@ public class ManageStoreFragmentViewModel  extends ViewModel {
         }
         return result ;
     }
+    public LiveData<ArrayList<Category>> getCategoryData() {
+
+        categoryLiveData = productRepository.getCategoryData();
+
+        return categoryLiveData;
+    }
 
     public void showConfirmationSb(){
         sbConfirmation.setValue(true);
     }
+
 }
