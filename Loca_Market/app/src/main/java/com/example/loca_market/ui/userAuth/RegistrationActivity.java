@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -154,7 +155,11 @@ public class RegistrationActivity extends AppCompatActivity {
                                 // si c'est un vendeur on crée une boutique par defaut
                                 if (new_user.getRole().equals("seller")){
                                     CollectionReference sotresRef = fdb.collection("stores");
-                                    Store store = new Store(uid);
+                                    TypedValue typedValue = new TypedValue();
+                                    getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+                                    int color = typedValue.data;
+
+                                    Store store = new Store(uid,"store name",null,color,"store description",null,true,new_user.getUsername());
                                     storeRepository.addStore(store);
                                 }
 
