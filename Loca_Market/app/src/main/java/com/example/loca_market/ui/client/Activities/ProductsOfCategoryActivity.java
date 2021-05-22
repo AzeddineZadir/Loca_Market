@@ -21,6 +21,7 @@ import android.widget.EditText;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.ui.client.ClientHomeActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.adapter.ProductsOfCategoryAdapter;
 import com.example.loca_market.ui.userAuth.LoginActivity;
@@ -174,25 +175,32 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-       /* if (id == R.id.nav_cart)
+        if (id == R.id.nav_cart)
         {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, ProductCartActivity.class);
+            startActivity(intent);
 
 
         }
-        else if (id == R.id.nav_search)
+        else if (id == R.id.nav_orders)
         {
-                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, OrdersManagement.class);
+            startActivity(intent);
         }
+        else if (id == R.id.nav_sellers)
+        {
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, Client_serachSellerActivity.class);
+            startActivity(intent);
+
+        }
+    /*
         else if (id == R.id.nav_categories)
         {
 
         }
         else if (id == R.id.nav_settings)
         {
-                Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                Intent intent = new Intent(ProductsOfCategoryActivity.this, SettingActivity.class);
                 startActivity(intent);
 
         }
@@ -200,7 +208,7 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         {
 
                  mAuth.signOut();
-                 Intent intent=new Intent(ClientHomeActivity.this, LoginActivity.class);
+                 Intent intent=new Intent(ProductsOfCategoryActivity.this, LoginActivity.class);
                  startActivity(intent);
                  finish();
         }

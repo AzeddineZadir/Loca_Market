@@ -11,10 +11,11 @@ public class Store {
     private String description ;
     private String imageUrl ;
     private boolean grildView ;
+    private String sellerName;
     public Store() {
     }
 
-    public Store(String sid, String name, String category, int color, String description, String imageUrl, boolean grildView) {
+    public Store(String sid, String name, String category, int color, String description, String imageUrl, boolean grildView, String sellerName) {
         this.sid = sid;
         this.name = name;
         this.category = category;
@@ -22,6 +23,7 @@ public class Store {
         this.description = description;
         this.imageUrl = imageUrl;
         this.grildView = grildView;
+        this.sellerName = sellerName;
     }
 
     public Store(String sid) {
@@ -82,5 +84,13 @@ public class Store {
 
     public void setGrildView(boolean grildView) {
         this.grildView = grildView;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 }

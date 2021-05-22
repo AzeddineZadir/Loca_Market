@@ -31,7 +31,6 @@ public class ProductSearchRecyclerAdapter extends RecyclerView.Adapter<ProductSe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // à modifier
         View view = LayoutInflater.from(context).inflate(R.layout.client_single_product_search,parent,false);
         return new ProductSearchRecyclerAdapter.ViewHolder(view);
     }
