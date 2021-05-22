@@ -13,8 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market"
         tools:replace="android:theme">
-        <activity android:name=".ui.client.Activities.Client_serachSellerActivity"
-            android:parentActivityName=".ui.client.ClientHomeActivity" ></activity>
+        <activity android:name=".ui.client.Activities.SellectedStoreActivity"></activity>
+        <activity
+            android:name=".ui.client.Activities.Client_serachSellerActivity"
+            android:parentActivityName=".ui.client.ClientHomeActivity" />
         <activity
             android:name=".ui.client.Activities.DetailOrderActivity"
             android:parentActivityName=".ui.client.Activities.OrdersManagement" />

@@ -1,6 +1,7 @@
 package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Store;
+import com.example.loca_market.ui.client.Activities.SellectedStoreActivity;
 
 import java.util.List;
 
@@ -41,9 +43,10 @@ public class SearchStoreAdapter extends RecyclerView.Adapter<SearchStoreAdapter.
         holder.seeStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // faire la liaison avec le magasin
-             //   Intent intent = new Intent(context, .class);
-              //  context.startActivity(intent);
+             // faire la liaison avec le magasin
+             Intent intent = new Intent(context, SellectedStoreActivity.class);
+             intent.putExtra("store_id",storeList.get(position).getSid());
+             context.startActivity(intent);
             }
         });
 
