@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:text="Nom Commerçant :"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:text="Boutique :"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
@@ -74,7 +74,8 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:padding="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
                 android:gravity="end"
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"

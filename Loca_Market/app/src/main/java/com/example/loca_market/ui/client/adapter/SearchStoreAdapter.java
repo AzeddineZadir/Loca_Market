@@ -65,7 +65,7 @@ public class SearchStoreAdapter extends RecyclerView.Adapter<SearchStoreAdapter.
             storeImg = itemView.findViewById(R.id.i_shop_image);
             sellerName =itemView.findViewById(R.id.t_seller_UserName);
             storeName = itemView.findViewById(R.id.t_seller_store_name);
-            storeCategory = itemView.findViewById(R.id.t_seller_store_name);
+            storeCategory = itemView.findViewById(R.id.t_seller_store_category);
             seeStore =itemView.findViewById(R.id.t_see_store);
 
         }
