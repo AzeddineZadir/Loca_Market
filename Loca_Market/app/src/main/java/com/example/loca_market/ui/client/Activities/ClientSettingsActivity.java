@@ -50,7 +50,7 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View v) {
                 personnalInfoFragment.saveData();
-
+                localisationFragment.saveData();
             }
         });
         // initaialisation des fragments
@@ -73,15 +73,16 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
         Fragment fragment =null;
         switch (v.getId()){
             case R.id.t_personalInformationSettings :{
-                fragment =new PersonnalInformationsFragment();
+                fragment = personnalInfoFragment ;
                 break;
             }
             case R.id.t_localisationSettings:{
-                fragment =new LocalisationFragment();
+                fragment = localisationFragment;
+
                 break;
             }
             case  R.id.t_hobbiesSettings:{
-                fragment =new HobbiesFragment();
+                fragment = hobbiesFragment;
                 break;
             }
         }
