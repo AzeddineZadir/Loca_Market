@@ -22,6 +22,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -33,6 +35,7 @@ import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.models.Store;
 import com.example.loca_market.data.repositores.UserRepository;
 import com.example.loca_market.databinding.FragmentStoreBinding;
+import com.example.loca_market.ui.seller.ManageFragmentDirections;
 import com.example.loca_market.ui.seller.adapters.SellerStoreProductLineAdapter;
 import com.example.loca_market.ui.seller.adapters.SellerStoreProductStaggeredAdapter;
 import com.example.loca_market.ui.userAuth.LoginActivity;
@@ -173,6 +176,17 @@ public class StoreFragment extends Fragment implements SellerStoreProductLineAda
 
     @Override
     public void onProductClick(int position) {
+        Toast.makeText(getContext(), "item "+position+"clicked" , Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+    @Override
+    public void onProductLongClick(int position) {
+        String productUid =productList.get(position).getPid();
+        NavDirections action =StoreFragmentDirections.actionStoreFragmentToProductDetailsFragment(productUid);
+        Navigation.findNavController(getView()).navigate(action);
 
     }
 }

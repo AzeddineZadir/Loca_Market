@@ -5,10 +5,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
@@ -21,10 +23,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.loca_market.R;
+import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.databinding.FragmentProductDetailsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class ProductDetailsFragment extends Fragment {
@@ -83,6 +88,7 @@ public class ProductDetailsFragment extends Fragment {
         // observations
         observeProduct();
         observeSbconfirmation();
+        observeCategories();
 
         return  view ;
     }
@@ -133,5 +139,31 @@ public class ProductDetailsFragment extends Fragment {
 
             }
         });
+    }
+
+    private void  observeCategories(){
+        productDetailsViewModel.getCategoryData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Category>>() {
+            @Override
+            public void onChanged(ArrayList<Category> categoryArrayList) {
+                Log.e(TAG, "onChanged categories: " + categoryArrayList.size()  );
+
+                ArrayList<String>stringArrayList=  getCategoriesNameList(categoryArrayList);
+                setCategoryAdapter(stringArrayList);
+
+            }
+        });
+    }
+
+    private ArrayList<String> getCategoriesNameList(ArrayList<Category>categoryArrayList){
+        ArrayList<String>stringArrayList = new ArrayList<>();
+        for (Category category:categoryArrayList) {
+            stringArrayList.add(category.getName());
+        }
+        return  stringArrayList;
+    }
+    private void setCategoryAdapter(ArrayList<String>stringArrayList){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1, stringArrayList);
+        actv_details_product_category.setAdapter(adapter);
     }
 }

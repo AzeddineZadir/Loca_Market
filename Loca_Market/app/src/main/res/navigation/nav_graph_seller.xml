@@ -9,7 +9,11 @@
         android:id="@+id/storeFragment"
         android:name="com.example.loca_market.ui.seller.sellerStore.StoreFragment"
         android:label="fragment_store"
-        tools:layout="@layout/fragment_store" />
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.loca_market.ui.seller.SearchFragment"

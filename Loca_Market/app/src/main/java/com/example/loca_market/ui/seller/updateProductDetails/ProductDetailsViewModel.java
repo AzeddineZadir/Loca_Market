@@ -2,17 +2,22 @@ package com.example.loca_market.ui.seller.updateProductDetails;
 
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.data.repositores.ProductRepository;
+
+import java.util.ArrayList;
 
 public class ProductDetailsViewModel  extends ViewModel {
     private ProductRepository productRepository;
     public MutableLiveData<Product> product = new MutableLiveData<>() ;
     public  Uri new_image ;
     public String new_imge_extention ,new_image_name ;
+    private MutableLiveData<ArrayList<Category>> categoryLiveData = new MutableLiveData<>();
     //UI VARIABLES
     MutableLiveData<Boolean> sbConfirmation = new  MutableLiveData<>();
 
@@ -49,6 +54,13 @@ public class ProductDetailsViewModel  extends ViewModel {
         }
         return result ;
     }
+    public LiveData<ArrayList<Category>> getCategoryData() {
+
+        categoryLiveData = productRepository.getCategoryData();
+
+        return categoryLiveData;
+    }
+
 
     //UI Methodes
     public void showConfirmationSb(){

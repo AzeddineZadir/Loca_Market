@@ -56,7 +56,7 @@ public class SellerStoreProductStaggeredAdapter  extends RecyclerView.Adapter<Se
         notifyDataSetChanged();
     }
 
-    class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener , View.OnLongClickListener {
         private TextView tv_product_name;
         private TextView tv_product_price;
         private ImageView iv_item_product;
@@ -69,16 +69,24 @@ public class SellerStoreProductStaggeredAdapter  extends RecyclerView.Adapter<Se
             iv_item_product = itemView.findViewById(R.id.i_ProductImg);
             this.onProductItemListener = onProductItemListener;
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             onProductItemListener.onProductClick(getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            onProductItemListener.onProductLongClick(getAdapterPosition());
+            return true ;
+        }
     }
 
     public interface OnProductItemListener {
         void onProductClick(int position);
+        void onProductLongClick(int position);
     }
 
 }
