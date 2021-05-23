@@ -50,7 +50,7 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View v) {
                 personnalInfoFragment.saveData();
-
+                localisationFragment.saveData();
             }
         });
         // initaialisation des fragments
