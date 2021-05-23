@@ -1,11 +1,34 @@
 package com.example.loca_market.data.models;
 
+import java.util.List;
+
 public class User {
 
     private String username;
     private String email;
     private String role;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String address;
+    private String city;
+    private String postalCode;
+    private String country;
+    private List<Category>preferences;
 
+    public User(String username, String email, String role, String firstName, String lastName, String phoneNumber, String address, String city, String postalCode, String country, List<Category> preferences) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.preferences = preferences;
+    }
 
     public User(String username, String email, String role) {
         this.username = username;
@@ -38,6 +61,70 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public List<Category> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(List<Category> preferences) {
+        this.preferences = preferences;
     }
 }
 
