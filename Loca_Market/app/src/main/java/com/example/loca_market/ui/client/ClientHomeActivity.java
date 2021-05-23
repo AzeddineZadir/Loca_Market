@@ -22,11 +22,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.databinding.ActivityClientAllCategoriesBinding;
+import com.example.loca_market.ui.client.Activities.AllCategories;
+import com.example.loca_market.ui.client.Activities.ClientSettingsActivity;
 import com.example.loca_market.ui.client.Activities.Client_serachSellerActivity;
 import com.example.loca_market.ui.client.Activities.OrdersManagement;
 import com.example.loca_market.ui.client.Activities.ProductCartActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
+import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.Task;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -185,16 +189,18 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
             startActivity(intent);
 
         }
-    /*    else if (id == R.id.nav_categories)
-        {
-
-        }
         else if (id == R.id.nav_settings)
         {
-                Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(ClientHomeActivity.this, ClientSettingsActivity.class);
+            startActivity(intent);
 
         }
+       else if (id == R.id.nav_categories)
+        {
+            Intent intent = new Intent(ClientHomeActivity.this, AllCategories.class);
+            startActivity(intent);
+        }
+
         else if (id == R.id.nav_logout)
         {
 
@@ -204,8 +210,8 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
                  finish();
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);*/
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_home_activity);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
