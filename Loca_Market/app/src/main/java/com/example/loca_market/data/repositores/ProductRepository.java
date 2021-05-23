@@ -237,11 +237,12 @@ public class ProductRepository {
 
     // recuperer tous les produits d'un vendeur de firestore et les mettre dans un mutable live data
     private void loadProductsBySeller(MutableLiveData<ArrayList<Product>> productLiveData, String sellerUid) {
-        ArrayList<Product> productArrayList = new ArrayList<>();
+
 
         productRef.whereEqualTo("productOwner", sellerUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                ArrayList<Product> productArrayList = new ArrayList<>();
                 if (error != null) {
                     Log.w(TAG, "Listen failed.", error);
                     return;

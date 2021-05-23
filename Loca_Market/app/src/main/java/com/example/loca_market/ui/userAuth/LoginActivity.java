@@ -30,7 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.security.PrivateKey;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements  LoginListner{
 
     public static final String  USER_SHARED_PREFS ="userSharedPrefs";
     public static final String  EMAIL ="email";
@@ -40,17 +40,21 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_email_login  , et_password_login ;
     ProgressBar pb_login ;
     FirebaseFirestore fdb;
-
+    LoginListner loginListner ;
     FirebaseAuth mAuth;
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
 
+
+        loginListner = this ;
         mAuth = FirebaseAuth.getInstance();
         fdb = FirebaseFirestore.getInstance();
         et_email_login =(EditText)findViewById(R.id.et_email_login);
@@ -63,33 +67,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        loadUserData();
-        if(user_email!="" && user_pwd != "")
-            mAuth.signInWithEmailAndPassword(user_email,user_pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (role.equals("seller")){
-
-                        Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        //Toast.makeText(getApplicationContext(),"juste connected as a Seller ", Toast.LENGTH_SHORT).show();
-                    }else if (role.equals("client")){
-
-                        Intent intent2 = new Intent(LoginActivity.this, ClientHomeActivity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent2);
-                        //Toast.makeText(getApplicationContext(),"juste connected as a Clinet  ", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-
-
-    }
 
 
     public void click_b_login(View view) {
@@ -143,19 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                             User current_user = documentSnapshot.toObject(User.class);
                             // save the user to loghim auto
                             saveUserPref(current_user.getRole());
-                             if (current_user.getRole().equals("seller")){
+                            loginListner.onSuccess(current_user.getRole());
 
-                                Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                //Toast.makeText(getApplicationContext(),"juste connected as a Seller ", Toast.LENGTH_SHORT).show();
-                            }else if (current_user.getRole().equals("client")){
-
-                                Intent intent2 = new Intent(LoginActivity.this, ClientHomeActivity.class);
-                                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent2);
-                                //Toast.makeText(getApplicationContext(),"juste connected as a Clinet  ", Toast.LENGTH_SHORT).show();
-                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -192,10 +158,31 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    public void loadUserData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(USER_SHARED_PREFS,MODE_PRIVATE);
-        user_email = sharedPreferences.getString(EMAIL,"");
-        user_pwd = sharedPreferences.getString(PWD,"");
-        role = sharedPreferences.getString(ROLE,"");
+
+
+
+
+
+    @Override
+    public void onSuccess(String role) {
+        if (role.equals("seller")){
+
+            Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
+
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            //Toast.makeText(getApplicationContext(),"juste connected as a Seller ", Toast.LENGTH_SHORT).show();
+        }else if (role.equals("client")){
+
+            Intent intent2 = new Intent(LoginActivity.this, ClientHomeActivity.class);
+            //intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent2);
+            //Toast.makeText(getApplicationContext(),"juste connected as a Clinet  ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFailure() {
+
     }
 }

@@ -52,6 +52,7 @@ public class UpdateProductAdapter extends RecyclerView.Adapter<UpdateProductAdap
 
 
     public void setProducts(List<Product> products){
+        this.products = new ArrayList<>();
         this.products = products ;
         notifyDataSetChanged();
     }

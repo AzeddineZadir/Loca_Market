@@ -50,6 +50,7 @@ public class UpdateProductListFragment extends Fragment implements UpdateProduct
         updateProductAdapter = new UpdateProductAdapter(getContext(),this);
         rv_sellers_product_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_sellers_product_list.setAdapter(updateProductAdapter);
+
         // view model
         updateProductListViewModel = new ViewModelProvider(requireActivity()).get(UpdateProductListViewModel.class);
         observeProductsBySeller();

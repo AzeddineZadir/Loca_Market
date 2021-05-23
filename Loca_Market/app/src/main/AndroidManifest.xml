@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Loca_Market"
         tools:replace="android:theme">
+
+        <activity android:name=".ui.userAuth.LoginActivity">
+
+        </activity>
         <activity android:name=".ui.client.Activities.SellectedStoreActivity"></activity>
         <activity
             android:name=".ui.client.Activities.Client_serachSellerActivity"
@@ -35,14 +39,14 @@
         <activity android:name=".ui.seller.SellerHomeActivity" />
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />
-        <activity android:name=".ui.userAuth.LoginActivity">
+
+        <activity android:name=".ui.userAuth.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.userAuth.SplashActivity" />
         <activity android:name=".ui.client.Activities.ProductsOfCategoryActivity" />
         <activity android:name=".ui.client.ClientHomeActivity" />
 
