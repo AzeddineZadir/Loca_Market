@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -27,15 +28,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.security.PrivateKey;
+
 public class LoginActivity extends AppCompatActivity {
 
-
+    public static final String  USER_SHARED_PREFS ="userSharedPrefs";
+    public static final String  EMAIL ="email";
+    public static final String  PWD ="pwd";
+    public static final String  ROLE ="role";
+    private  String user_email ,user_pwd,role;
     EditText et_email_login  , et_password_login ;
     ProgressBar pb_login ;
     FirebaseFirestore fdb;
 
     FirebaseAuth mAuth;
-    public static String role ;
+
 
 
     @Override
@@ -59,10 +66,28 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.getCurrentUser()!= null){
+        loadUserData();
+        if(user_email!="" && user_pwd != "")
+            mAuth.signInWithEmailAndPassword(user_email,user_pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (role.equals("seller")){
+
+                        Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        //Toast.makeText(getApplicationContext(),"juste connected as a Seller ", Toast.LENGTH_SHORT).show();
+                    }else if (role.equals("client")){
+
+                        Intent intent2 = new Intent(LoginActivity.this, ClientHomeActivity.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent2);
+                        //Toast.makeText(getApplicationContext(),"juste connected as a Clinet  ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
 
-        }
 
     }
 
@@ -116,7 +141,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             User current_user = documentSnapshot.toObject(User.class);
-
+                            // save the user to loghim auto
+                            saveUserPref(current_user.getRole());
                              if (current_user.getRole().equals("seller")){
 
                                 Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
@@ -149,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void registration(View view){
         Intent intent = new Intent(this, RegistrationActivity.class);
-        intent.putExtra("role",role);
+
         startActivity(intent);
     }
     public void forgotPassword(View view){
@@ -157,5 +183,19 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void saveUserPref(String useer_role){
+        SharedPreferences sharedPreferences = getSharedPreferences(USER_SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(EMAIL,et_email_login.getText().toString());
+        editor.putString(PWD,et_password_login.getText().toString());
+        editor.putString(ROLE,useer_role);
+        editor.apply();
+    }
 
+    public void loadUserData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(USER_SHARED_PREFS,MODE_PRIVATE);
+        user_email = sharedPreferences.getString(EMAIL,"");
+        user_pwd = sharedPreferences.getString(PWD,"");
+        role = sharedPreferences.getString(ROLE,"");
+    }
 }

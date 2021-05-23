@@ -47,11 +47,6 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-       /* Intent intent  = getIntent() ;
-        if (intent!= null){
-            role = intent.getStringExtra("role");
-
-        }*/
 
 
         mAuth = FirebaseAuth.getInstance();
