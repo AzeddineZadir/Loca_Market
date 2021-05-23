@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Order;
@@ -18,8 +19,11 @@ import com.example.loca_market.ui.client.fragments.PersonnalInformationsFragment
 public class ClientSettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar mToolbar;
-    TextView personalInformation, localisation, hobbies;
+    TextView personalInformation, localisation, hobbies,tSave;
     FragmentTransaction transaction;
+    PersonnalInformationsFragment personnalInfoFragment=null;
+    LocalisationFragment localisationFragment=null;
+    HobbiesFragment hobbiesFragment=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +38,33 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
         personalInformation =findViewById(R.id.t_personalInformationSettings);
         localisation = findViewById(R.id.t_localisationSettings);
         hobbies=findViewById(R.id.t_hobbiesSettings);
+        tSave =findViewById(R.id.t_saveSettings);
 
         // gestion des fragments
         personalInformation.setOnClickListener(this);
         localisation.setOnClickListener(this);
         hobbies.setOnClickListener(this);
 
-        // initaialisation du fragment initial
-        PersonnalInformationsFragment personnalInfoFragment =new PersonnalInformationsFragment();
+        //enregistrement des informations
+        tSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                personnalInfoFragment.saveData();
+
+            }
+        });
+        // initaialisation des fragments
+        personnalInfoFragment =new PersonnalInformationsFragment();
+        localisationFragment = new LocalisationFragment();
+        hobbiesFragment = new HobbiesFragment();
+
+        // inflate du fragment initiale
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.container_idSettings,personnalInfoFragment,"personnalInfo");
         transaction.commit();
+
+
+
 
     }
 
@@ -53,15 +73,16 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
         Fragment fragment =null;
         switch (v.getId()){
             case R.id.t_personalInformationSettings :{
-                fragment =new PersonnalInformationsFragment();
+                fragment = personnalInfoFragment ;
                 break;
             }
             case R.id.t_localisationSettings:{
-                fragment =new LocalisationFragment();
+                fragment = localisationFragment;
+
                 break;
             }
             case  R.id.t_hobbiesSettings:{
-                fragment =new HobbiesFragment();
+                fragment = hobbiesFragment;
                 break;
             }
         }

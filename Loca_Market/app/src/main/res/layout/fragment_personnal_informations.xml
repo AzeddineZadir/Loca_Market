@@ -77,42 +77,6 @@
                         android:hint="Jean"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:contentDescription="@string/desc_ic_email"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_email_personal_information" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_email"
-                        android:textColor="@color/gray_800"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        />
-                    <EditText
-                        android:id="@+id/et_email_personnalInformation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="janedo123@gmail.com"/>
-                </LinearLayout>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -176,9 +140,10 @@
                         android:layout_marginTop="10dp"
                         />
                     <EditText
-                        android:id="@+id/ed_tel_personal_information"
+                        android:id="@+id/et_phoneNumber_personal_information"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="phone"
                         android:hint="07589632145" />
                 </LinearLayout>
              </LinearLayout>
