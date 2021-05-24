@@ -64,13 +64,13 @@
 
             <TextView
                 android:id="@+id/t_personalInformationSettings"
-                android:layout_width="105dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Informations personnelle"
-                android:textColor="@color/black"
+                android:text="Informations"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -78,19 +78,23 @@
                 android:id="@+id/t_localisationSettings"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Localisation"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/t_preferencesSettings"
-                android:layout_width="120dp"
+                android:id="@+id/t_hobbiesSettings"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Centres d'intérêts"
-                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Préférences"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -102,10 +106,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/b_saveSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></FrameLayout>
+    <Button
+        android:id="@+id/b_saveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="5"
+        android:background="@color/colorPrimary"
+        android:text="Enregistrer"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Order;
+import com.example.loca_market.ui.client.ClientHomeActivity;
 import com.example.loca_market.ui.client.fragments.HobbiesFragment;
 import com.example.loca_market.ui.client.fragments.LocalisationFragment;
 import com.example.loca_market.ui.client.fragments.PersonnalInformationsFragment;
@@ -19,7 +22,8 @@ import com.example.loca_market.ui.client.fragments.PersonnalInformationsFragment
 public class ClientSettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar mToolbar;
-    TextView personalInformation, localisation, hobbies,tSave;
+    TextView personalInformation, localisation, hobbies;
+    Button b_save;
     FragmentTransaction transaction;
     PersonnalInformationsFragment personnalInfoFragment=null;
     LocalisationFragment localisationFragment=null;
@@ -32,13 +36,13 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
         mToolbar=findViewById(R.id.clientSettings_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Préférences");
+        getSupportActionBar().setTitle("Configurations");
 
         // menu
         personalInformation =findViewById(R.id.t_personalInformationSettings);
         localisation = findViewById(R.id.t_localisationSettings);
         hobbies=findViewById(R.id.t_hobbiesSettings);
-        tSave =findViewById(R.id.t_saveSettings);
+        b_save =findViewById(R.id.b_saveSettings);
 
         // gestion des fragments
         personalInformation.setOnClickListener(this);
@@ -46,11 +50,13 @@ public class ClientSettingsActivity extends AppCompatActivity implements View.On
         hobbies.setOnClickListener(this);
 
         //enregistrement des informations
-        tSave.setOnClickListener(new View.OnClickListener() {
+        b_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 personnalInfoFragment.saveData();
                 localisationFragment.saveData();
+                Intent intent=new Intent(ClientSettingsActivity.this,ClientHomeActivity.class);
+                startActivity(intent);
             }
         });
         // initaialisation des fragments
