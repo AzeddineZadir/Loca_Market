@@ -88,18 +88,19 @@ public class PersonnalInformationsFragment extends Fragment {
     public void saveData(){
 
         Map<String,Object> mapInfo = new HashMap<>();
-        if(edFirstName.getText()!=null && !edFirstName.getText().toString().trim().isEmpty() ){
+        if(edFirstName!=null && !edFirstName.getText().toString().trim().isEmpty() ){
             mapInfo.put("firstName",edFirstName.getText().toString().trim());
         }
-        if(edLastName.getText()!=null && !edLastName.getText().toString().trim().isEmpty()){
+        if(edLastName!=null && !edLastName.getText().toString().trim().isEmpty()){
             mapInfo.put("lastName",edLastName.getText().toString().trim());
         }
-        if(edUserName.getText()!=null && !edUserName.getText().toString().trim().isEmpty()){
+        if(edUserName!=null && !edUserName.getText().toString().trim().isEmpty()){
             mapInfo.put("username",edUserName.getText().toString().trim());
         }
-        if (edPhoneNumber.getText()!=null && !edPhoneNumber.getText().toString().trim().isEmpty()){
+        if (edPhoneNumber!=null && !edPhoneNumber.getText().toString().trim().isEmpty()){
             mapInfo.put("phoneNumber",edPhoneNumber.getText().toString().trim());
         }
+        if (!mapInfo.isEmpty())
         mStore.collection("users").document(mAuth.getCurrentUser().getUid()).update(mapInfo);
     }
 }

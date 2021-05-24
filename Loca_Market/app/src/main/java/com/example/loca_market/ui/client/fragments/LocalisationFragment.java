@@ -73,18 +73,19 @@ public class LocalisationFragment extends Fragment {
     public void saveData(){
 
         Map<String,Object> mapInfo = new HashMap<>();
-        if(et_address.getText()!=null && !et_address.getText().toString().trim().isEmpty() ){
+        if(et_address!=null && !et_address.getText().toString().trim().isEmpty() ){
             mapInfo.put("address",et_address.getText().toString().trim());
         }
-        if(et_city.getText()!=null && !et_city.getText().toString().trim().isEmpty()){
+        if(et_city!=null && !et_city.getText().toString().trim().isEmpty()){
             mapInfo.put("city",et_city.getText().toString().trim());
         }
-        if(et_postalCode.getText()!=null && !et_postalCode.getText().toString().trim().isEmpty()){
+        if(et_postalCode!=null && !et_postalCode.getText().toString().trim().isEmpty()){
             mapInfo.put("postalCode",et_postalCode.getText().toString().trim());
         }
-        if (et_country.getText()!=null && !et_country.getText().toString().trim().isEmpty()){
+        if (et_country!=null && !et_country.getText().toString().trim().isEmpty()){
             mapInfo.put("country",et_country.getText().toString().trim());
         }
+        if(!mapInfo.isEmpty())
         mStore.collection("users").document(mAuth.getCurrentUser().getUid()).update(mapInfo);
     }
 }
