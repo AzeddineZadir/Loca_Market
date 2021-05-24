@@ -1,5 +1,7 @@
 package com.example.loca_market.data.models;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class Category {
    String name ;
    String description;
