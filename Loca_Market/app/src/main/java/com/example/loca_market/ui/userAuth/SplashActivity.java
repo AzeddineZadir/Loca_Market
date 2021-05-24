@@ -64,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
     public void connectSavedUser(){
         loadUserData();
 
-        if(user_email!="" && user_pwd != "") {
+        if(!user_email.equals("") && !user_pwd.equals("") ) {
             mAuth.signInWithEmailAndPassword(user_email, user_pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

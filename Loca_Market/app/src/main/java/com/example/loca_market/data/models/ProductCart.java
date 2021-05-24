@@ -9,13 +9,18 @@ public class ProductCart implements Serializable {
     private String docId ;
     Product product;
     int quantity;
-
+    boolean status ;
+    String orderId;
     public ProductCart() {
+
     }
 
-    public ProductCart(Product product, int quantity) {
+    public ProductCart(Product product, int quantity,String orderId) {
         this.product = product;
         this.quantity = quantity;
+        this.status =false;
+        this.orderId=orderId;
+
     }
 
     public Product getProduct() {
@@ -40,5 +45,21 @@ public class ProductCart implements Serializable {
 
     public void setDocId(String docId) {
         this.docId = docId;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

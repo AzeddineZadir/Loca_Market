@@ -77,7 +77,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         b_addToCartButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                ProductCart productCart = new ProductCart(product,Integer.parseInt(strQty[0]));
+                ProductCart productCart = new ProductCart(product,Integer.parseInt(strQty[0]),"");
                addProductToCart(productCart);
             }
         });

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Order;
+import com.example.loca_market.data.models.ProductCart;
 import com.example.loca_market.ui.client.Activities.DetailOrderActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,41 +26,58 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     private Context context;
-    private List<Order>orderListe;
+    private List<Order> orderListe;
 
     public OrderManagementAdapter(Context context, List<Order> orderListe) {
         this.context = context;
         this.orderListe = orderListe;
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.client_order_management_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.client_order_management_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.orderTitle.setText("Commande "+(position+1) );
-        holder.orderDate.setText("Date : "+orderListe.get(position).getDate()+" à "+orderListe.get(position).getTime());
-        holder.orderState.setText("Etat : "+orderListe.get(position).getState());
-        holder.orderTotalPrice.setText("Prix Total : "+orderListe.get(position).getTotalAmount()+" €");
-        if(!orderListe.get(position).getState().trim().equals("En cour")){
-            holder.removeOrder.setVisibility(View.INVISIBLE);
+        boolean commande_status = true;
+        Order currentOrder = orderListe.get(position);
+        List<ProductCart> productCarts = currentOrder.getProductsOrdred();
+
+        for (ProductCart product : productCarts) {
+            if (!product.isStatus()) {
+                commande_status = false ;
+            }
+        }
+
+        holder.orderTitle.setText("Commande " + (position + 1));
+        holder.orderDate.setText("Date : " + orderListe.get(position).getDate() + " à " + orderListe.get(position).getTime());
+        if (commande_status){
+            holder.orderState.setText("Etat : Validé");
         }else{
+            holder.orderState.setText("Etat : En cour");
+        }
+
+        holder.orderTotalPrice.setText("Prix Total : " + orderListe.get(position).getTotalAmount() + " €");
+
+
+        if (commande_status) {
+            holder.removeOrder.setVisibility(View.INVISIBLE);
+        } else {
             holder.removeOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     firebaseFirestore.collection("orders").document(orderListe.get(position).getOrderId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 orderListe.remove(orderListe.get(position));
                                 notifyDataSetChanged();
-                            }else{
+                            } else {
                                 Toast.makeText(holder.itemView.getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
@@ -72,7 +90,7 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailOrderActivity.class);
-                intent.putExtra("orderDetail",orderListe.get(position));
+                intent.putExtra("orderDetail", orderListe.get(position));
                 context.startActivity(intent);
             }
         });
@@ -84,21 +102,22 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
         return orderListe.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderTitle;
         TextView orderDate;
         TextView orderState;
         TextView orderTotalPrice;
         TextView removeOrder;
         TextView detailOrder;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            orderTitle=itemView.findViewById(R.id.t_order_title);
-            orderDate= itemView.findViewById(R.id.t_order_date);
-            orderState=itemView.findViewById(R.id.t_order_state);
-            orderTotalPrice =itemView.findViewById(R.id.t_order_total_price);
-            removeOrder =itemView.findViewById(R.id.t_b_aboart_order);
-            detailOrder=itemView.findViewById(R.id.t_b_order_details);
+            orderTitle = itemView.findViewById(R.id.t_order_title);
+            orderDate = itemView.findViewById(R.id.t_order_date);
+            orderState = itemView.findViewById(R.id.t_order_state);
+            orderTotalPrice = itemView.findViewById(R.id.t_order_total_price);
+            removeOrder = itemView.findViewById(R.id.t_b_aboart_order);
+            detailOrder = itemView.findViewById(R.id.t_b_order_details);
         }
     }
 

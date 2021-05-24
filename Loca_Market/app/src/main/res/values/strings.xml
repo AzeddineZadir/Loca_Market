@@ -48,5 +48,7 @@ pour réinitialiser votre mot de passe</string>
     <string name="g_rer_ma_boutique">Gérer ma Boutique</string>
     <string name="vue_lin_aire">vue linéaire</string>
     <string name="vue_tableaux">vue tableaux</string>
+    <string name="quantit">quantité</string>
+    <string name="status">status</string>
 
 </resources>

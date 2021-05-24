@@ -37,6 +37,7 @@ public class Client_confirm_orderActivity extends AppCompatActivity {
     private FirebaseFirestore mStore;
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +109,15 @@ public class Client_confirm_orderActivity extends AppCompatActivity {
         saveCurrentTime = hourMinSec[0]+":"+hourMinSec[1];
         String totalAmount = getIntent().getStringExtra("totalAmount");
         List<ProductCart>productsOrdered =(ArrayList<ProductCart>) getIntent().getSerializableExtra("itemsList");
+
         Order order =new Order();
+        DocumentReference orderRef = mStore.collection("orders").document();
+        String oId = orderRef.getId();
+        order.setOrderId(oId);
+
+        for (ProductCart productCart:productsOrdered) {
+            productCart.setOrderId(oId);
+        }
         order.setLastName(lastNameEditText.getText().toString());
         order.setFirstName(firstNameEditText.getText().toString());
         order.setPhone(phoneEditText.getText().toString());

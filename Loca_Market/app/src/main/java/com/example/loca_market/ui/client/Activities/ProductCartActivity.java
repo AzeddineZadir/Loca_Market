@@ -86,6 +86,7 @@ public class ProductCartActivity extends AppCompatActivity  implements CartProdu
                             String documentId = doc.getDocument().getId();
                             ProductCart productCart = doc.getDocument().toObject(ProductCart.class);
                             productCart.setDocId(documentId);
+
                             productsCartList.add(productCart);
                         }
                         calculateAmount(productsCartList);
