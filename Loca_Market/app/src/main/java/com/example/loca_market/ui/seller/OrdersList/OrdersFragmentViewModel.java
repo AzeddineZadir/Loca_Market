@@ -47,7 +47,12 @@ public class OrdersFragmentViewModel extends ViewModel {
 
     public LiveData<Boolean> validateOrder(String order_id){
 
-        validateStatuLiveData = ordersRepository.validateProductByUid(order_id);
+        validateStatuLiveData = ordersRepository.validateOrderByid(order_id);
+        return validateStatuLiveData;
+    }
+    public LiveData<Boolean> deleteOrder(String order_id){
+
+        validateStatuLiveData = ordersRepository.deleteOrderByid(order_id);
         return validateStatuLiveData;
     }
 

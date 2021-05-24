@@ -56,7 +56,7 @@ public void setProducts(List<Order> orders){
         notifyDataSetChanged();
         }
 
-class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener , View.OnLongClickListener {
     private TextView tv_item_client_info ;
     private TextView tv_item_order_date;
     private TextView tv_item_order_satus;
@@ -72,15 +72,24 @@ class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListene
 
         this.onOrderItemListener = onOrderItemListener ;
         itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         onOrderItemListener.onOrderClick(getAdapterPosition());
     }
+
+    @Override
+    public boolean onLongClick(View v) {
+        onOrderItemListener.onOrderLongClick(getAdapterPosition());
+
+        return true;
+    }
 }
 public interface OnOrderItemListener{
     void onOrderClick (int position);
+    void onOrderLongClick(int position);
 }
 }
 

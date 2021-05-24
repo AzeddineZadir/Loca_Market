@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.loca_market.data.models.Order;
-import com.example.loca_market.data.models.Product;
-import com.example.loca_market.data.models.ProductCart;
+import com.example.loca_market.data.models.Order;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,7 +32,7 @@ public class OrdersRepository {
         return instance;
     }
 
-    //recuperer les tous les produis de firstore grace a loadProductData et les passer au view model
+    //recuperer les tous les produis de firstore grace a loadOrderDaa et les passer au view model
     public MutableLiveData<ArrayList<Order>> getOrdersData() {
 
         MutableLiveData<ArrayList<Order>> data = new MutableLiveData<>();
@@ -69,7 +69,7 @@ public class OrdersRepository {
     }
 
 
-    public MutableLiveData<Boolean> validateProductByUid(String order_id){
+    public MutableLiveData<Boolean> validateOrderByid(String order_id){
         MutableLiveData<Boolean > data = new MutableLiveData<>();
         validate(data,order_id);
         return  data;
@@ -91,6 +91,32 @@ public class OrdersRepository {
             @Override
             public void onFailure(@NonNull Exception e) {
                 validateStatus.setValue(false) ;
+            }
+        });
+
+    }
+
+    public MutableLiveData<Boolean> deleteOrderByid(String order_id){
+        MutableLiveData<Boolean > data = new MutableLiveData<>();
+        delete(data,order_id);
+        return  data;
+
+
+
+    }
+
+    private void delete(MutableLiveData<Boolean> dropStatus ,  String order_id){
+        ordersRef.document(order_id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+            @Override
+            public void onSuccess(Void aVoid) {
+                dropStatus.setValue(true) ;
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dropStatus.setValue(false) ;
             }
         });
 

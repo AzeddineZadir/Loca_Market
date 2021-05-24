@@ -78,13 +78,13 @@ public class OrdersFragment extends Fragment implements  SellerOrdersAdapter.OnO
     @Override
     public void onOrderClick(int position) {
 
-        Order orderToValidate = orderList.get(position);
-        if (!orderToValidate.getState().equals("Accépté")) {
-            Snackbar snackbar = Snackbar.make(getView(), "voulez vous valider la commande de  " + orderToValidate.getFirstName() + " " + orderToValidate.getLastName(), BaseTransientBottomBar.LENGTH_LONG)
+        Order orderToDelet = orderList.get(position);
+        if (!orderToDelet.getState().equals("Accépté")) {
+            Snackbar snackbar = Snackbar.make(getView(), "voulez vous valider la commande de  " + orderToDelet.getFirstName() + " " + orderToDelet.getLastName(), BaseTransientBottomBar.LENGTH_LONG)
                     .setAction("OUI", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ordersFragmentViewModel.validateOrder(orderToValidate.getOrderId()).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                            ordersFragmentViewModel.validateOrder(orderToDelet.getOrderId()).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
                                 @Override
                                 public void onChanged(Boolean aBoolean) {
                                     if (aBoolean == true) {
@@ -102,6 +102,36 @@ public class OrdersFragment extends Fragment implements  SellerOrdersAdapter.OnO
                     });
             snackbar.show();
         }
+    }
+
+    @Override
+    public void onOrderLongClick(int position) {
+
+        Order orderToDelet = orderList.get(position);
+        if (!orderToDelet.getState().equals("Accépté")) {
+            Snackbar snackbar = Snackbar.make(getView(), "voulez vous supprimer la commande de  " + orderToDelet.getFirstName() + " " + orderToDelet.getLastName(), BaseTransientBottomBar.LENGTH_LONG)
+                    .setAction("OUI", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ordersFragmentViewModel.deleteOrder(orderToDelet.getOrderId()).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                                @Override
+                                public void onChanged(Boolean aBoolean) {
+                                    if (aBoolean == true) {
+                                        Snackbar.make(getView(), "la commande a été supprimée correctement", BaseTransientBottomBar.LENGTH_LONG).show();
+                                        observeOrders();
+
+                                    } else {
+                                        Snackbar.make(getView(), "un probleme lors de la suppression ", BaseTransientBottomBar.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
+
+                        }
+                    });
+            snackbar.show();
+        }
+
     }
 
     private  ArrayList<ProductCart> filterProductOrdersBySeller(ArrayList<Order> orders, String seller_id){
