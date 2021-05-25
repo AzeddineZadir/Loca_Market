@@ -54,12 +54,14 @@ public class ProductDetailsViewModel  extends ViewModel {
         }
         return result ;
     }
+
     public LiveData<ArrayList<Category>> getCategoryData() {
 
         categoryLiveData = productRepository.getCategoryData();
 
         return categoryLiveData;
     }
+
 
 
     //UI Methodes

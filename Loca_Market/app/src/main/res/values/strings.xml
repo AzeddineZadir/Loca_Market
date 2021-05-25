@@ -54,5 +54,10 @@ pour réinitialiser votre mot de passe</string>
     <string name="ajouter_une_offre">Ajouter une offre</string>
     <string name="modifer_une_offre">Modifer une offre</string>
     <string name="supprimer_une_offre">Supprimer une offre</string>
+    <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
+    <string name="email">Email</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="numero">Numero</string>
+    <string name="role">Role</string>
 
 </resources>

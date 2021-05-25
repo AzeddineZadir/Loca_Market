@@ -21,9 +21,13 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/profilFragment"
-        android:name="com.example.loca_market.ui.seller.ProfilFragment"
+        android:name="com.example.loca_market.ui.seller.profile.ProfileFragment"
         android:label="fragment_profil"
-        tools:layout="@layout/fragment_profil" />
+        tools:layout="@layout/fragment_profil" >
+        <action
+            android:id="@+id/action_profilFragment_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.example.loca_market.ui.seller.OrdersList.OrdersFragment"
@@ -124,4 +128,9 @@
         android:name="com.example.loca_market.ui.seller.addOffer.AddOfferFragment"
         android:label="fragment_add_offer"
         tools:layout="@layout/fragment_add_offer" />
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.example.loca_market.ui.seller.updatePassword.UpdatePasswordFragment"
+        android:label="fragment_update_password"
+        tools:layout="@layout/fragment_update_password" />
 </navigation>
