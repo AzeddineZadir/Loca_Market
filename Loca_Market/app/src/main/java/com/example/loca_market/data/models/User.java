@@ -2,8 +2,12 @@ package com.example.loca_market.data.models;
 
 import java.util.List;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class User {
 
+    @DocumentId
+    private String uid ;
     private String username;
     private String email;
     private String role;
