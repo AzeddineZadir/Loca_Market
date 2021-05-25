@@ -44,7 +44,7 @@ public class Client_confirm_orderActivity extends AppCompatActivity {
         // tootlbar managment
         mToolbar=findViewById(R.id.confirm_order_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Nouvelle Commande");
         firstNameEditText = findViewById(R.id.ed_shippment_firstName);
         lastNameEditText = findViewById(R.id.ed_shippment_lastName);

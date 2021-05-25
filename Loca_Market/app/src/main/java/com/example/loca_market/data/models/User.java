@@ -15,8 +15,9 @@ public class User {
     private String postalCode;
     private String country;
     private List<Category>preferences;
+    private String profilePicURL;
 
-    public User(String username, String email, String role, String firstName, String lastName, String phoneNumber, String address, String city, String postalCode, String country, List<Category> preferences) {
+    public User(String username, String email, String role, String firstName, String lastName, String phoneNumber, String address, String city, String postalCode, String country, List<Category> preferences, String profilePicURL) {
         this.username = username;
         this.email = email;
         this.role = role;
@@ -28,6 +29,7 @@ public class User {
         this.postalCode = postalCode;
         this.country = country;
         this.preferences = preferences;
+        this.profilePicURL = profilePicURL;
     }
 
     public User(String username, String email, String role) {
@@ -125,6 +127,14 @@ public class User {
 
     public void setPreferences(List<Category> preferences) {
         this.preferences = preferences;
+    }
+
+    public String getProfilePicURL() {
+        return profilePicURL;
+    }
+
+    public void setProfilePicURL(String profilePicURL) {
+        this.profilePicURL = profilePicURL;
     }
 }
 
