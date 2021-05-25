@@ -93,10 +93,35 @@
         <action
             android:id="@+id/action_manageFragment_to_manageStoreFragment"
             app:destination="@id/manageStoreFragment" />
+        <action
+            android:id="@+id/action_manageFragment_to_manageOffersFragment"
+            app:destination="@id/manageOffersFragment" />
     </fragment>
     <fragment
         android:id="@+id/manageStoreFragment"
         android:name="com.example.loca_market.ui.seller.manageStore.ManageStoreFragment"
         android:label="fragment_manage_store"
         tools:layout="@layout/fragment_manage_store" />
+    <fragment
+        android:id="@+id/manageOffersFragment"
+        android:name="com.example.loca_market.ui.seller.ManageOffersFragment"
+        android:label="manage_offers_fragment"
+        tools:layout="@layout/fragment_manage_offers" >
+        <action
+            android:id="@+id/action_manageOffersFragment_to_updateOffersListFragment"
+            app:destination="@id/updateOffersListFragment" />
+        <action
+            android:id="@+id/action_manageOffersFragment_to_addOfferFragment"
+            app:destination="@id/addOfferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateOffersListFragment"
+        android:name="com.example.loca_market.ui.seller.updateOffersList.UpdateOffersListFragment"
+        android:label="fragment_update_offers_list"
+        tools:layout="@layout/fragment_update_offers_list" />
+    <fragment
+        android:id="@+id/addOfferFragment"
+        android:name="com.example.loca_market.ui.seller.addOffer.AddOfferFragment"
+        android:label="fragment_add_offer"
+        tools:layout="@layout/fragment_add_offer" />
 </navigation>

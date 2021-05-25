@@ -14,12 +14,12 @@ import androidx.navigation.Navigation;
 
 import com.example.loca_market.R;
 
-public class ManageFragment  extends Fragment {
+public class ManageOffersFragment extends Fragment {
 
-    CardView card_manage_product,card_manage_store,card_manage_offers;
+    CardView card_add_offer,card_update_offer,card_delete_offer;
 
-    public ManageFragment(){
-        super(R.layout.fragment_manage);
+    public ManageOffersFragment(){
+        super(R.layout.fragment_manage_offers);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,41 +29,40 @@ public class ManageFragment  extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manage, container, false);
+        View view = inflater.inflate(R.layout.fragment_manage_offers, container, false);
 
-        card_manage_product = (CardView)view.findViewById(R.id.card_manage_product);
-        card_manage_store = (CardView)view.findViewById(R.id.card_manage_store);
-        card_manage_offers = (CardView)view.findViewById(R.id.card_manage_offers);
+        card_add_offer = (CardView)view.findViewById(R.id.card_add_offer);
+        card_update_offer = (CardView)view.findViewById(R.id.card_update_offer);
+        card_delete_offer = (CardView)view.findViewById(R.id.card_delete_offer);
+
         // gérer la navigations vers les differents fragment
 
-        card_manage_product.setOnClickListener(new View.OnClickListener() {
+        card_add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageFragmentDirections.actionManageFragmentToManageProductFragment();
+                NavDirections action = ManageOffersFragmentDirections.actionManageOffersFragmentToAddOfferFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }
         });
 
-        card_manage_store.setOnClickListener(new View.OnClickListener() {
+        card_update_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageFragmentDirections.actionManageFragmentToManageStoreFragment();
+                NavDirections action = ManageOffersFragmentDirections.actionManageOffersFragmentToUpdateOffersListFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }
         });
 
-        card_manage_offers.setOnClickListener(new View.OnClickListener() {
+        card_delete_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageFragmentDirections.actionManageFragmentToManageOffersFragment();
+                NavDirections action = ManageOffersFragmentDirections.actionManageOffersFragmentToUpdateOffersListFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }
         });
-
-
 
 
         return view;

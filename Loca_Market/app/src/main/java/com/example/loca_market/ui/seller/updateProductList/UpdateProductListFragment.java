@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Product;
-
 import com.example.loca_market.ui.seller.adapters.UpdateProductAdapter;
 
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class UpdateProductListFragment extends Fragment implements UpdateProduct
 
         rv_sellers_product_list = view.findViewById(R.id.rv_sellers_product_list);
         productList = new ArrayList<>();
-        updateProductAdapter = new UpdateProductAdapter(getContext(),this);
+        updateProductAdapter = new UpdateProductAdapter(getContext(), this);
         rv_sellers_product_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_sellers_product_list.setAdapter(updateProductAdapter);
 
