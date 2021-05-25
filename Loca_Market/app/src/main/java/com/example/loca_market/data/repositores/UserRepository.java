@@ -3,6 +3,8 @@ package com.example.loca_market.data.repositores;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -15,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -46,8 +49,39 @@ public class UserRepository {
         return instance;
     }
 
-    public static void logIN(String email ,String password){
+    public static void logIN(String email ,String password ){
 
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+
+
+                    FirebaseUser connectedUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                    DocumentReference userdocRef = fdb.collection("users").document(connectedUser.getUid());
+                    userdocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            User current_user = documentSnapshot.toObject(User.class);
+                            // save the user to loghim auto
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+                } else {
+
+                }
+            }
+        });
     }
 
     // logout the user by firbase authentification system
