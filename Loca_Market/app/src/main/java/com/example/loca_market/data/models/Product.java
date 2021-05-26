@@ -15,6 +15,7 @@ public class Product implements Serializable {
     private String imageUrl ;
     private String productOwner ;
     private boolean bestSell;
+    private Float percentage;
 
 
     public Product() {
@@ -113,8 +114,13 @@ public class Product implements Serializable {
         this.bestSell = bestSell;
     }
 
+    public Float getPercentage() {
+        return percentage;
+    }
 
-
+    public void setPercentage(Float percentage) {
+        this.percentage = percentage;
+    }
 }
 
 

@@ -4,11 +4,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,31 +20,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
+import com.example.loca_market.data.models.Offer;
 import com.example.loca_market.data.models.Product;
 import com.example.loca_market.ui.seller.adapters.SellerAddOfferSearchProductAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AddOfferFragment extends Fragment {
-    private TextInputLayout tif_offer_titel,tif_percentage,tif_offer_product,tif_offer_begin_date,tif_offer_end_date;
-    private Button b_offer_begin_date,b_add_offer;
+public class AddOfferFragment extends Fragment implements SellerAddOfferSearchProductAdapter.OnProductItemListener {
+    public static final String TAG = "AddOfferFragment";
+    private TextInputLayout tif_offer_titel, tif_percentage, tif_offer_product, tif_offer_begin_date, tif_offer_end_date;
+    private Button b_offer_begin_date, b_add_offer;
     private FirebaseFirestore firebaseFirestore;
     private List<Product> productsListSearch;
-    private List<Product>allProducts;
+    private List<Product> allProducts;
     private RecyclerView productSearchRecyclerView;
     private SellerAddOfferSearchProductAdapter productSearchAdapter;
-
+    private static FirebaseUser currentUser;
+    private String b_Date, e_Date;
+    private Product productOffer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,24 +67,24 @@ public class AddOfferFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_offer, container, false);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         // construction du  date picker
-        MaterialDatePicker.Builder<Pair<Long, Long>> builder =MaterialDatePicker.Builder.dateRangePicker() ;
+        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         builder.setTitleText("la date du debut ");
         MaterialDatePicker materialDatePickerBegin = builder.build();
 
 
+        tif_offer_titel = view.findViewById(R.id.tif_offer_titel);
+        tif_percentage = view.findViewById(R.id.tif_percentage);
+        tif_offer_product = view.findViewById(R.id.tif_offer_product);
 
-        tif_offer_titel= (TextInputLayout)view.findViewById(R.id.tif_offer_titel);
-        tif_percentage= (TextInputLayout)view.findViewById(R.id.tif_percentage);
-        tif_offer_product= (TextInputLayout)view.findViewById(R.id.tif_offer_product);
-
-        b_offer_begin_date= (Button)view.findViewById(R.id.b_offer_begin_date) ;
-        b_add_offer= (Button)view.findViewById(R.id.b_add_offer) ;
+        b_offer_begin_date = view.findViewById(R.id.b_offer_begin_date);
+        b_add_offer = view.findViewById(R.id.b_add_offer);
         // afficher le date picker de la date de debut
         b_offer_begin_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                materialDatePickerBegin.show(getParentFragmentManager(),"date debut ");
+                materialDatePickerBegin.show(getParentFragmentManager(), "date debut ");
 
             }
         });
@@ -91,33 +103,45 @@ public class AddOfferFragment extends Fragment {
 //              Format the dates in ur desired display mode
                 SimpleDateFormat simpleFormat = new SimpleDateFormat("dd MMM yyyy");
 //              Display it by setText
-                b_offer_begin_date.setText(simpleFormat.format(startDate) +" : "+ simpleFormat.format(endDate));
-
+                b_offer_begin_date.setText(simpleFormat.format(startDate) + " : " + simpleFormat.format(endDate));
+                b_Date = simpleFormat.format(startDate);
+                e_Date = simpleFormat.format(endDate);
             }
         });
 
         // get all products
-        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         allProducts = new ArrayList<>();
-        firebaseFirestore.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful() && task.getResult()!=null){
-                    for(DocumentSnapshot doc:task.getResult().getDocuments()){
-                        Product product=doc.toObject(Product.class);
-                        allProducts.add(product);
+
+        firebaseFirestore.collection("products").whereEqualTo("productOwner", currentUser.getUid())
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        ArrayList<Product> productArrayList = new ArrayList<>();
+                        if (error != null) {
+                            Log.w(TAG, "Listen failed.", error);
+                            return;
+                        }
+                        if (!value.isEmpty()) {
+                            List<DocumentSnapshot> documentSnapshotList = value.getDocuments();
+
+                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                                Product product = documentSnapshot.toObject(Product.class);
+                                allProducts.add(product);
+                            }
 
 
+                        }
                     }
-                }
-            }
-        } );
+                });
+
+
         // search products
-        tif_offer_product= view.findViewById(R.id.tif_offer_product);
-        productsListSearch =new ArrayList<>();
+        tif_offer_product = view.findViewById(R.id.tif_offer_product);
+        productsListSearch = new ArrayList<>();
         productSearchRecyclerView = view.findViewById(R.id.offer_product_search_recycler);
-        productSearchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
-        productSearchAdapter = new SellerAddOfferSearchProductAdapter(getContext(), productsListSearch);
+        productSearchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        productSearchAdapter = new SellerAddOfferSearchProductAdapter(getContext(), productsListSearch, this);
         productSearchRecyclerView.setAdapter(productSearchAdapter);
 
         tif_offer_product.getEditText().addTextChangedListener(new TextWatcher() {
@@ -128,29 +152,103 @@ public class AddOfferFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().isEmpty()){
+                if (s.toString().isEmpty()) {
+                    productSearchRecyclerView.setAdapter(productSearchAdapter);
                     productsListSearch.clear();
                     productSearchAdapter.notifyDataSetChanged();
-                }else {
+                } else {
+                    productSearchRecyclerView.setAdapter(productSearchAdapter);
                     productsListSearch.clear();
                     searchProduct(s.toString());
                     productSearchAdapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
 
+
+        b_add_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addOffer();
+            }
+        });
         return view;
+    }
+
+    private void addOffer() {
+
+        // ajout de l'offfre dans la base
+        Offer offerToAdd = new Offer();
+        offerToAdd.setOfferTitel(tif_offer_titel.getEditText().getText().toString().trim());
+        offerToAdd.setBeginDate(b_Date);
+        offerToAdd.setEndDate(e_Date);
+        offerToAdd.setPercentage(Float.parseFloat(tif_percentage.getEditText().getText().toString().trim()));
+        offerToAdd.setOfferProduct(productOffer);
+        addOfferRequest(offerToAdd);
+        // modification du produits
+
+
+
+    }
+
+    private void updateProductRequest(Offer offer) {
+
+        Product productToUp = offer.getOfferProduct();
+        firebaseFirestore.collection("products").document(productToUp.getPid()).update("percentage",offer.getPercentage()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e(TAG, "onSuccess: to update the product " + productToUp.getName());
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: to update the product " + productToUp.getName());
+
+            }
+        });
+
+
+
+    }
+
+    private void addOfferRequest(Offer offerToAdd) {
+
+        firebaseFirestore.collection("offers").add(offerToAdd).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference reference) {
+                updateProductRequest(offerToAdd);
+                Snackbar snackbar =   Snackbar.make(getView(),"Offer ajouter  ", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                tif_offer_titel.getEditText().setText("");
+                tif_offer_product.getEditText().setText("");
+                tif_percentage.getEditText().setText("");
+                b_offer_begin_date.setText("periode");
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Snackbar snackbar =   Snackbar.make(getView(),"Nous avons rencontrer un problem lors de l'ajout de l'offre ", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+
+            }
+        });
+
     }
 
     private void searchProduct(String text) {
         productsListSearch.clear();
-        if(!text.isEmpty()){
-            for(Product product : allProducts){
-                if(product.getName().toLowerCase().contains(text.toLowerCase())){
+        if (!text.isEmpty()) {
+            for (Product product : allProducts) {
+                if (product.getName().toLowerCase().contains(text.toLowerCase())&& product.getPercentage()==0) {
                     productsListSearch.add(product);
                     productSearchAdapter.notifyDataSetChanged();
                 }
@@ -159,4 +257,12 @@ public class AddOfferFragment extends Fragment {
 
     }
 
+    @Override
+    public void onProductClick(int position) {
+        Product currentProduct = productsListSearch.get(position);
+        productOffer = currentProduct;
+        tif_offer_product.getEditText().setText(currentProduct.getName());
+        Toast.makeText(getContext(), "cliccke", Toast.LENGTH_SHORT).show();
+        productSearchRecyclerView.setAdapter(null);
+    }
 }
