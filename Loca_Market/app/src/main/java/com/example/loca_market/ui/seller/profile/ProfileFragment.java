@@ -161,7 +161,7 @@ public class ProfileFragment extends Fragment {
         u = usertoUpdate;
         u.setEmail(tf_email.getEditText().getText().toString());
         u.setUsername(tf_username.getEditText().getText().toString());
-        u.setPhone(tf_phone_num.getEditText().getText().toString());
+        u.setPhoneNumber(tf_phone_num.getEditText().getText().toString());
 
         return u;
     }
