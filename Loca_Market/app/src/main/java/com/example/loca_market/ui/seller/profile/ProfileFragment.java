@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment {
                 tf_username.getEditText().setText(user.getUsername());
                 tf_email.getEditText().setText(user.getEmail());
                 tf_role.getEditText().setText(user.getRole());
-                tf_phone_num.getEditText().setText(user.getPhone());
+                tf_phone_num.getEditText().setText(user.getPhoneNumber());
             }
         });
 
