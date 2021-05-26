@@ -46,6 +46,7 @@ public class AddProductViewModel extends ViewModel {
     public void addProduct() {
 
         product.getValue().setProductOwner(currentuser.getUid());
+        product.getValue().setPercentage(Float.parseFloat("0"));
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         image_name = ts;
