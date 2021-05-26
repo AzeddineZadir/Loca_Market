@@ -44,28 +44,15 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        boolean commande_status = true;
-        Order currentOrder = orderListe.get(position);
-        List<ProductCart> productCarts = currentOrder.getProductsOrdred();
-
-        for (ProductCart product : productCarts) {
-            if (!product.isStatus()) {
-                commande_status = false ;
-            }
-        }
 
         holder.orderTitle.setText("Commande " + (position + 1));
         holder.orderDate.setText("Date : " + orderListe.get(position).getDate() + " à " + orderListe.get(position).getTime());
-        if (commande_status){
-            holder.orderState.setText("Etat : Validé");
-        }else{
-            holder.orderState.setText("Etat : En cour");
-        }
+        holder.orderState.setText("Etat : "+ orderListe.get(position).getState());
 
         holder.orderTotalPrice.setText("Prix Total : " + orderListe.get(position).getTotalAmount() + " €");
 
 
-        if (commande_status) {
+        if ( orderListe.get(position).getState().trim().equals("Accépté")) {
             holder.removeOrder.setVisibility(View.INVISIBLE);
         } else {
             holder.removeOrder.setOnClickListener(new View.OnClickListener() {
