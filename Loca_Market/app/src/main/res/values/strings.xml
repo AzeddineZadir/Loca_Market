@@ -63,6 +63,9 @@ pour réinitialiser votre mot de passe</string>
     <string name="ancien_mot_de_passe">Ancien mot de passe</string>
     <string name="nouveau_mot_de_passe">Nouveau mot de passe</string>
     <string name="confirmer_le_mot_de_passe">Confirmer le mot de passe</string>
+    <string name="pourcentage_de_l_offre">Pourcentage de l\'offre</string>
+    <string name="pourcentage">Pourcentage</string>
+    <string name="produit">Produit</string>
 
     <string name="notification_title">Nouvelle Notification</string>
     <string name="channelID" translatable="false">Channel01</string>
