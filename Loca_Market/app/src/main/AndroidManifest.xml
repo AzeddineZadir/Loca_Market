@@ -49,6 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.userAuth.SplashActivity" />
         <activity android:name=".ui.client.Activities.ProductsOfCategoryActivity" />
         <activity android:name=".ui.client.ClientHomeActivity" />
 
