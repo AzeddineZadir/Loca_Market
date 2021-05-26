@@ -171,14 +171,12 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_cart)
+        if (id == R.id.nav_homme)
         {
-                Intent intent = new Intent(ClientHomeActivity.this, ProductCartActivity.class);
-                startActivity(intent);
-
-
+            Intent intent = new Intent(ClientHomeActivity.this, ClientHomeActivity.class);
+            startActivity(intent);
         }
-       else if (id == R.id.nav_orders)
+        else if (id == R.id.nav_orders)
         {
                 Intent intent = new Intent(ClientHomeActivity.this, OrdersManagement.class);
                 startActivity(intent);

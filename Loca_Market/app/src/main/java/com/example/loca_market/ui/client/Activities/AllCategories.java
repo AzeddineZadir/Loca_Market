@@ -84,20 +84,23 @@ public class AllCategories extends AppCompatActivity {
         // retreive all categories
         categoryList =new ArrayList<>();
 
-        mStore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot doc:task.getResult().getDocuments()){
-                        Category category=doc.toObject(Category.class);
-                        categoryList.add(category);
-                        searchCategoryList.add(category);
-                        Log.i("SearchCategory",category.getName());
-                        searchCategoryAdapter.notifyDataSetChanged();
-                    }
-                }
-            }
-        });
+                    mStore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc:task.getResult().getDocuments()){
+                                    Category category=doc.toObject(Category.class);
+                                    categoryList.add(category);
+                                    searchCategoryList.add(category);
+                                    Log.i("SearchCategory",category.getName());
+                                    searchCategoryAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+     
+
+
     }
 
     private void searchCategory(String text) {

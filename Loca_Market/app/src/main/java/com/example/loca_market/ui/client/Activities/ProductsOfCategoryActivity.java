@@ -175,7 +175,12 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_cart)
+        if (id == R.id.nav_homme)
+        {
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, ClientHomeActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_cart)
         {
             Intent intent = new Intent(ProductsOfCategoryActivity.this, ProductCartActivity.class);
             startActivity(intent);
