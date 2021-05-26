@@ -37,7 +37,8 @@
             android:name=".ui.client.Activities.ProductCartActivity"
             android:parentActivityName=".ui.client.ClientHomeActivity" />
         <activity android:name=".ui.client.Activities.ProductDetailsActivity" />
-        <activity android:name=".ui.client.Activities.AllCategories" />
+        <activity android:name=".ui.client.Activities.AllCategories"
+            android:parentActivityName=".ui.client.ClientHomeActivity" />
         <activity android:name=".ui.seller.SellerHomeActivity" />
         <activity android:name=".ui.userAuth.ForgotPasswordActivity" />
         <activity android:name=".ui.userAuth.RegistrationActivity" />

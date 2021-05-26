@@ -1,6 +1,7 @@
 package com.example.loca_market.ui.client.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.loca_market.R;
 import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Store;
+import com.example.loca_market.ui.client.Activities.ProductsOfCategoryActivity;
 
 import java.util.List;
 
@@ -35,7 +38,16 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
 
     @Override
     public void onBindViewHolder(@NonNull SearchCategoryAdapter.ViewHolder holder, int position) {
-
+        Glide.with(context).load(categoryList.get(position).getImageUrl()).into(holder.categoryImg);
+        holder.categoryName.setText(categoryList.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, ProductsOfCategoryActivity.class);
+                intent.putExtra("Category",categoryList.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
