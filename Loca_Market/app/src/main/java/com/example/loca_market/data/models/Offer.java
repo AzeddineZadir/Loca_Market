@@ -13,6 +13,7 @@ public class Offer {
     private Product offerProduct ;
     private String beginDate ;
     private String endDate ;
+    private String sellerId ;
 
     public Offer() {
     }
@@ -72,5 +73,13 @@ public class Offer {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
     }
 }

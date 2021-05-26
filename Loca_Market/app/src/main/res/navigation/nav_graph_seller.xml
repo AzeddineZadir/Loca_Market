@@ -117,6 +117,9 @@
         <action
             android:id="@+id/action_manageOffersFragment_to_addOfferFragment"
             app:destination="@id/addOfferFragment" />
+        <action
+            android:id="@+id/action_manageOffersFragment_to_deleteOfferListFragment"
+            app:destination="@id/deleteOfferListFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateOffersListFragment"
@@ -133,4 +136,9 @@
         android:name="com.example.loca_market.ui.seller.updatePassword.UpdatePasswordFragment"
         android:label="fragment_update_password"
         tools:layout="@layout/fragment_update_password" />
+    <fragment
+        android:id="@+id/deleteOfferListFragment"
+        android:name="com.example.loca_market.ui.seller.deleteOffersList.DeleteOfferListFragment"
+        android:label="fragment_delete_offer_list"
+        tools:layout="@layout/fragment_delete_offer_list" />
 </navigation>

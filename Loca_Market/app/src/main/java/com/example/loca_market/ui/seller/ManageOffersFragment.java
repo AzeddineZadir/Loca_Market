@@ -58,7 +58,7 @@ public class ManageOffersFragment extends Fragment {
         card_delete_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ManageOffersFragmentDirections.actionManageOffersFragmentToUpdateOffersListFragment();
+                NavDirections action = ManageOffersFragmentDirections.actionManageOffersFragmentToDeleteOfferListFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }

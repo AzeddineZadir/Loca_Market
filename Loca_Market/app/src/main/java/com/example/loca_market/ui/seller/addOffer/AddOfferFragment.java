@@ -184,11 +184,13 @@ public class AddOfferFragment extends Fragment implements SellerAddOfferSearchPr
 
         // ajout de l'offfre dans la base
         Offer offerToAdd = new Offer();
+
         offerToAdd.setOfferTitel(tif_offer_titel.getEditText().getText().toString().trim());
         offerToAdd.setBeginDate(b_Date);
         offerToAdd.setEndDate(e_Date);
         offerToAdd.setPercentage(Float.parseFloat(tif_percentage.getEditText().getText().toString().trim()));
         offerToAdd.setOfferProduct(productOffer);
+        offerToAdd.setSellerId(currentUser.getUid());
         addOfferRequest(offerToAdd);
         // modification du produits
 
