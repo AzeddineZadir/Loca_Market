@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="170dp"
-    android:background="@color/white"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:layout_height="wrap_content">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/t_ProductName"
@@ -23,10 +23,12 @@
     <ImageView
         android:id="@+id/i_ProductImg"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_ordinateur"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_ordinateur"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,13 +39,28 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
         android:text="55€"
+        android:textColor="@color/black"
         android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/t_ProductName"
-        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/t_ProductName" />
+
+    <TextView
+        android:id="@+id/tv_offer_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="30€"
+        android:textColor="@color/green50_500"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i_ProductImg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

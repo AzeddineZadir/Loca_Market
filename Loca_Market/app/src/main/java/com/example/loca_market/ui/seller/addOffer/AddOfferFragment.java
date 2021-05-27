@@ -190,6 +190,8 @@ public class AddOfferFragment extends Fragment implements SellerAddOfferSearchPr
         offerToAdd.setEndDate(e_Date);
         offerToAdd.setPercentage(Float.parseFloat(tif_percentage.getEditText().getText().toString().trim()));
         offerToAdd.setOfferProduct(productOffer);
+        offerToAdd.setProductOfferId(productOffer.getPid());
+        Log.e(TAG, "productOfferId: "+productOffer.getPid() );
         offerToAdd.setSellerId(currentUser.getUid());
         addOfferRequest(offerToAdd);
         // modification du produits

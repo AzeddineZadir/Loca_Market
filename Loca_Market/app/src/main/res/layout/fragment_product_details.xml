@@ -58,7 +58,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:onClick="openFileChoser"
-                        android:src="@drawable/ic_baseline_image" />
+                        android:src="@drawable/ic_baseline_image_search_24"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.security.PrivateKey;
 
 public class LoginActivity extends AppCompatActivity implements  LoginListner{
-
+    public static final String TAG = "LoginActivity";
     public static final String  USER_SHARED_PREFS ="userSharedPrefs";
     public static final String  EMAIL ="email";
     public static final String  PWD ="pwd";
@@ -118,6 +119,7 @@ public class LoginActivity extends AppCompatActivity implements  LoginListner{
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             User current_user = documentSnapshot.toObject(User.class);
+                            Log.e(TAG, "current user role : "+current_user.getUsername() );
                             // save the user to loghim auto
                             saveUserPref(current_user.getRole());
                             loginListner.onSuccess(current_user.getRole());

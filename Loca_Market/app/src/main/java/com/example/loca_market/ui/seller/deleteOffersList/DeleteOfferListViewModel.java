@@ -41,9 +41,10 @@ public class DeleteOfferListViewModel extends ViewModel {
     }
 
 
-    public LiveData<Boolean> dropOffer(String productUid) {
+    public LiveData<Boolean> dropOffer(Offer offer) {
 
-        dropStatuLiveData = offerRepository.deleteOfferByid(productUid);
+        dropStatuLiveData = offerRepository.deleteOfferByid(offer);
+
         return dropStatuLiveData;
     }
 
