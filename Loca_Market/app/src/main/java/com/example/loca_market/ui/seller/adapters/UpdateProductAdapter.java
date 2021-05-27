@@ -40,7 +40,13 @@ public class UpdateProductAdapter extends RecyclerView.Adapter<UpdateProductAdap
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         Product currentProduct = products.get(position);
         holder.tv_product_name.setText(currentProduct.getName());
-        holder.tv_product_description.setText(currentProduct.getPrice()+" €");
+        Float newPrice = currentProduct.getPrice()-(currentProduct.getPrice()*currentProduct.getPercentage()/100);
+        holder.tv_product_description.setText(newPrice+" €");
+        if(currentProduct.getPercentage()!=0){
+            holder.tv_product_offer_percentage_line.setText("- " +currentProduct.getPercentage()+" %");
+        }else{
+            holder.tv_product_offer_percentage_line.setVisibility(View.INVISIBLE);
+        }
         Glide.with(context).load(currentProduct.getImageUrl()).into(holder.iv_item_product);
 
     }
@@ -60,12 +66,14 @@ public class UpdateProductAdapter extends RecyclerView.Adapter<UpdateProductAdap
     class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tv_product_name ;
         private TextView tv_product_description;
+        private TextView tv_product_offer_percentage_line;
         private ImageView iv_item_product ;
         OnProductItemListener onProductItemListener ;
         public ProductHolder(@NonNull View itemView , OnProductItemListener onProductItemListener) {
             super(itemView);
             tv_product_name= itemView.findViewById(R.id.tv_item_prodcut_name);
             tv_product_description = itemView.findViewById(R.id.tv_item_product_description);
+            tv_product_offer_percentage_line = itemView.findViewById(R.id.tv_product_offer_percentage_line);
             iv_item_product= itemView.findViewById(R.id.iv_item_product);
             this.onProductItemListener = onProductItemListener ;
             itemView.setOnClickListener(this);

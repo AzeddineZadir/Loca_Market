@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -59,6 +60,10 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
     private RecyclerView mProductSearchRecyclerView;
     private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
     FirebaseUser user;
+    public static final String USER_SHARED_PREFS = "userSharedPrefs";
+    public static final String EMAIL = "email";
+    public static final String PWD = "pwd";
+    public static final String ROLE = "role";
     // navigation drawer
     private DrawerLayout mDrawer;
 
@@ -237,6 +242,7 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
 
                  mAuth.signOut();
                  Intent intent=new Intent(ClientHomeActivity.this, LoginActivity.class);
+                    wipeUserPref();
                  startActivity(intent);
                  finish();
         }
@@ -244,6 +250,17 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         DrawerLayout drawer = findViewById(R.id.drawer_layout_home_activity);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
+
+
+
     }
+    public void wipeUserPref() {
+        SharedPreferences sharedPreferences = getSharedPreferences(USER_SHARED_PREFS, MODE_PRIVATE);
+        sharedPreferences.edit().putString(EMAIL, "").apply();
+        sharedPreferences.edit().putString(PWD, "").apply();
+        sharedPreferences.edit().putString(ROLE, "").apply();
+    }
+
 
 }

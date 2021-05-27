@@ -40,7 +40,7 @@ public class SearchStoreAdapter extends RecyclerView.Adapter<SearchStoreAdapter.
         holder.sellerName.setText(storeList.get(position).getSellerName());
         holder.storeName.setText(storeList.get(position).getName());
         holder.storeCategory.setText(storeList.get(position).getCategory());
-        holder.seeStore.setOnClickListener(new View.OnClickListener() {
+        holder.iv_seeStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
              // faire la liaison avec le magasin
@@ -62,14 +62,14 @@ public class SearchStoreAdapter extends RecyclerView.Adapter<SearchStoreAdapter.
         private TextView sellerName;
         private TextView storeName;
         private  TextView storeCategory;
-        private TextView seeStore;
+        private ImageView iv_seeStore;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             storeImg = itemView.findViewById(R.id.i_shop_image);
             sellerName =itemView.findViewById(R.id.t_seller_UserName);
             storeName = itemView.findViewById(R.id.t_seller_store_name);
             storeCategory = itemView.findViewById(R.id.t_seller_store_category);
-            seeStore =itemView.findViewById(R.id.t_see_store);
+            iv_seeStore =itemView.findViewById(R.id.iv_seeStore);
 
         }
     }
