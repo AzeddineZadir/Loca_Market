@@ -25,6 +25,8 @@ import com.example.loca_market.ui.client.Activities.AllCategories;
 import com.example.loca_market.ui.client.Activities.ClientSettingsActivity;
 import com.example.loca_market.ui.client.Activities.ClientSearchSellerActivity;
 import com.example.loca_market.ui.client.Activities.OrdersManagement;
+import com.example.loca_market.ui.client.Activities.ProductCartActivity;
+import com.example.loca_market.ui.client.Activities.ProductsOfCategoryActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.example.loca_market.ui.userAuth.LoginActivity;
@@ -200,6 +202,11 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         if (id == R.id.nav_homme)
         {
             Intent intent = new Intent(ClientHomeActivity.this, ClientHomeActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_cart)
+        {
+            Intent intent = new Intent(ClientHomeActivity.this, ProductCartActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.nav_orders)
