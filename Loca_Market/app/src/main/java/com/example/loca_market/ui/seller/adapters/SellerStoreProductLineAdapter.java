@@ -40,11 +40,13 @@ public class SellerStoreProductLineAdapter extends RecyclerView.Adapter<SellerSt
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         Product currentProduct = products.get(position);
+
         holder.tv_product_name.setText(currentProduct.getName());
 
         Float newPrice = currentProduct.getPrice()-(currentProduct.getPrice()*currentProduct.getPercentage()/100);
         holder.tv_product_description.setText(newPrice+" €");
-        if(currentProduct.getPercentage()!=0){
+
+        if(currentProduct.getPercentage()!= 0){
             holder.tv_product_offer_percentage_line.setText("- " +currentProduct.getPercentage()+" %");
         }else{
             holder.tv_product_offer_percentage_line.setVisibility(View.INVISIBLE);
