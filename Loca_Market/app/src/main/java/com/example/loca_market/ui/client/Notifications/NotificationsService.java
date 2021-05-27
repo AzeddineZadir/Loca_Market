@@ -35,14 +35,14 @@ public class NotificationsService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        if (remoteMessage.getNotification() != null) {
-            String message = remoteMessage.getNotification().getBody();
+        super.onMessageReceived(remoteMessage);
+
             // 8 - Show notification after received message
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 this.sendVisualNotification(remoteMessage);
-                Log.e(TAG, "onMessageReceived:NotificationsService "+message );
+                Log.e(TAG, "onMessageReceived:NotificationsService " );
             }
-        }
+
     }
 
     // ---
