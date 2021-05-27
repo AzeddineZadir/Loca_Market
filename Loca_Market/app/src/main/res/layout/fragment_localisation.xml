@@ -36,7 +36,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_address_localisation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_localisation_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_postal_code_localisation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp" />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_country_localisation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
