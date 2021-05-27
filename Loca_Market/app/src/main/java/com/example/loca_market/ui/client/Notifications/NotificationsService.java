@@ -70,8 +70,8 @@ public class NotificationsService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_image_notification)
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText(getString(R.string.notification_title))
+                        .setContentTitle(titre)
+                        .setContentText(contenu)
                         .setAutoCancel(true)
                         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                         .setContentIntent(pendingIntent)
