@@ -36,8 +36,18 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull NewProductAdapter.ViewHolder holder, int position) {
+        Product currentProduct = mProductList.get(position);
         holder.mNewProductName.setText(mProductList.get(position).getName());
-        holder.mNewProductPrice.setText(mProductList.get(position).getPrice()+"€");
+        Float newPrice = currentProduct.getPrice()-(currentProduct.getPrice()*currentProduct.getPercentage()/100);
+        holder.mNewProductPrice.setText(newPrice+"€");
+
+        if(currentProduct.getPercentage()!=0){
+            holder.tv_product_offer_precentage.setText("- " +currentProduct.getPercentage()+" %");
+        }else{
+            holder.tv_product_offer_precentage.setVisibility(View.INVISIBLE);
+        }
+
+
         Glide.with(context).load(mProductList.get(position).getImageUrl()).into(holder.mNewProductImg);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,11 +68,13 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
         private ImageView mNewProductImg;
         private TextView mNewProductPrice;
         private  TextView mNewProductName;
+        private  TextView tv_product_offer_precentage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
           mNewProductImg = itemView.findViewById(R.id.i_ProductImg);
           mNewProductPrice =itemView.findViewById(R.id.t_ProductPrice);
           mNewProductName=itemView.findViewById(R.id.t_ProductName);
+            tv_product_offer_precentage=itemView.findViewById(R.id.tv_product_offer_precentage);
         }
     }
 }

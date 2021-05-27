@@ -40,7 +40,7 @@ public class DeleteProductAdapter extends RecyclerView.Adapter<DeleteProductAdap
     public void onBindViewHolder(@NonNull DeleteProductAdapter.ProductHolder holder, int position) {
         Product currentProduct = products.get(position);
         holder.tv_product_name.setText(currentProduct.getName());
-        holder.tv_product_description.setText(currentProduct.getDescription());
+        holder.tv_product_description.setText(currentProduct.getPrice()+" €");
         Glide.with(context).load(currentProduct.getImageUrl()).into(holder.iv_item_product);
 
     }

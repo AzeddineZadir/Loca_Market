@@ -28,4 +28,12 @@
         android:text="55€"
         android:textSize="15sp"/>
 
+    <TextView
+        android:id="@+id/tv_product_offer_precentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="%"
+        android:textColor="@color/green50_500" />
+
 </LinearLayout>
