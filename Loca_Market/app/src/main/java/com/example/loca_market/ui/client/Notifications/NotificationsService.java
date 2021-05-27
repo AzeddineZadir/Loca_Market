@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
@@ -16,10 +18,20 @@ import com.example.loca_market.ui.client.Activities.ClientSearchSellerActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class NotificationsService extends FirebaseMessagingService {
+import java.util.Map;
 
+public class NotificationsService extends FirebaseMessagingService {
+    public static final String TAG = "NotificationsService";
     private final int NOTIFICATION_ID = 007;
     private final String NOTIFICATION_TAG = "FIREBASEOC";
+
+
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+        Log.e(TAG, "token NS"+s );
+
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -27,7 +39,8 @@ public class NotificationsService extends FirebaseMessagingService {
             String message = remoteMessage.getNotification().getBody();
             // 8 - Show notification after received message
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                this.sendVisualNotification(message);
+                this.sendVisualNotification(remoteMessage);
+                Log.e(TAG, "onMessageReceived:NotificationsService "+message );
             }
         }
     }
@@ -35,7 +48,7 @@ public class NotificationsService extends FirebaseMessagingService {
     // ---
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void sendVisualNotification(String messageBody) {
+    private void sendVisualNotification(RemoteMessage remoteMessage) {
 
         // 1 - Create an Intent that will be shown when user will click on the Notification
         Intent intent = new Intent(this, ClientSearchSellerActivity.class);
@@ -43,8 +56,12 @@ public class NotificationsService extends FirebaseMessagingService {
 
         // 2 - Create a Style for the Notification
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        inboxStyle.setBigContentTitle(getString(R.string.notification_title));
-        inboxStyle.addLine(messageBody);
+        Map<String,String> data = remoteMessage.getData();
+        String titre = data.get("title");
+        String contenu = data.get("content");
+
+        inboxStyle.setBigContentTitle(titre);
+        inboxStyle.addLine(contenu);
 
         // 3 - Create a Channel (Android 8)
         String channelId = getString(R.string.channelID);

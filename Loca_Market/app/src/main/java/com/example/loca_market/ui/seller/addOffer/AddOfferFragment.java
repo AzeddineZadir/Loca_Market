@@ -20,8 +20,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loca_market.R;
+import com.example.loca_market.data.models.Category;
 import com.example.loca_market.data.models.Offer;
 import com.example.loca_market.data.models.Product;
+import com.example.loca_market.data.models.User;
+import com.example.loca_market.ui.client.Notifications.NotificationBody;
+import com.example.loca_market.ui.client.Notifications.NotificationRoot;
+import com.example.loca_market.ui.client.Notifications.RetrofitCaller;
 import com.example.loca_market.ui.seller.adapters.SellerAddOfferSearchProductAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,18 +36,24 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddOfferFragment extends Fragment implements SellerAddOfferSearchProductAdapter.OnProductItemListener {
     public static final String TAG = "AddOfferFragment";
@@ -56,7 +67,10 @@ public class AddOfferFragment extends Fragment implements SellerAddOfferSearchPr
     private static FirebaseUser currentUser;
     private String b_Date, e_Date;
     private Product productOffer;
-
+    private static final String USERS = "users";
+    private static final FirebaseFirestore fdb = FirebaseFirestore.getInstance();
+    private static final CollectionReference usersRef = fdb.collection(USERS);
+    private String url = "https://fcm.googleapis.com/";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -234,6 +248,7 @@ public class AddOfferFragment extends Fragment implements SellerAddOfferSearchPr
                 tif_percentage.getEditText().setText("");
                 b_offer_begin_date.setText("periode");
 
+                notifyUserByInterest(offerToAdd.getOfferProduct().getCategory());
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -259,6 +274,99 @@ public class AddOfferFragment extends Fragment implements SellerAddOfferSearchPr
             }
         }
 
+    }
+
+
+    private void notifyUserByInterest(String offerCategory ){
+
+        Log.e(TAG, "notifyUserByInterest by "+offerCategory);
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        usersRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                        userArrayList.add(documentSnapshot.toObject(User.class));
+                    }
+
+                    ArrayList<User> filteredUserArrayList = new ArrayList<>();
+                    Log.e(TAG, "size of non filterd"+userArrayList.size());
+                    filteredUserArrayList = filterUsers(userArrayList , offerCategory);
+                    Log.e(TAG, "size of filteredUserArrayList "+filteredUserArrayList.size());
+
+
+
+                    for (User user:filteredUserArrayList ) {
+
+                        if(user.getNotifToken()!= null && !user.getNotifToken().equals("")){
+                            // executer la requete  de notification
+
+                            NotificationBody data = new NotificationBody("Nouvelle offre disponible","Vous avez une nouvelle offre suseptible de vous intéressez dans la catégorie"+offerCategory);
+                            NotificationRoot root = new NotificationRoot(data,user.getNotifToken());
+                            Gson json = new Gson();
+                            String requestBody = json.toJson(root);
+                            Log.d(TAG, "NotifyParent: root "+ requestBody);
+                            Retrofit r = new Retrofit.Builder().baseUrl(url)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+                            Log.d(TAG, "NotifyParent: "+r.toString());
+                            RetrofitCaller retrofitCaller =r.create(RetrofitCaller.class);
+                            Call<NotificationRoot> call = retrofitCaller.PostData(root);
+                            call.enqueue(new Callback<NotificationRoot>() {
+                                @Override
+                                public void onResponse(Call<NotificationRoot> call, retrofit2.Response<NotificationRoot> response) {
+                                    Log.d(TAG, "onResponse: "+response.isSuccessful());
+                                }
+
+                                @Override
+                                public void onFailure(Call<NotificationRoot> call, Throwable t) {
+
+                                }
+                            });
+
+                        }
+
+                    }
+
+
+
+
+
+
+                }
+            }
+        });
+
+
+
+    }
+
+    private ArrayList<User> filterUsers(ArrayList<User> userArrayList , String offerCategorie) {
+
+        ArrayList<User> filterdUserArrayList = new ArrayList<>();
+
+
+        for (User user: userArrayList) {
+
+            if (user.getRole().equals("client")&& user.getPreferences()!=null) {
+
+                List<Category> categoryList = user.getPreferences();
+                Log.e(TAG, "filterUsers :Categories  size"+categoryList.size() );
+                for (Category category : categoryList) {
+                    if (category.getName().trim().equals(offerCategorie)) {
+                        Log.e(TAG, "filterUsers: "+category.getName()+"=================="+offerCategorie+"******" );
+                        filterdUserArrayList.add(user);
+
+                    }
+
+                }
+            }
+        }
+
+        return  filterdUserArrayList ;
     }
 
     @Override

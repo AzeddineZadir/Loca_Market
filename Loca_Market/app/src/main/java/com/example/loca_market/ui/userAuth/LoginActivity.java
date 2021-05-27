@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.installations.FirebaseInstallations;
 
 import java.security.PrivateKey;
 
@@ -63,7 +65,10 @@ public class LoginActivity extends AppCompatActivity implements  LoginListner{
         pb_login =(ProgressBar)findViewById(R.id.pb_login);
         pb_login.setVisibility(View.INVISIBLE);
 
-
+        //String token = FirebaseInstallations.getInstance().getToken(true).getResult().toString();
+        String token2 = FirebaseInstanceId.getInstance().getToken() ;
+     /*   Log.e(TAG, "token created "+token );*/
+        Log.e(TAG, "token login "+token2 );
 
 
     }

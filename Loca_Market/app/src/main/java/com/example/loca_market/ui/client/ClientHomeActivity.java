@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -27,20 +28,26 @@ import com.example.loca_market.ui.client.Activities.OrdersManagement;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.example.loca_market.ui.userAuth.LoginActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final String TAG = "ClientHomeActivity";
     private Fragment clientHomeFragment;
     private EditText et_search_text;
     private Toolbar mToolbar;
@@ -49,7 +56,7 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
     private List<Product> mProductslistSearch;
     private RecyclerView mProductSearchRecyclerView;
     private ProductSearchRecyclerAdapter productSearchRecyclerAdapter;
-
+    FirebaseUser user;
     // navigation drawer
     private DrawerLayout mDrawer;
 
@@ -60,10 +67,13 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         clientHomeFragment =new ClientHomeFragment();
         loadFragment(clientHomeFragment);
         mAuth =FirebaseAuth.getInstance();
+        mStore=FirebaseFirestore.getInstance();
         mToolbar=findViewById(R.id.toolbar_client_home);
         setSupportActionBar(mToolbar);
         // navigation drawer
         mDrawer=findViewById(R.id.drawer_layout_home_activity);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference docRef = mStore.collection("users").document(user.getUid());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
@@ -72,11 +82,12 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        // creat toketn
+        addTokenToUser(docRef);
 
         // search bar
         et_search_text = findViewById(R.id.et_search_text_client_home);
-        mStore=FirebaseFirestore.getInstance();
+
         mProductslistSearch =new ArrayList<>();
         mProductSearchRecyclerView = findViewById(R.id.search_recycler);
         mProductSearchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -134,6 +145,25 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         transaction.replace(R.id.client_home_container,clientHomeFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void addTokenToUser( DocumentReference docRef) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        docRef.update("notifToken", token).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Log.e(TAG, "onSuccess: update token " + user.getDisplayName());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Log.e(TAG, "onfaile: update token " + user.getDisplayName());
+
+            }
+        });
     }
 
     @Override

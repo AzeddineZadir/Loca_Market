@@ -20,6 +20,7 @@ public class User {
     private String country;
     private List<Category>preferences;
     private String profilePicURL;
+    private String notifToken ;
 
     public User(String username, String email, String role, String firstName, String lastName, String phoneNumber, String address, String city, String postalCode, String country, List<Category> preferences, String profilePicURL) {
         this.username = username;
@@ -147,6 +148,14 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getNotifToken() {
+        return notifToken;
+    }
+
+    public void setNotifToken(String notifToken) {
+        this.notifToken = notifToken;
     }
 }
 
