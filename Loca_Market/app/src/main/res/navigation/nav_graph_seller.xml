@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_store" >
         <action
             android:id="@+id/action_storeFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -26,7 +30,11 @@
         tools:layout="@layout/fragment_profil" >
         <action
             android:id="@+id/action_profilFragment_to_updatePasswordFragment"
-            app:destination="@id/updatePasswordFragment" />
+            app:destination="@id/updatePasswordFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -40,7 +48,11 @@
         tools:layout="@layout/fragment_add_product" >
         <action
             android:id="@+id/action_addProductFragment_to_manageProductFragment"
-            app:destination="@id/manageProductFragment" />
+            app:destination="@id/manageProductFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/deleteProductFragment"
@@ -54,7 +66,11 @@
         tools:layout="@layout/fragment_update_product_list" >
         <action
             android:id="@+id/action_updateProductFragmentList_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -78,13 +94,25 @@
         tools:layout="@layout/fragment_manage_products" >
         <action
             android:id="@+id/action_manageProductFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/addProductFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageProductFragment_to_updateProductFragmentList"
-            app:destination="@id/updateProductFragmentList" />
+            app:destination="@id/updateProductFragmentList"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageProductFragment_to_deleteProductListFragment"
-            app:destination="@id/deleteProductListFragment" />
+            app:destination="@id/deleteProductListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/manageFragment"
@@ -93,13 +121,25 @@
         tools:layout="@layout/fragment_manage" >
         <action
             android:id="@+id/action_manageFragment_to_manageProductFragment"
-            app:destination="@id/manageProductFragment" />
+            app:destination="@id/manageProductFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageFragment_to_manageStoreFragment"
-            app:destination="@id/manageStoreFragment" />
+            app:destination="@id/manageStoreFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageFragment_to_manageOffersFragment"
-            app:destination="@id/manageOffersFragment" />
+            app:destination="@id/manageOffersFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/manageStoreFragment"
@@ -113,13 +153,25 @@
         tools:layout="@layout/fragment_manage_offers" >
         <action
             android:id="@+id/action_manageOffersFragment_to_updateOffersListFragment"
-            app:destination="@id/updateOffersListFragment" />
+            app:destination="@id/updateOffersListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageOffersFragment_to_addOfferFragment"
-            app:destination="@id/addOfferFragment" />
+            app:destination="@id/addOfferFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_manageOffersFragment_to_deleteOfferListFragment"
-            app:destination="@id/deleteOfferListFragment" />
+            app:destination="@id/deleteOfferListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/updateOffersListFragment"
