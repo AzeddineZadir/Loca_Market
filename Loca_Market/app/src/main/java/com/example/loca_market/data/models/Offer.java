@@ -14,6 +14,7 @@ public class Offer {
     private String beginDate ;
     private String endDate ;
     private String sellerId ;
+    private String productOfferId;
 
     public Offer() {
     }
@@ -81,5 +82,13 @@ public class Offer {
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public String getProductOfferId() {
+        return productOfferId;
+    }
+
+    public void setProductOfferId(String productOfferId) {
+        this.productOfferId = productOfferId;
     }
 }

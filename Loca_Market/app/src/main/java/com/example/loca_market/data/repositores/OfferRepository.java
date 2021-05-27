@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.loca_market.data.models.Offer;
 import com.example.loca_market.data.models.Offer;
+import com.example.loca_market.data.models.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,21 +76,36 @@ public class OfferRepository {
 
 
 
-    public MutableLiveData<Boolean> deleteOfferByid(String offer_id){
+    public MutableLiveData<Boolean> deleteOfferByid(Offer offer){
         MutableLiveData<Boolean > data = new MutableLiveData<>();
-        delete(data,offer_id);
+        delete(data,offer);
         return  data;
 
 
 
     }
 
-    private void delete(MutableLiveData<Boolean> dropStatus ,  String offer_id){
-        offersRef.document(offer_id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-
-
+    private void delete(MutableLiveData<Boolean> dropStatus ,  Offer offer){
+        offersRef.document(offer.getOfferId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                // update the product
+                Product productToUp = offer.getOfferProduct();
+
+                fdb.collection("products").document(offer.getProductOfferId()).update("percentage",Float.parseFloat("0")).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.e(TAG, "onSuccess: to update the product " + productToUp.getName());
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure: to update the product " +e.getMessage());
+
+                    }
+                });
+
                 dropStatus.setValue(true) ;
             }
         }).addOnFailureListener(new OnFailureListener() {

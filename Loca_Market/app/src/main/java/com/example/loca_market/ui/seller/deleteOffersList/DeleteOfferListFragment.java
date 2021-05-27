@@ -91,7 +91,7 @@ public class DeleteOfferListFragment extends Fragment implements DeleteOfferAdap
 
     @Override
     public void onDropOfferButtonClick(int position) {
-        String offertoDelet = offersList.get(position).getOfferId();
+        Offer offertoDelet = offersList.get(position);
         Log.e(TAG, "onDropProductButtonClick:");
         Snackbar snackbar = Snackbar.make(getView(), "voulez vous vraiment supprimer le produits " + offersList.get(position).getOfferTitel(), BaseTransientBottomBar.LENGTH_LONG)
                 .setAction("OUI", new View.OnClickListener() {
@@ -101,8 +101,8 @@ public class DeleteOfferListFragment extends Fragment implements DeleteOfferAdap
                             @Override
                             public void onChanged(Boolean aBoolean) {
                                 if (aBoolean == true) {
-                                    Snackbar.make(getView(), "le produit a été supprimé correctement", BaseTransientBottomBar.LENGTH_LONG).show();
-
+                                    Snackbar.make(getView(), "l'offre a été supprimé correctement", BaseTransientBottomBar.LENGTH_LONG).show();
+                                    observeOffersBySeller();
 
                                 } else {
                                     Snackbar.make(getView(), "un probleme lors de la suppression ", BaseTransientBottomBar.LENGTH_LONG).show();
