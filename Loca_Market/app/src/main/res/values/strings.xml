@@ -64,4 +64,6 @@ pour réinitialiser votre mot de passe</string>
     <string name="nouveau_mot_de_passe">Nouveau mot de passe</string>
     <string name="confirmer_le_mot_de_passe">Confirmer le mot de passe</string>
 
+    <string name="notification_title">Nouvelle Notification</string>
+    <string name="channelID" translatable="false">Channel01</string>
 </resources>

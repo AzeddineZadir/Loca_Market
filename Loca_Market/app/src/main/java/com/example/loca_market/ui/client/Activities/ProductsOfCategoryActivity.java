@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -24,7 +23,6 @@ import com.example.loca_market.data.models.Product;
 import com.example.loca_market.ui.client.ClientHomeActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.adapter.ProductsOfCategoryAdapter;
-import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -34,9 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ProductsOfCategoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -194,7 +190,7 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         }
         else if (id == R.id.nav_sellers)
         {
-            Intent intent = new Intent(ProductsOfCategoryActivity.this, Client_serachSellerActivity.class);
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, ClientSearchSellerActivity.class);
             startActivity(intent);
 
         }

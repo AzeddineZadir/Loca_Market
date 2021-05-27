@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.client.Activities.Client_serachSellerActivity">
+    tools:context=".ui.client.Activities.ClientSearchSellerActivity">
 
         <LinearLayout
             android:id="@+id/layout_toolbar_client_searchSeller"

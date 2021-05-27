@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client_serachSellerActivity extends AppCompatActivity {
+public class ClientSearchSellerActivity extends AppCompatActivity {
 
     FirebaseFirestore mStore;
     FirebaseAuth mAuth;

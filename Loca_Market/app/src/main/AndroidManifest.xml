@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".ui.client.Activities.SellectedStoreActivity"></activity>
         <activity
-            android:name=".ui.client.Activities.Client_serachSellerActivity"
+            android:name=".ui.client.Activities.ClientSearchSellerActivity"
             android:parentActivityName=".ui.client.ClientHomeActivity" />
         <activity
             android:name=".ui.client.Activities.DetailOrderActivity"
@@ -56,6 +56,13 @@
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_16aDCdOdDuAfHO" />
+        <!-- NOTIFICATION SERVICE -->
+        <service
+            android:name=".ui.client.Notifications.NotificationsService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

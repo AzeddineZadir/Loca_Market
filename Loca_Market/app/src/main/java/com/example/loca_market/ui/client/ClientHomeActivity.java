@@ -17,17 +17,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.loca_market.data.models.Product;
-import com.example.loca_market.databinding.ActivityClientAllCategoriesBinding;
 import com.example.loca_market.ui.client.Activities.AllCategories;
 import com.example.loca_market.ui.client.Activities.ClientSettingsActivity;
-import com.example.loca_market.ui.client.Activities.Client_serachSellerActivity;
+import com.example.loca_market.ui.client.Activities.ClientSearchSellerActivity;
 import com.example.loca_market.ui.client.Activities.OrdersManagement;
-import com.example.loca_market.ui.client.Activities.ProductCartActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.fragments.ClientHomeFragment;
 import com.example.loca_market.ui.userAuth.LoginActivity;
@@ -183,7 +179,7 @@ public class ClientHomeActivity extends AppCompatActivity implements NavigationV
         }
        else if (id == R.id.nav_sellers)
         {
-            Intent intent = new Intent(ClientHomeActivity.this, Client_serachSellerActivity.class);
+            Intent intent = new Intent(ClientHomeActivity.this, ClientSearchSellerActivity.class);
             startActivity(intent);
 
         }
