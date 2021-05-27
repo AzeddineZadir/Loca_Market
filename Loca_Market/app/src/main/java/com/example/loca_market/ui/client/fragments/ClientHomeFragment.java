@@ -25,6 +25,8 @@ import com.example.loca_market.data.models.Category;
 import com.example.loca_market.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -34,6 +36,7 @@ import java.util.List;
 
 public class ClientHomeFragment extends Fragment {
     private FirebaseFirestore mstore;
+    FirebaseAuth mAuth;
 
     // for categories
     private List<Category> mCategoryList;
@@ -70,6 +73,7 @@ public class ClientHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  =inflater.inflate(R.layout.fragment_client_home, container, false);
         mstore=FirebaseFirestore.getInstance();
+        mAuth=FirebaseAuth.getInstance();
         tViewAllCategories = view.findViewById(R.id.t_viewAllCategories);
         // get the data
 
@@ -86,50 +90,6 @@ public class ClientHomeFragment extends Fragment {
         mNewProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
-
-
-        mstore.collection("categories")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Home Fragment cat", document.getId() + " => " + document.getData());
-                                Category category=document.toObject(Category.class);
-
-                                mCategoryList.add(category);
-                                mCategoryAdapter.notifyDataSetChanged();
-
-                            }
-                        } else {
-                            Log.w("Home Fragment", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-
-
-        mstore.collection("products")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Home Fragment best", document.getId() + " => " + document.getData());
-                                if(document.getData().get("bestSell").equals(false)) {
-                                    Product product = document.toObject(Product.class);
-                                    mNewProductsList.add(product);
-                                    mNewProductsAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        } else {
-                            Log.w("Home Fragment", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
         // for BestSells
         mBestSellsList =new ArrayList<>();
         mBestSellsAdapter = new BestSellsAdapter(getContext(),mBestSellsList);
@@ -137,26 +97,42 @@ public class ClientHomeFragment extends Fragment {
         mBestSellsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
         mBestSellsRecyclerView.setAdapter(mBestSellsAdapter);
 
-        mstore.collection("products")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Home Fragment Best Sell", document.getId() + " => " + document.getData());
-                                if(document.getData().get("bestSell").equals(true)){
-                                    Product product2=document.toObject(Product.class);
-                                    mBestSellsList.add(product2);
-                                    mBestSellsAdapter.notifyDataSetChanged();
-                                }
 
-                            }
-                        } else {
-                            Log.w("Home Fragment", "Error getting documents.", task.getException());
-                        }
+
+     // get categories
+        mstore.collection("users").document(mAuth.getCurrentUser().getUid())
+                .collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot doc:task.getResult().getDocuments()){
+                        Category category=doc.toObject(Category.class);
+                        mCategoryList.add(category);
+                        mCategoryAdapter.notifyDataSetChanged();
                     }
-                });
+                }
+                if(!mCategoryList.isEmpty()){
+                    getProducts();
+                }else {
+                    mstore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task2) {
+                            if(task2.isSuccessful()){
+                                for(DocumentSnapshot doc:task2.getResult().getDocuments()){
+                                    Category category=doc.toObject(Category.class);
+                                    mCategoryList.add(category);
+                                    mCategoryAdapter.notifyDataSetChanged();
+                                }
+                                getProducts();
+                            }
+                        }
+                    });
+                }
+
+            }
+        });
+
+
         // click buton for all categories
         tViewAllCategories.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,4 +143,35 @@ public class ClientHomeFragment extends Fragment {
         });
         return view;
     }
+
+    private void getProducts() {
+        mstore.collection("products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Product product = document.toObject(Product.class);
+                                    for(Category c : mCategoryList){
+                                        if(product.getCategory()!=null && product.getCategory().trim().equals(c.getName().trim())){
+                                            if (!product.isBestSell()) {
+                                                mNewProductsList.add(product);
+                                                mNewProductsAdapter.notifyDataSetChanged();
+                                            }else{
+                                                mBestSellsList.add(product);
+                                                mBestSellsAdapter.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                            }
+
+                        } else {
+                            Log.w("Home Fragment", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+
 }

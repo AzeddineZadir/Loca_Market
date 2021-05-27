@@ -83,7 +83,20 @@ public class AllCategories extends AppCompatActivity {
 
         // retreive all categories
         categoryList =new ArrayList<>();
-
+        mStore.collection("users").document(mAuth.getCurrentUser().getUid())
+                .collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot doc:task.getResult().getDocuments()){
+                        Category category=doc.toObject(Category.class);
+                        categoryList.add(category);
+                        searchCategoryList.add(category);
+                        Log.i("SearchCategory1",category.getName());
+                        searchCategoryAdapter.notifyDataSetChanged();
+                    }
+                }
+                if(categoryList.isEmpty()){
                     mStore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -98,9 +111,10 @@ public class AllCategories extends AppCompatActivity {
                             }
                         }
                     });
-     
-
-
+                }
+            }
+        });
+        
     }
 
     private void searchCategory(String text) {
