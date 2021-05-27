@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.example.loca_market.data.models.Product;
 import com.example.loca_market.ui.client.ClientHomeActivity;
 import com.example.loca_market.ui.client.adapter.ProductSearchRecyclerAdapter;
 import com.example.loca_market.ui.client.adapter.ProductsOfCategoryAdapter;
+import com.example.loca_market.ui.userAuth.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -67,6 +69,8 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         /* search bar */
         mAuth =FirebaseAuth.getInstance();
@@ -160,7 +164,6 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
@@ -178,10 +181,9 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
         }
         else if (id == R.id.nav_cart)
         {
+
             Intent intent = new Intent(ProductsOfCategoryActivity.this, ProductCartActivity.class);
             startActivity(intent);
-
-
         }
         else if (id == R.id.nav_orders)
         {
@@ -194,28 +196,28 @@ public class ProductsOfCategoryActivity extends AppCompatActivity implements Nav
             startActivity(intent);
 
         }
-    /*
-        else if (id == R.id.nav_categories)
-        {
-
-        }
         else if (id == R.id.nav_settings)
         {
-                Intent intent = new Intent(ProductsOfCategoryActivity.this, SettingActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, ClientSettingsActivity.class);
+            startActivity(intent);
 
         }
+        else if (id == R.id.nav_categories)
+        {
+            Intent intent = new Intent(ProductsOfCategoryActivity.this, AllCategories.class);
+            startActivity(intent);
+        }
+
         else if (id == R.id.nav_logout)
         {
 
-                 mAuth.signOut();
-                 Intent intent=new Intent(ProductsOfCategoryActivity.this, LoginActivity.class);
-                 startActivity(intent);
-                 finish();
+            mAuth.signOut();
+            Intent intent=new Intent(ProductsOfCategoryActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);*/
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_product_of_category_activity);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
