@@ -47,7 +47,7 @@
                     android:id="@+id/et_search_text_allCategories"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Chercher un produit" />
+                    android:hint="Chercher une catégorie" />
 
             </LinearLayout>
         </LinearLayout>
