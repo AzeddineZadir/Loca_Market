@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "782442548940",
+    "project_id": "locamarket-2d763",
+    "storage_bucket": "locamarket-2d763.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782442548940:android:67f85061788a7d00873c69",
+        "android_client_info": {
+          "package_name": "com.example.loca_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782442548940-2g93sivnjcbv035v38b6981a5sc0pejb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPjl1CpksJb5wO4dOiUjTYgeIwQmh_6yQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782442548940-2g93sivnjcbv035v38b6981a5sc0pejb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

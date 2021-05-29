@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment {
     public static final String PWD = "pwd";
     public static final String ROLE = "role";
     private ProfileViewModel profileViewModel;
-    TextInputLayout tf_username, tf_email, tf_role, tf_phone_num;
+    TextInputLayout tf_username, tf_email, tf_role, tf_phone_num,tf_first_name,tf_last_name,tf_city;
     FragmentProfilBinding binding;
     User usertoUpdate;
 
@@ -84,6 +84,9 @@ public class ProfileFragment extends Fragment {
         tf_email = (TextInputLayout) view.findViewById(R.id.tf_email);
         tf_role = (TextInputLayout) view.findViewById(R.id.tf_role);
         tf_phone_num = (TextInputLayout) view.findViewById(R.id.tf_phone_num);
+        tf_first_name = (TextInputLayout) view.findViewById(R.id.tf_first_name);
+        tf_last_name = (TextInputLayout) view.findViewById(R.id.tf_last_name);
+        tf_city = (TextInputLayout) view.findViewById(R.id.tf_city);
 
 
         b_update_user.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +134,9 @@ public class ProfileFragment extends Fragment {
                 tf_email.getEditText().setText(user.getEmail());
                 tf_role.getEditText().setText(user.getRole());
                 tf_phone_num.getEditText().setText(user.getPhoneNumber());
+                tf_first_name.getEditText().setText(user.getFirstName());
+                tf_last_name.getEditText().setText(user.getLastName());
+                tf_city.getEditText().setText(user.getCity());
             }
         });
 
@@ -162,7 +168,9 @@ public class ProfileFragment extends Fragment {
         u.setEmail(tf_email.getEditText().getText().toString());
         u.setUsername(tf_username.getEditText().getText().toString());
         u.setPhoneNumber(tf_phone_num.getEditText().getText().toString());
-
+        u.setFirstName(tf_first_name.getEditText().getText().toString());
+        u.setLastName(tf_last_name.getEditText().getText().toString());
+        u.setCity(tf_city.getEditText().getText().toString());
         return u;
     }
 
