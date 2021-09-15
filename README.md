@@ -9,7 +9,7 @@ Les	 produits	 (vêtements,	 jouets,	 parfums,	 etc.)	 sont	 déposés/publiés	
 habitants	ou	les	visiteurs	de	la	localité.	
 
 1. Pour	les	commerçants,	l’application	leur	permet	de :	
-  ..* S’inscrire.	
+  ..*S’inscrire.	
   Après	connexion :	
   ..* Gérer	les produits	à	vendre	sur	l’application :	ajouter	des	catégories,	des	produits,etc.	
   ..* Créer	 sa	 propre	 boutique	 (customisation).	 Il	 s’agit	 d’offrir	 au	 commerçant	 un	ensemble	de	templates	de	boutiques configurables.	Une	boutique	est	créée	selon	un	template	choisi.		Les	produits	du	commerçant	seront	ainsi	visibles via	sa	propre boutique intégrée	à	l’application.		
