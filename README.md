@@ -1,6 +1,11 @@
 # Loca_Market
 Application Mobile pour Favoriser le Commerce de Proximité : Place de Marché Locale. 
 
+## Interface Utilisateur    
+| ![product details](./product-details.png) | ![store home](./store.png) | ![Product Listing](./products-list.png) |
+|---|---|---|
+
+
 Cette	application	mobile	a	pour	objectif	d’offrir	aux	habitants d’une	localité	 (ville,	quartier,	
 village,	etc.)	la	possibilité	d’acheter	en	ligne	les	produits	de	leurs	commerçants	de	proximité.	
 Les	 produits	 (vêtements,	 jouets,	 parfums,	 etc.)	 sont	 déposés/publiés	 sur	 l’application	
